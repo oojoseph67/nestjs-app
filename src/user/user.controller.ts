@@ -16,6 +16,7 @@ import {
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
+import { PatchUserDto } from './dtos/patch-user.dto';
 
 @Controller('users')
 export class UserController {
@@ -27,7 +28,7 @@ export class UserController {
    * ==> USE CASES
    * /users/ -> return all users with default pagination
    * /users/1223 -> returns one user whos id is 1234
-   * /users?limit=10&page=2 -> return page 2 with limt of pagination 10
+   * /users?limit=10&page=2 -> return page 2 with limit of pagination 10
    */
 
   @Get('/:id?')
@@ -37,6 +38,7 @@ export class UserController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
     console.log(getUserParamDto);
+    console.log(`Limit: ${limit}, Page: ${page}`);
 
     return 'You sent a get request to users endpoint';
   }
@@ -48,5 +50,8 @@ export class UserController {
   }
 
   @Patch()
-  public patchUser(@Body() body) {}
+  public patchUser(@Body() patchUserDto: PatchUserDto) {
+    return patchUserDto
+    // return 'You sent a patch request to users endpoint';
+  }
 }

@@ -1,25 +1,25 @@
-### Signup
-POST http://localhost:7231/users/auth/signup
+### /id
+PATCH http://localhost:7231/users/
 content-type: application/json
 
 {
-  "email": "testV2@test.com",
+  "email": "joseph@gmail.com",
   "password": "nestjsIS6@awesome"
 }
 
-### Signin
-POST http://localhost:7231/users/auth/signin
-content-type: application/json
+# ### Signin
+# POST http://localhost:7231/users/auth/signin
+# content-type: application/json
 
-{
-  "email": "test@test.com",
-  "password": "nestjsIS6@awesome"
-}
+# {
+#   "email": "test@test.com",
+#   "password": "nestjsIS6@awesome"
+# }
 
-### Who Am I
-GET http://localhost:7231/users/auth/whoami
-content-type: application/json
+# ### Who Am I
+# GET http://localhost:7231/users/auth/whoami
+# content-type: application/json
 
-### Signout
-POST http://localhost:7231/users/auth/signout
-content-type: application/json
+# ### Signout
+# POST http://localhost:7231/users/auth/signout
+# content-type: application/json
