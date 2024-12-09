@@ -17,6 +17,7 @@ import {
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
+import { UserService } from './user.service';
 
 @Controller('users')
 export class UserController {
@@ -31,16 +32,24 @@ export class UserController {
    * /users?limit=10&page=2 -> return page 2 with limit of pagination 10
    */
 
+  constructor(private readonly userService: UserService) {}
+
   @Get('/:id?')
   public getUsers(
     @Param() getUserParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
   ) {
-    console.log(getUserParamDto);
-    console.log(`Limit: ${limit}, Page: ${page}`);
+    // console.log(getUserParamDto);
+    // console.log(`Limit: ${limit}, Page: ${page}`);
 
-    return 'You sent a get request to users endpoint';
+    const findAll = this.userService.findAll({
+      page,
+      limit,
+      userParamsDTO: getUserParamDto,
+    });
+
+    return findAll;
   }
 
   @Post()
@@ -51,7 +60,7 @@ export class UserController {
 
   @Patch()
   public patchUser(@Body() patchUserDto: PatchUserDto) {
-    return patchUserDto
+    return patchUserDto;
     // return 'You sent a patch request to users endpoint';
   }
 }

@@ -7,19 +7,10 @@ content-type: application/json
   "password": "nestjsIS6@awesome"
 }
 
-# ### Signin
-# POST http://localhost:7231/users/auth/signin
-# content-type: application/json
+# Get User (id)
+GET http://localhost:7231/users/12345
+content-type: application/json
 
-# {
-#   "email": "test@test.com",
-#   "password": "nestjsIS6@awesome"
-# }
-
-# ### Who Am I
-# GET http://localhost:7231/users/auth/whoami
-# content-type: application/json
-
-# ### Signout
-# POST http://localhost:7231/users/auth/signout
-# content-type: application/json
+# Get Posts
+GET http://localhost:7231/posts/
+content-type: application/json
