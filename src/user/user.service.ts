@@ -1,8 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import {
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
+import { AuthService } from 'src/auth/auth.service';
 
 @Injectable()
 export class UserService {
+  constructor(
+    // injecting auth service dependency
+    @Inject(forwardRef(() => AuthService))
+    private authService: AuthService,
+  ) {}
   public findAll({
     userParamsDTO,
     limit,
@@ -13,6 +25,13 @@ export class UserService {
     page: number;
   }) {
     const { id } = userParamsDTO;
+
+    const isAuth = this.authService.isAuthenticated();
+    console.log(`User authenticated: ${isAuth}`);
+
+    if (!isAuth) {
+      throw new HttpException('User not found', HttpStatus.FORBIDDEN);
+    }
 
     console.log(
       `Find all users with id: ${id}, limit: ${limit}, page: ${page}`,

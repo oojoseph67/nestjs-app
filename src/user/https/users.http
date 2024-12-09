@@ -3,7 +3,7 @@ PATCH http://localhost:7231/users/
 content-type: application/json
 
 {
-  "email": "joseph@gmail.com",
+  "email": "john@doe.com",
   "password": "nestjsIS6@awesome"
 }
 
@@ -14,3 +14,13 @@ content-type: application/json
 # Get Posts
 GET http://localhost:7231/posts/1
 content-type: application/json
+
+#login 
+POST http://localhost:7231/auth/login
+content-type: application/json
+
+{
+  "id": 1,
+  "email": "john@doe.com",
+  "password": "nestjsIS6@awesome"
+}
