@@ -12,5 +12,5 @@ GET http://localhost:7231/users/12345
 content-type: application/json
 
 # Get Posts
-GET http://localhost:7231/posts/
+GET http://localhost:7231/posts/1
 content-type: application/json
