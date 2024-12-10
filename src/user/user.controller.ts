@@ -18,8 +18,10 @@ import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
 import { UserService } from './user.service';
+import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('users')
+@ApiTags('Users') // with the updated version of @nestjs/swagger there is no need to use @ApiTags
 export class UserController {
   /**
    * Final Endpoint - /users/id?limit=10&page=1
@@ -35,6 +37,29 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Get('/:id?')
+  @ApiOperation({
+    summary: 'Get all users',
+    description: 'Get all users with optional pagination',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'All users',
+    type: [CreateUserDto],
+  })
+  @ApiQuery({
+    name: 'limit',
+    type: Number,
+    required: false,
+    description: 'Limit the number of returned results',
+    example: 10,
+  })
+  @ApiQuery({
+    name: 'page',
+    type: Number,
+    required: false,
+    description: 'The position of the number that you want the api to return',
+    example: 1,
+  })
   public getUsers(
     @Param() getUserParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
