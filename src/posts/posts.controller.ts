@@ -16,6 +16,17 @@ import { PatchPostDto } from './dtos/patch-post.dto';
 export class PostsController {
   constructor(private readonly postService: PostsService) {}
 
+  /**
+   * Retrieves all posts for a specific user.
+   *
+   * This function handles GET requests to fetch all posts associated with a given user ID.
+   * It logs the user ID for which posts are being retrieved and then calls the post service
+   * to fetch the posts.
+   *
+   * @param {number} userId - The ID of the user whose posts are to be retrieved.
+   * @returns {Promise<CreatePostDto[]>} A promise that resolves to an array of CreatePostDto objects,
+   *                                     representing all posts for the specified user.
+   */
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'All posts',
@@ -28,6 +39,15 @@ export class PostsController {
     return this.postService.getAllPosts({ userId });
   }
 
+  /**
+   * Creates a new post.
+   *
+   * This function handles the creation of a new post by processing the provided CreatePostDto.
+   * It logs the received data and returns a confirmation message.
+   *
+   * @param {CreatePostDto} createPostDto - The data transfer object containing the details of the post to be created.
+   * @returns {string} A confirmation message indicating that the post request was received.
+   */
   @ApiOperation({
     summary: 'Creates a new post',
   })
@@ -43,6 +63,16 @@ export class PostsController {
     return 'You sent a post request to posts endpoint';
   }
 
+  /**
+   * Updates an existing post.
+   *
+   * This function handles PATCH requests to update an existing post using the provided data.
+   * It logs the update data received and processes the partial post update through the
+   * PatchPostDto data transfer object.
+   *
+   * @param {PatchPostDto} updatePostDto - The data transfer object containing the fields to be updated.
+   * @returns {string} A confirmation message indicating that the patch request was received.
+   */
   @ApiOperation({
     summary: 'Updates a post',
   })
