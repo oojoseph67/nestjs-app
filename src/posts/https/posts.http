@@ -19,3 +19,25 @@ content-type: application/json
         }
     ]
 }
+
+PATCH http://localhost:7231/posts
+content-type: application/json
+
+{
+    "id": 123,
+    "title": "Whats new",
+    "postType": "page",
+    "slug": "new-nestjs",
+    "status": "published",
+    "content": "Welcome to our new blog post!",
+    "schema": "{\r\n \"@context\": \"https:\/\/schema.org\", \r\n \"@type\": \"Person\"\r\n}",
+    "featuredImageUrl": "https://images.app.goo.gl/2twFaFy51iKBmi519",
+    "publishedOn": "2024-03-16T07:46:32+0000",
+    "tags": ["news", "page", "typescript"],
+    "metaOptions": [
+        {
+            "key": "good",
+            "value": true
+        }
+    ]
+}

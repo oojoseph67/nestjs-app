@@ -44,7 +44,7 @@ export class UserController {
   @ApiResponse({
     status: 200,
     description: 'All users',
-    type: [CreateUserDto],
+    type: CreateUserDto,
   })
   @ApiQuery({
     name: 'limit',
