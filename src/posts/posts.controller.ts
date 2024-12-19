@@ -1,5 +1,6 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { PostsService } from './posts.service';
+import { CreatePostDto } from './dtos/create-post.dto';
 
 @Controller('posts')
 export class PostsController {
@@ -10,5 +11,12 @@ export class PostsController {
     console.log(`Getting posts for user ${userId}`);
 
     return this.postService.getAllPosts({ userId });
+  }
+
+  @Post('')
+  createPost(@Body() createPostDto: CreatePostDto) {
+    console.log({ createPostDto });
+
+    return 'You sent a post request to posts endpoint';
   }
 }
