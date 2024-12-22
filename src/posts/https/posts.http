@@ -40,3 +40,6 @@ content-type: application/json
         }
     ]
 }
+
+GET http://localhost:7231/posts
+content-type: application/json

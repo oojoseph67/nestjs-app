@@ -205,8 +205,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="60"
-                                    class="link-to-prism">src/posts/posts.controller.ts:60</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/posts/posts.controller.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -288,7 +288,7 @@ It logs the received data and returns a confirmation message.</p>
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiResponse({status: undefined, description: &#x27;All posts&#x27;, type: undefined})<br />@Get(&#x27;:userId&#x27;)<br /></code>
+                    <code>@ApiResponse({status: undefined, description: &#x27;All posts&#x27;, type: undefined})<br />@Get(&#x27;:userId?&#x27;)<br /></code>
                 </td>
             </tr>
 
@@ -386,8 +386,8 @@ representing all posts for the specified user.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/posts/posts.controller.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/posts/posts.controller.ts:82</a></div>
                         </td>
                     </tr>
 
@@ -484,10 +484,8 @@ export class PostsController {
     description: &#x27;All posts&#x27;,
     type: [CreatePostDto],
   })
-  @Get(&#x27;:userId&#x27;)
+  @Get(&#x27;:userId?&#x27;)
   getAllPosts(@Param(&#x27;userId&#x27;) userId: number) {
-    console.log(&#x60;Getting posts for user ${userId}&#x60;);
-
     return this.postService.getAllPosts({ userId });
   }
 

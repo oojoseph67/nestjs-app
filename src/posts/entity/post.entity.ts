@@ -74,6 +74,7 @@ export class Post {
   @OneToOne(() => MetaOption, {
     // cascade: ['remove'] // setting cascade to work for a few methods
     cascade: true, // this enables us create data in the metaoption table by just passing the value
+    eager: true, // loading the metaOptions eagerly instead of lazy loading it
   })
   @JoinColumn()
   metaOptions?: MetaOption;

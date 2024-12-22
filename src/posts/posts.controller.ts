@@ -32,10 +32,8 @@ export class PostsController {
     description: 'All posts',
     type: [CreatePostDto],
   })
-  @Get(':userId')
+  @Get(':userId?')
   getAllPosts(@Param('userId') userId: number) {
-    console.log(`Getting posts for user ${userId}`);
-
     return this.postService.getAllPosts({ userId });
   }
 

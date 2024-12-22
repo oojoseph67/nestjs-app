@@ -39,27 +39,11 @@ export class PostsService {
     return post;
   }
 
-  public getAllPosts({ userId }: { userId: number }) {
-    // checks if a user exists and is authenticated
-    // gets the user's posts from a database
-    // and returns them
+  public async getAllPosts({ userId }: { userId: number }) {
+    const posts = await this.postRepository.find({
+      relations: { metaOptions: false },
+    });
 
-    const user = this.userServices.findOneById({ id: userId });
-    console.log(`Getting posts for user ${user.firstName}`);
-
-    if (!user) {
-      throw new HttpException('User not found', HttpStatus.NOT_FOUND, {
-        cause: 'User not registered',
-        description: 'User was not found in the system database',
-      });
-    }
-
-    const dummyPost = {
-      user,
-      title: 'Post Title',
-      content: 'Post Content',
-    };
-
-    return dummyPost;
+    return posts;
   }
 }
