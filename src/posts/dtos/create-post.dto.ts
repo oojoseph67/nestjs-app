@@ -9,6 +9,7 @@ import {
   IsString,
   IsUrl,
   Matches,
+  MaxLength,
   MinLength,
   ValidateNested,
 } from 'class-validator';
@@ -26,6 +27,7 @@ export class CreatePostDto {
   }) // this adds the value to the post documentation
   @IsString()
   @MinLength(4)
+  @MaxLength(512)
   @IsNotEmpty()
   title: string;
 
@@ -48,6 +50,7 @@ export class CreatePostDto {
   })
   @IsString()
   @IsNotEmpty()
+  @MaxLength(255)
   @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message:
       'Slug should be composed only of lowercase alphanumeric characters and hyphens. For example: my-first-post',
@@ -94,6 +97,7 @@ export class CreatePostDto {
   })
   @IsOptional()
   @IsUrl()
+  @MaxLength(1024)
   featuredImageUrl?: string;
 
   @ApiProperty({
@@ -153,17 +157,21 @@ export class CreatePostDto {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CreatePostDtoWithMeta)
-  metaOptions: CreatePostDtoWithMeta[];
+  metaOptions?: CreatePostDtoWithMeta[];
 }
 
-class CreatePostDtoWithMeta {
-  @ApiProperty()
-  @IsString()
-  @MinLength(4)
-  @IsNotEmpty()
-  key: string;
+export class CreatePostDtoWithMeta {
+  // @ApiProperty()
+  // @IsString()
+  // @MinLength(4)
+  // @IsNotEmpty()
+  // key: string;
 
-  @ApiProperty()
+  // @ApiProperty()
+  // @IsNotEmpty()
+  // value: any;
+
   @IsNotEmpty()
-  value: any;
+  @IsJSON()
+  metaValue: string;
 }

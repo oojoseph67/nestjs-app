@@ -1,0 +1,80 @@
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { PostStatus, PostTypes } from '../enums/posts.enums';
+import { CreatePostDtoWithMeta } from '../dtos/create-post.dto';
+import { MetaOption } from './meta-option.entity';
+
+@Entity()
+export class Post {
+  @PrimaryGeneratedColumn({})
+  id: number;
+
+  @Column({
+    type: 'varchar',
+    length: 512,
+    nullable: false,
+  })
+  title: string;
+
+  @Column({
+    type: 'enum',
+    nullable: false,
+    enum: PostTypes,
+    default: PostTypes.POST,
+  })
+  postType: PostTypes;
+
+  @Column({
+    type: 'varchar',
+    length: 255,
+    nullable: false,
+    unique: true,
+  })
+  slug: string;
+
+  @Column({
+    type: 'enum',
+    nullable: false,
+    enum: PostStatus,
+    default: PostStatus.DRAFT,
+  })
+  status: PostStatus;
+
+  @Column({
+    type: 'text',
+    nullable: true,
+  })
+  content?: string;
+
+  @Column({
+    type: 'text',
+    nullable: true,
+  })
+  schema?: string;
+
+  @Column({
+    type: 'varchar',
+    length: 1024,
+    nullable: true,
+  })
+  featuredImageUrl?: string;
+
+  @Column({
+    type: 'timestamp',
+    nullable: false,
+  })
+  publishedOn: Date;
+
+  tags?: string[];
+
+  @OneToOne(() => MetaOption)
+  @JoinColumn()
+  metaOptions?: MetaOption;
+
+  // metaOptions?: CreatePostDtoWithMeta[];
+}

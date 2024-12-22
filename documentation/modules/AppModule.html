@@ -277,9 +277,29 @@ import { UserModule } from &#x27;./user/user.module&#x27;;
 import { PostsController } from &#x27;./posts/posts.controller&#x27;;
 import { PostsModule } from &#x27;./posts/posts.module&#x27;;
 import { AuthModule } from &#x27;./auth/auth.module&#x27;;
+import { TypeOrmModule } from &#x27;@nestjs/typeorm&#x27;;
 
 @Module({
-  imports: [UserModule, PostsModule, AuthModule],
+  imports: [
+    UserModule,
+    PostsModule,
+    AuthModule,
+    TypeOrmModule.forRootAsync({
+      imports: [], // specify any additional imports here, e.g., TypeORM migrations or custom repositories
+      inject: [], // inject
+      useFactory: () &#x3D;&gt; ({
+        type: &#x27;postgres&#x27;,
+        host: &#x27;localhost&#x27;,
+        port: 5432,
+        username: &#x27;postgres&#x27;,
+        password: &#x27;oojoseph&#x27;,
+        database: &#x27;blog-app&#x27;,
+        entities: [&#x27;dist/**/*.entity.js&#x27;],
+        synchronize: true, // set to false in production
+        // autoLoadEntities: true, // using this would require us to create a module (controller and module file) for every entity we want to add, exporting it and using the TypeORM.forFeature([]) function
+      }),
+    }),
+  ],
   controllers: [AppController, PostsController],
   providers: [AppService],
 })
