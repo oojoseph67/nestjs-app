@@ -4,7 +4,7 @@ import { UserService } from 'src/user/user.service';
 @Injectable()
 export class AuthService {
   constructor(
-    // injecting a service dependency
+    // injecting a service dependency (circular dependency injection)
     @Inject(forwardRef(() => UserService))
     private userService: UserService,
   ) {}

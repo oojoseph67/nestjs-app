@@ -456,7 +456,7 @@ import { CreateUserDto } from &#x27;./dtos/create-user.dto&#x27;;
 @Injectable()
 export class UserService {
   constructor(
-    // injecting auth service dependency
+    // injecting a service dependency (circular dependency injection)
     @Inject(forwardRef(() &#x3D;&gt; AuthService))
     private authService: AuthService,
 

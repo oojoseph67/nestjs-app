@@ -4,15 +4,15 @@ content-type: application/json
 
 {
     "authorId": 1,
-    "title": "Everything is good",
+    "title": "Javascript to the world",
     "postType": "page",
-    "slug": "everyday-2",
+    "slug": "javascript-world",
     "status": "published",
-    "content": "Welcome to our new blog post!",
+    "content": "Javascript is going to take over the world!",
     "schema": "{\r\n \"@context\": \"https:\/\/schema.org\", \r\n \"@type\": \"Person\"\r\n}",
     "featuredImageUrl": "https://images.app.goo.gl/2twFaFy51iKBmi519",
-    "publishedOn": "2024-03-16T07:46:32+0000",
-    "tags": ["news", "page", "typescript"],
+    "publishedOn": "2024-03-16T12:00:00+0000",
+    "tags": [1],
     "metaOptions" : {
         "metaValue": "{\"sidebarEnabled\": false, \"footerEnabled\": false}"
     }
@@ -24,22 +24,8 @@ PATCH http://localhost:7231/posts
 content-type: application/json
 
 {
-    "id": 123,
-    "title": "Whats new",
-    "postType": "page",
-    "slug": "new-nestjs",
-    "status": "published",
-    "content": "Welcome to our new blog post!",
-    "schema": "{\r\n \"@context\": \"https:\/\/schema.org\", \r\n \"@type\": \"Person\"\r\n}",
-    "featuredImageUrl": "https://images.app.goo.gl/2twFaFy51iKBmi519",
-    "publishedOn": "2024-03-16T07:46:32+0000",
-    "tags": ["news", "page", "typescript"],
-    "metaOptions": [
-        {
-            "key": "good",
-            "value": true
-        }
-    ]
+    "id": 4,
+    "tags": [2]
 }
 
 GET http://localhost:7231/posts

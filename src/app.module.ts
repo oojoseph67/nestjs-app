@@ -8,6 +8,8 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { MetaOptionsController } from './meta-options/meta-options.controller';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
+import { TagsController } from './tags/tags.controller';
+import { TagsModule } from './tags/tags.module';
 
 @Module({
   imports: [
@@ -30,8 +32,9 @@ import { MetaOptionsModule } from './meta-options/meta-options.module';
         // autoLoadEntities: true, // using this would require us to create a module (controller and module file) for every entity we want to add, exporting it and using the TypeORM.forFeature([]) function
       }),
     }),
+    TagsModule,
   ],
-  controllers: [AppController, PostsController, MetaOptionsController],
+  controllers: [AppController, PostsController, MetaOptionsController, TagsController],
   providers: [AppService],
 })
 export class AppModule {}

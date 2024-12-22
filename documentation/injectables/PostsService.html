@@ -168,12 +168,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userServices: <a href="../injectables/UserService.html" target="_self">UserService</a>, postRepository: <a href="../entitys/Post.html" target="_self">Repository&lt;PostRepository&gt;</a>, metaOptionsRepository: Repository<MetaOptionRepository>)</code>
+<code>constructor(userServices: <a href="../injectables/UserService.html" target="_self">UserService</a>, tagsService: TagsService, postRepository: <a href="../entitys/Post.html" target="_self">Repository&lt;PostRepository&gt;</a>, metaOptionsRepository: Repository<MetaOptionRepository>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/posts/posts.service.ts:10</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/posts/posts.service.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -195,6 +195,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>tagsService</td>
+                                                  
+                                                        <td>
+                                                                    <code>TagsService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -263,8 +275,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/posts/posts.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">src/posts/posts.service.ts:32</a></div>
                         </td>
                     </tr>
 
@@ -332,8 +344,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="43"
-                                    class="link-to-prism">src/posts/posts.service.ts:43</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="58"
+                                    class="link-to-prism">src/posts/posts.service.ts:58</a></div>
                         </td>
                     </tr>
 
@@ -401,8 +413,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="37"
-                                    class="link-to-prism">src/posts/posts.service.ts:37</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/posts/posts.service.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -460,13 +472,23 @@ import { Repository } from &#x27;typeorm&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { MetaOption as MetaOptionRepository } from &#x27;src/meta-options/entity/meta-option.entity&#x27;;
 import { Post as PostRepository } from &#x27;./entity/post.entity&#x27;;
+import { TagsService } from &#x27;src/tags/tags.service&#x27;;
 
 @Injectable()
 export class PostsService {
   constructor(
+    /**
+     * Repositories Injections
+     */
+
     // injecting user service (making user of another service (a single dependency injection))
     private userServices: UserService,
 
+    private tagsService: TagsService,
+
+    /**
+     * Repositories Injections
+     */
     @InjectRepository(PostRepository)
     private postRepository: Repository&lt;PostRepository&gt;,
 
@@ -479,9 +501,14 @@ export class PostsService {
       id: createPost.authorId,
     });
 
+    const tags &#x3D; await this.tagsService.findMultipleTags({
+      tags: createPost.tags,
+    });
+
     const post &#x3D; await this.postRepository.create({
       ...createPost,
       author: author,
+      tags: tags,
     });
 
     await this.postRepository.save(post);

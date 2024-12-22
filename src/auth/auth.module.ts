@@ -4,7 +4,7 @@ import { AuthService } from './auth.service';
 import { UserModule } from 'src/user/user.module';
 
 @Module({
-  imports: [forwardRef(() => UserModule)],
+  imports: [forwardRef(() => UserModule)], // for dependency injection (circular dependency injection)
   exports: [AuthService],
   controllers: [AuthController],
   providers: [AuthService],

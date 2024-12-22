@@ -5,9 +5,14 @@ import { UserModule } from 'src/user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Post as PostEntity } from './entity/post.entity';
 import { MetaOption } from 'src/meta-options/entity/meta-option.entity';
+import { TagsModule } from 'src/tags/tags.module';
 
 @Module({
-  imports: [UserModule, TypeOrmModule.forFeature([PostEntity, MetaOption])],
+  imports: [
+    UserModule,
+    TagsModule,
+    TypeOrmModule.forFeature([PostEntity, MetaOption]),
+  ],
   controllers: [PostsController],
   providers: [PostsService],
   exports: [PostsService],

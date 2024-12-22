@@ -1,0 +1,9 @@
+POST http://localhost:7231/tags
+content-type: application/json
+
+{
+    "name": "Javascript",
+    "description": "A post about javascript",
+    "slug": "js",
+    "featuredImageUrl": "https://example.com/image.jpg"
+}

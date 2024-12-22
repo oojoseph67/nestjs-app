@@ -1,5 +1,6 @@
 import {
   IsArray,
+  IsDate,
   IsEnum,
   IsInt,
   IsISO8601,
@@ -103,7 +104,7 @@ export class CreatePostDto {
 
   @ApiProperty({
     description: 'This is the date when the post was published',
-    example: '2022-01-01T12:00:00Z',
+    example: '2024-03-16T12:00:00+0000',
     format: 'date-time',
     type: 'string',
   })
@@ -112,15 +113,15 @@ export class CreatePostDto {
   publishedOn: Date;
 
   @ApiPropertyOptional({
-    description: 'This is the author of the post',
-    example: ['author', 'blog'],
+    description: 'Array of ids of tags',
+    example: [1, 4],
     type: 'array',
     required: false,
   })
   @IsOptional()
   @IsArray()
-  @IsString({ each: true }) // validate each item in the array as a string
-  tags?: string[];
+  @IsInt({ each: true }) // validate each item in the array as a string
+  tags?: number[];
 
   @ApiPropertyOptional({
     description: 'This is the additional options for the post',
