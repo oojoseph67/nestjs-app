@@ -2,11 +2,16 @@ POST http://localhost:7231/tags
 content-type: application/json
 
 {
-    "name": "Javascript",
-    "description": "A post about javascript",
-    "slug": "js",
+    "name": "Pussy",
+    "description": "A post about pussy",
+    "slug": "psy",
     "featuredImageUrl": "https://example.com/image.jpg"
 }
 
-DELETE http://localhost:7231/tags?id=2
+# ## delete
+# DELETE http://localhost:7231/tags?id=2
+# content-type: application/json
+
+## soft delete
+DELETE http://localhost:7231/tags/soft-delete?id=1
 content-type: application/json
