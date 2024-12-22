@@ -159,7 +159,6 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
-                                    <span class="modifier"></span>
                                     <span class="modifier">Optional</span>
                                 <a href="#metaOptions" >metaOptions</a>
                             </li>
@@ -322,7 +321,6 @@
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
-                            <span class="modifier"></span>
                             <span class="modifier">Optional</span>
                         <span ><b>metaOptions</b></span>
                         <a href="#metaOptions"><span class="icon ion-ios-link"></span></a>
@@ -331,7 +329,7 @@
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../entitys/Post.html" target="_self" >CreatePostDtoWithMeta[]</a></code>
+                        <i>Type : </i>    <code>CreateMetaOptionsDto | null</code>
 
                     </td>
                 </tr>
@@ -340,13 +338,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @ApiPropertyOptional({description: &#x27;This is the additional options for the post&#x27;, example: undefined, type: &#x27;array&#x27;, required: false, items: undefined})<br />@IsOptional()<br />@IsArray()<br />@ValidateNested({each: true})<br />@Type(undefined)<br />
+                            @ApiPropertyOptional({description: &#x27;This is the additional options for the post&#x27;, example: &#x27;{&quot;sidebarEnabled&quot;: true, &quot;footerEnabled&quot;: true}&#x27;, type: &#x27;string&#x27;, required: false, items: undefined})<br />@IsOptional()<br />@ValidateNested({each: true})<br />@Type(undefined)<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/posts/dtos/create-post.dto.ts:160</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">src/posts/dtos/create-post.dto.ts:144</a></div>
                         </td>
                     </tr>
 
@@ -645,7 +643,6 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
   IsArray,
-  IsDate,
   IsEnum,
   IsISO8601,
   IsJSON,
@@ -661,6 +658,7 @@
 import { PostStatus, PostTypes } from &#x27;../enums/posts.enums&#x27;;
 import { Type } from &#x27;class-transformer&#x27;;
 import { ApiProperty, ApiPropertyOptional } from &#x27;@nestjs/swagger&#x27;;
+import { CreateMetaOptionsDto } from &#x27;src/meta-options/dtos/create-meta-options.dto&#x27;;
 
 export class CreatePostDto {
   @ApiProperty({
@@ -768,57 +766,25 @@ export class CreatePostDto {
 
   @ApiPropertyOptional({
     description: &#x27;This is the additional options for the post&#x27;,
-    example: [
-      {
-        key: &#x27;sidebar&#x27;,
-        value: true,
-      },
-      {
-        key: &#x27;layout&#x27;,
-        value: &#x27;default&#x27;,
-      },
-    ],
-    type: &#x27;array&#x27;,
+    example: &#x27;{&quot;sidebarEnabled&quot;: true, &quot;footerEnabled&quot;: true}&#x27;,
+    type: &#x27;string&#x27;,
     required: false,
     items: {
       type: &#x27;object&#x27;,
       properties: {
-        key: {
-          type: &#x27;string&#x27;,
-          description:
-            &#x27;the key can be any string identifier for your meta option&#x27;,
-          example: &#x27;sidebarEnabled&#x27;,
-        },
-        value: {
-          type: &#x27;any&#x27;,
-          description: &#x27;any value that you want to make for the key&#x27;,
-          example: true,
+        metaValue: {
+          type: &#x27;json&#x27;,
+          description: &#x27;The meta value is a json object&#x27;,
+          example: &#x27;{&quot;sidebarEnabled&quot;: true, &quot;footerEnabled&quot;: true}&#x27;,
         },
       },
       required: [&#x27;key&#x27;, &#x27;value&#x27;],
     },
   })
   @IsOptional()
-  @IsArray()
   @ValidateNested({ each: true })
-  @Type(() &#x3D;&gt; CreatePostDtoWithMeta)
-  metaOptions?: CreatePostDtoWithMeta[];
-}
-
-export class CreatePostDtoWithMeta {
-  // @ApiProperty()
-  // @IsString()
-  // @MinLength(4)
-  // @IsNotEmpty()
-  // key: string;
-
-  // @ApiProperty()
-  // @IsNotEmpty()
-  // value: any;
-
-  @IsNotEmpty()
-  @IsJSON()
-  metaValue: string;
+  @Type(() &#x3D;&gt; CreateMetaOptionsDto)
+  metaOptions?: CreateMetaOptionsDto | null;
 }
 </code></pre>
     </div>

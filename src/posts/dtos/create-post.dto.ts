@@ -1,6 +1,5 @@
 import {
   IsArray,
-  IsDate,
   IsEnum,
   IsISO8601,
   IsJSON,
@@ -16,6 +15,7 @@ import {
 import { PostStatus, PostTypes } from '../enums/posts.enums';
 import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { CreateMetaOptionsDto } from 'src/meta-options/dtos/create-meta-options.dto';
 
 export class CreatePostDto {
   @ApiProperty({
@@ -123,55 +123,23 @@ export class CreatePostDto {
 
   @ApiPropertyOptional({
     description: 'This is the additional options for the post',
-    example: [
-      {
-        key: 'sidebar',
-        value: true,
-      },
-      {
-        key: 'layout',
-        value: 'default',
-      },
-    ],
-    type: 'array',
+    example: '{"sidebarEnabled": true, "footerEnabled": true}',
+    type: 'string',
     required: false,
     items: {
       type: 'object',
       properties: {
-        key: {
-          type: 'string',
-          description:
-            'the key can be any string identifier for your meta option',
-          example: 'sidebarEnabled',
-        },
-        value: {
-          type: 'any',
-          description: 'any value that you want to make for the key',
-          example: true,
+        metaValue: {
+          type: 'json',
+          description: 'The meta value is a json object',
+          example: '{"sidebarEnabled": true, "footerEnabled": true}',
         },
       },
       required: ['key', 'value'],
     },
   })
   @IsOptional()
-  @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => CreatePostDtoWithMeta)
-  metaOptions?: CreatePostDtoWithMeta[];
-}
-
-export class CreatePostDtoWithMeta {
-  // @ApiProperty()
-  // @IsString()
-  // @MinLength(4)
-  // @IsNotEmpty()
-  // key: string;
-
-  // @ApiProperty()
-  // @IsNotEmpty()
-  // value: any;
-
-  @IsNotEmpty()
-  @IsJSON()
-  metaValue: string;
+  @Type(() => CreateMetaOptionsDto)
+  metaOptions?: CreateMetaOptionsDto | null;
 }

@@ -137,6 +137,11 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#create" >create</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#getAllPosts" >getAllPosts</a>
                             </li>
                         </ul>
@@ -157,12 +162,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userServices: <a href="../injectables/UserService.html" target="_self">UserService</a>)</code>
+<code>constructor(userServices: <a href="../injectables/UserService.html" target="_self">UserService</a>, postRepository: <a href="../entitys/Post.html" target="_self">Repository&lt;PostRepository&gt;</a>, metaOptionsRepository: Repository<MetaOptionRepository>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/posts/posts.service.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/posts/posts.service.ts:10</a></div>
                             </td>
                         </tr>
 
@@ -191,6 +196,30 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>postRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Post.html" target="_self" >Repository&lt;PostRepository&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>metaOptionsRepository</td>
+                                                  
+                                                        <td>
+                                                                    <code>Repository&lt;MetaOptionRepository&gt;</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -205,6 +234,75 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="create"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>create</b></span>
+                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>create(undefined: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="22"
+                                    class="link-to-prism">src/posts/posts.service.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -227,8 +325,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="9"
-                                    class="link-to-prism">src/posts/posts.service.ts:9</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/posts/posts.service.ts:42</a></div>
                         </td>
                     </tr>
 
@@ -281,11 +379,44 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &#x27;@nestjs/common&#x27;;
 import { UserService } from &#x27;src/user/user.service&#x27;;
+import { CreatePostDto } from &#x27;./dtos/create-post.dto&#x27;;
+import { Repository } from &#x27;typeorm&#x27;;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
+import { MetaOption as MetaOptionRepository } from &#x27;src/meta-options/entity/meta-option.entity&#x27;;
+import { Post as PostRepository } from &#x27;./entity/post.entity&#x27;;
 
 @Injectable()
 export class PostsService {
-  // injecting user service
-  constructor(private userServices: UserService) {}
+  constructor(
+    // injecting user service (making user of another service (a single dependency injection))
+    private userServices: UserService,
+
+    @InjectRepository(PostRepository)
+    private postRepository: Repository&lt;PostRepository&gt;,
+
+    @InjectRepository(MetaOptionRepository)
+    private metaOptionsRepository: Repository&lt;MetaOptionRepository&gt;,
+  ) {}
+
+  public async create({ createPost }: { createPost: CreatePostDto }) {
+    let metaOptions &#x3D; null;
+    if (createPost.metaOptions) {
+      const metaValue &#x3D; createPost.metaOptions;
+      metaOptions &#x3D; this.metaOptionsRepository.create(metaValue);
+
+      await this.metaOptionsRepository.save(metaOptions);
+    }
+
+    const post &#x3D; await this.postRepository.create(createPost);
+
+    if (metaOptions) {
+      post.metaOptions &#x3D; metaOptions;
+    }
+
+    await this.postRepository.save(post);
+
+    return post;
+  }
 
   public getAllPosts({ userId }: { userId: number }) {
     // checks if a user exists and is authenticated

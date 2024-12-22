@@ -58,9 +58,8 @@ export class PostsController {
   })
   @Post('')
   createPost(@Body() createPostDto: CreatePostDto) {
-    console.log({ createPostDto });
-
-    return 'You sent a post request to posts endpoint';
+    const createdPost = this.postService.create({ createPost: createPostDto });
+    return createdPost;
   }
 
   /**

@@ -253,7 +253,7 @@ It logs the received data and returns a confirmation message.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
@@ -386,8 +386,8 @@ representing all posts for the specified user.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="85"
-                                    class="link-to-prism">src/posts/posts.controller.ts:85</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/posts/posts.controller.ts:84</a></div>
                         </td>
                     </tr>
 
@@ -510,9 +510,8 @@ export class PostsController {
   })
   @Post(&#x27;&#x27;)
   createPost(@Body() createPostDto: CreatePostDto) {
-    console.log({ createPostDto });
-
-    return &#x27;You sent a post request to posts endpoint&#x27;;
+    const createdPost &#x3D; this.postService.create({ createPost: createPostDto });
+    return createdPost;
   }
 
   /**
