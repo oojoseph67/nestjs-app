@@ -20,19 +20,19 @@ export class PostsService {
   ) {}
 
   public async create({ createPost }: { createPost: CreatePostDto }) {
-    let metaOptions = null;
-    if (createPost.metaOptions) {
-      const metaValue = createPost.metaOptions;
-      metaOptions = this.metaOptionsRepository.create(metaValue);
+    // let metaOptions = null;
+    // if (createPost.metaOptions) {
+    //   const metaValue = createPost.metaOptions;
+    //   metaOptions = this.metaOptionsRepository.create(metaValue);
 
-      await this.metaOptionsRepository.save(metaOptions);
-    }
+    //   await this.metaOptionsRepository.save(metaOptions);
+    // }
 
     const post = await this.postRepository.create(createPost);
 
-    if (metaOptions) {
-      post.metaOptions = metaOptions;
-    }
+    // if (metaOptions) {
+    //   post.metaOptions = metaOptions;
+    // }
 
     await this.postRepository.save(post);
 

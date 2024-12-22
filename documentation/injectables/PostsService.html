@@ -399,19 +399,19 @@ export class PostsService {
   ) {}
 
   public async create({ createPost }: { createPost: CreatePostDto }) {
-    let metaOptions &#x3D; null;
-    if (createPost.metaOptions) {
-      const metaValue &#x3D; createPost.metaOptions;
-      metaOptions &#x3D; this.metaOptionsRepository.create(metaValue);
+    // let metaOptions &#x3D; null;
+    // if (createPost.metaOptions) {
+    //   const metaValue &#x3D; createPost.metaOptions;
+    //   metaOptions &#x3D; this.metaOptionsRepository.create(metaValue);
 
-      await this.metaOptionsRepository.save(metaOptions);
-    }
+    //   await this.metaOptionsRepository.save(metaOptions);
+    // }
 
     const post &#x3D; await this.postRepository.create(createPost);
 
-    if (metaOptions) {
-      post.metaOptions &#x3D; metaOptions;
-    }
+    // if (metaOptions) {
+    //   post.metaOptions &#x3D; metaOptions;
+    // }
 
     await this.postRepository.save(post);
 

@@ -333,13 +333,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @OneToOne(undefined)<br />@JoinColumn()<br />
+                            @OneToOne(undefined, {cascade: true})<br />@JoinColumn()<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/posts/entity/post.entity.ts:76</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/posts/entity/post.entity.ts:79</a></div>
                         </td>
                     </tr>
 
@@ -668,7 +668,10 @@ export class Post {
 
   tags?: string[];
 
-  @OneToOne(() &#x3D;&gt; MetaOption)
+  @OneToOne(() &#x3D;&gt; MetaOption, {
+    // cascade: [&#x27;remove&#x27;] // setting cascade to work for a few methods
+    cascade: true, // this enables us create data in the metaoption table by just passing the value
+  })
   @JoinColumn()
   metaOptions?: MetaOption;
 
