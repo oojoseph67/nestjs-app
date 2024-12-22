@@ -84,9 +84,9 @@ export class PostsController {
   })
   @Patch('')
   updatePost(@Body() updatePostDto: PatchPostDto) {
-    console.log({ updatePostDto });
-
-    return 'You sent a patch request to posts endpoint';
+    // console.log({updatePostDto})
+    const updatedPost = this.postService.update({ updatePost: updatePostDto });
+    return updatedPost;
   }
 
   @ApiOperation({

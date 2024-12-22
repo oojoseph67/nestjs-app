@@ -519,7 +519,7 @@ PatchPostDto data transfer object.</p>
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </div>
                             <div class="io-description">
@@ -620,9 +620,9 @@ export class PostsController {
   })
   @Patch(&#x27;&#x27;)
   updatePost(@Body() updatePostDto: PatchPostDto) {
-    console.log({ updatePostDto });
-
-    return &#x27;You sent a patch request to posts endpoint&#x27;;
+    // console.log({updatePostDto})
+    const updatedPost &#x3D; this.postService.update({ updatePost: updatePostDto });
+    return updatedPost;
   }
 
   @ApiOperation({

@@ -7,3 +7,6 @@ content-type: application/json
     "slug": "js",
     "featuredImageUrl": "https://example.com/image.jpg"
 }
+
+DELETE http://localhost:7231/tags?id=2
+content-type: application/json

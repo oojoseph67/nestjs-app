@@ -52,4 +52,10 @@ export class TagsService {
 
     return results;
   }
+
+  public async delete({ id }: { id: number }) {
+    await this.tagsRepository.delete({ id });
+
+    return { message: 'Tag deleted successfully', status: 'success', id };
+  }
 }

@@ -592,7 +592,7 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @ManyToMany(undefined, {eager: true})<br />@JoinTable()<br />
+                            @ManyToMany(undefined, tags &#x3D;&gt; tags.posts, {eager: true})<br />@JoinTable()<br />
                         </code>
                     </td>
                 </tr>
@@ -722,7 +722,7 @@ export class Post {
   })
   publishedOn: Date;
 
-  @ManyToMany(() &#x3D;&gt; Tag, {
+  @ManyToMany(() &#x3D;&gt; Tag, (tags) &#x3D;&gt; tags.posts, {
     eager: true,
   })
   @JoinTable() // this must be on the owning side of the relationship and join table is used for M2M relationships, it also creates a new table for the relationship

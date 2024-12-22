@@ -142,7 +142,14 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#createPost" >createPost</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Async</span>
+                                <a href="#deleteTag" >deleteTag</a>
                             </li>
                         </ul>
                     </td>
@@ -168,6 +175,7 @@
                     <a name="createPost"></a>
                     <span class="name">
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>createPost</b></span>
                         <a href="#createPost"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -184,14 +192,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post(&#x27;&#x27;)<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Create a tag&#x27;})<br />@Post(&#x27;&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/tags/tags.controller.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/tags/tags.controller.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -237,11 +245,96 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="deleteTag"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Async</span>
+                        <span ><b>deleteTag</b></span>
+                        <a href="#deleteTag"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deleteTag(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@ApiOperation({summary: &#x27;Delete a tag by id&#x27;})<br />@Delete(&#x27;&#x27;)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="26"
+                                    class="link-to-prism">src/tags/tags.controller.ts:26</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, Post } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Body,
+  Controller,
+  Delete,
+  ParseIntPipe,
+  Post,
+  Query,
+} from &#x27;@nestjs/common&#x27;;
 import { CreateTagDto } from &#x27;./dtos/create-tag.dto&#x27;;
 import { ApiOperation } from &#x27;@nestjs/swagger&#x27;;
 import { TagsService } from &#x27;./tags.service&#x27;;
@@ -250,11 +343,17 @@ import { TagsService } from &#x27;./tags.service&#x27;;
 export class TagsController {
   constructor(private tagsService: TagsService) {}
 
+  @ApiOperation({ summary: &#x27;Create a tag&#x27; })
   @Post(&#x27;&#x27;)
   createPost(@Body() createTag: CreateTagDto) {
     const createdTags &#x3D; this.tagsService.createTag({ tag: createTag });
-
     return createdTags;
+  }
+
+  @ApiOperation({ summary: &#x27;Delete a tag by id&#x27; })
+  @Delete(&#x27;&#x27;)
+  async deleteTag(@Query(&#x27;id&#x27;, ParseIntPipe) id: number) {
+    return await this.tagsService.delete({ id });
   }
 }
 </code></pre>

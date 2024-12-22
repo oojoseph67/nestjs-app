@@ -74,7 +74,7 @@ export class Post {
   })
   publishedOn: Date;
 
-  @ManyToMany(() => Tag, {
+  @ManyToMany(() => Tag, (tags) => tags.posts, {
     eager: true,
   })
   @JoinTable() // this must be on the owning side of the relationship and join table is used for M2M relationships, it also creates a new table for the relationship

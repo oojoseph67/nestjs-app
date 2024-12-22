@@ -150,6 +150,11 @@
                                     <span class="modifier">Async</span>
                                 <a href="#getAllPosts" >getAllPosts</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#update" >update</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -173,7 +178,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/posts/posts.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/posts/posts.service.ts:12</a></div>
                             </td>
                         </tr>
 
@@ -275,8 +280,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/posts/posts.service.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/posts/posts.service.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -344,8 +349,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/posts/posts.service.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="92"
+                                    class="link-to-prism">src/posts/posts.service.ts:92</a></div>
                         </td>
                     </tr>
 
@@ -413,8 +418,77 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/posts/posts.service.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/posts/posts.service.ts:86</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="update"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>update</b></span>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>update(undefined: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/posts/posts.service.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -473,6 +547,7 @@ import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { MetaOption as MetaOptionRepository } from &#x27;src/meta-options/entity/meta-option.entity&#x27;;
 import { Post as PostRepository } from &#x27;./entity/post.entity&#x27;;
 import { TagsService } from &#x27;src/tags/tags.service&#x27;;
+import { PatchPostDto } from &#x27;./dtos/patch-post.dto&#x27;;
 
 @Injectable()
 export class PostsService {
@@ -514,6 +589,39 @@ export class PostsService {
     await this.postRepository.save(post);
 
     return post;
+  }
+
+  public async update({ updatePost }: { updatePost: PatchPostDto }) {
+    // find the tags
+
+    const tags &#x3D; await this.tagsService.findMultipleTags({
+      tags: updatePost.tags,
+    });
+
+    if (!(tags.length &gt; 0)) {
+      throw new HttpException(&#x27;Tags not found&#x27;, HttpStatus.NOT_FOUND);
+    }
+
+    const post &#x3D; await this.postRepository.findOneBy({ id: updatePost.id });
+
+    if (!post) {
+      throw new HttpException(&#x27;Post not found&#x27;, HttpStatus.NOT_FOUND);
+    }
+
+    post.title &#x3D; updatePost.title ?? post.title;
+    post.postType &#x3D; updatePost.postType ?? post.postType;
+    post.slug &#x3D; updatePost.slug ?? post.slug;
+    post.status &#x3D; updatePost.status ?? post.status;
+    post.content &#x3D; updatePost.content ?? post.content;
+    post.schema &#x3D; updatePost.schema ?? post.schema;
+    post.featuredImageUrl &#x3D;
+      updatePost.featuredImageUrl ?? post.featuredImageUrl;
+    post.publishedOn &#x3D; updatePost.publishedOn ?? post.publishedOn;
+    post.tags &#x3D; updatePost.tags ? tags : post.tags;
+
+    const updatedPost &#x3D; await this.postRepository.save(post);
+
+    return updatedPost;
   }
 
   public async getAllPosts({ userId }: { userId: number }) {
