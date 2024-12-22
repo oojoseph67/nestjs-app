@@ -149,6 +149,12 @@
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                <a href="#deletePost" >deletePost</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#getAllPosts" >getAllPosts</a>
                             </li>
                             <li>
@@ -205,8 +211,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/posts/posts.controller.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="62"
+                                    class="link-to-prism">src/posts/posts.controller.ts:62</a></div>
                         </td>
                     </tr>
 
@@ -268,6 +274,84 @@ It logs the received data and returns a confirmation message.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="deletePost"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                        <span ><b>deletePost</b></span>
+                        <a href="#deletePost"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>deletePost(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@ApiOperation({summary: &#x27;Deletes a post&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Deleted post&#x27;})<br />@Delete(&#x27;&#x27;)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="100"
+                                    class="link-to-prism">src/posts/posts.controller.ts:100</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getAllPosts"></a>
                     <span class="name">
                             <span class="modifier"></span>
@@ -294,8 +378,8 @@ It logs the received data and returns a confirmation message.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/posts/posts.controller.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="40"
+                                    class="link-to-prism">src/posts/posts.controller.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -386,8 +470,8 @@ representing all posts for the specified user.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="82"
-                                    class="link-to-prism">src/posts/posts.controller.ts:82</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="86"
+                                    class="link-to-prism">src/posts/posts.controller.ts:86</a></div>
                         </td>
                     </tr>
 
@@ -453,11 +537,15 @@ PatchPostDto data transfer object.</p>
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpException,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
+  Query,
 } from &#x27;@nestjs/common&#x27;;
 import { PostsService } from &#x27;./posts.service&#x27;;
 import { CreatePostDto } from &#x27;./dtos/create-post.dto&#x27;;
@@ -535,6 +623,24 @@ export class PostsController {
     console.log({ updatePostDto });
 
     return &#x27;You sent a patch request to posts endpoint&#x27;;
+  }
+
+  @ApiOperation({
+    summary: &#x27;Deletes a post&#x27;,
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: &#x27;Deleted post&#x27;,
+  })
+  @Delete(&#x27;&#x27;)
+  deletePost(@Query(&#x27;id&#x27;, ParseIntPipe) id: number) {
+    if (!id) {
+      throw new HttpException(&#x27;No id provided&#x27;, HttpStatus.BAD_REQUEST);
+    }
+
+    const deleteRequest &#x3D; this.postService.delete({ id });
+
+    return deleteRequest;
   }
 }
 </code></pre>

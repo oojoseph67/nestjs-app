@@ -1,11 +1,15 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  HttpException,
   HttpStatus,
   Param,
+  ParseIntPipe,
   Patch,
   Post,
+  Query,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dtos/create-post.dto';
@@ -83,5 +87,23 @@ export class PostsController {
     console.log({ updatePostDto });
 
     return 'You sent a patch request to posts endpoint';
+  }
+
+  @ApiOperation({
+    summary: 'Deletes a post',
+  })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Deleted post',
+  })
+  @Delete('')
+  deletePost(@Query('id', ParseIntPipe) id: number) {
+    if (!id) {
+      throw new HttpException('No id provided', HttpStatus.BAD_REQUEST);
+    }
+
+    const deleteRequest = this.postService.delete({ id });
+
+    return deleteRequest;
   }
 }

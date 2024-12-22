@@ -43,3 +43,6 @@ content-type: application/json
 
 GET http://localhost:7231/posts
 content-type: application/json
+
+DELETE http://localhost:7231/posts?id=5
+content-type: application/json

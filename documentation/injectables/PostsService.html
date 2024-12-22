@@ -143,6 +143,11 @@
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
+                                <a href="#delete" >delete</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#getAllPosts" >getAllPosts</a>
                             </li>
                         </ul>
@@ -260,6 +265,75 @@
                         <td class="col-md-4">
                             <div class="io-line">Defined in <a href="" data-line="22"
                                     class="link-to-prism">src/posts/posts.service.ts:22</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="delete"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>delete</b></span>
+                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>delete(undefined: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/posts/posts.service.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -426,6 +500,20 @@ export class PostsService {
     });
 
     return posts;
+  }
+
+  public async delete({ id }: { id: number }) {
+    const post &#x3D; await this.postRepository.findOneBy({ id });
+
+    if (!post) {
+      throw new HttpException(&#x27;Post not found&#x27;, HttpStatus.NOT_FOUND);
+    }
+
+    await this.postRepository.delete({ id });
+
+    await this.metaOptionsRepository.delete({ id: post.metaOptions.id });
+
+    return { message: &#x27;Post deleted successfully&#x27;, status: &#x27;success&#x27;, id };
   }
 }
 </code></pre>
