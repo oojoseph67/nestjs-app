@@ -503,15 +503,15 @@ export class PostsService {
   }
 
   public async delete({ id }: { id: number }) {
-    const post &#x3D; await this.postRepository.findOneBy({ id });
+    // const post &#x3D; await this.postRepository.findOneBy({ id });
 
-    if (!post) {
-      throw new HttpException(&#x27;Post not found&#x27;, HttpStatus.NOT_FOUND);
-    }
+    // if (!post) {
+    //   throw new HttpException(&#x27;Post not found&#x27;, HttpStatus.NOT_FOUND);
+    // }
 
     await this.postRepository.delete({ id });
 
-    await this.metaOptionsRepository.delete({ id: post.metaOptions.id });
+    // await this.metaOptionsRepository.delete({ id: post.metaOptions.id });
 
     return { message: &#x27;Post deleted successfully&#x27;, status: &#x27;success&#x27;, id };
   }

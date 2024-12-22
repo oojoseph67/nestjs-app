@@ -147,7 +147,6 @@
                             </li>
                             <li>
                                     <span class="modifier"></span>
-                                    <span class="modifier"></span>
                                     <span class="modifier">Optional</span>
                                 <a href="#metaOptions" >metaOptions</a>
                             </li>
@@ -315,7 +314,6 @@
                     <a name="metaOptions"></a>
                     <span class="name">
                             <span class="modifier"></span>
-                            <span class="modifier"></span>
                             <span class="modifier">Optional</span>
                         <span ><b>metaOptions</b></span>
                         <a href="#metaOptions"><span class="icon ion-ios-link"></span></a>
@@ -333,7 +331,7 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @OneToOne(undefined, {cascade: true, eager: true})<br />@JoinColumn()<br />
+                            @OneToOne(undefined, metaOptions &#x3D;&gt; metaOptions.post, {cascade: true, eager: true})<br />
                         </code>
                     </td>
                 </tr>
@@ -668,12 +666,12 @@ export class Post {
 
   tags?: string[];
 
-  @OneToOne(() &#x3D;&gt; MetaOption, {
+  @OneToOne(() &#x3D;&gt; MetaOption, (metaOptions) &#x3D;&gt; metaOptions.post, {
     // cascade: [&#x27;remove&#x27;] // setting cascade to work for a few methods
     cascade: true, // this enables us create data in the metaoption table by just passing the value
     eager: true, // loading the metaOptions eagerly instead of lazy loading it
   })
-  @JoinColumn()
+  // @JoinColumn()
   metaOptions?: MetaOption;
 
   // metaOptions?: CreatePostDtoWithMeta[];

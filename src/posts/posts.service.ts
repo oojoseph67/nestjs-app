@@ -48,15 +48,15 @@ export class PostsService {
   }
 
   public async delete({ id }: { id: number }) {
-    const post = await this.postRepository.findOneBy({ id });
+    // const post = await this.postRepository.findOneBy({ id });
 
-    if (!post) {
-      throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
-    }
+    // if (!post) {
+    //   throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
+    // }
 
     await this.postRepository.delete({ id });
 
-    await this.metaOptionsRepository.delete({ id: post.metaOptions.id });
+    // await this.metaOptionsRepository.delete({ id: post.metaOptions.id });
 
     return { message: 'Post deleted successfully', status: 'success', id };
   }

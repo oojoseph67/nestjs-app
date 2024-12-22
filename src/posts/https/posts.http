@@ -3,9 +3,9 @@ POST http://localhost:7231/posts
 content-type: application/json
 
 {
-    "title": "Whats new",
+    "title": "Everything is good",
     "postType": "page",
-    "slug": "hjhkh",
+    "slug": "everyday-2",
     "status": "published",
     "content": "Welcome to our new blog post!",
     "schema": "{\r\n \"@context\": \"https:\/\/schema.org\", \r\n \"@type\": \"Person\"\r\n}",
@@ -14,7 +14,7 @@ content-type: application/json
     "tags": ["news", "page", "typescript"],
     "metaOptions" : {
         "metaValue": "{\"sidebarEnabled\": false, \"footerEnabled\": false}"
-    },
+    }
 }
 
 ###
@@ -44,5 +44,5 @@ content-type: application/json
 GET http://localhost:7231/posts
 content-type: application/json
 
-DELETE http://localhost:7231/posts?id=5
+DELETE http://localhost:7231/posts?id=4
 content-type: application/json

@@ -635,7 +635,7 @@ export class PostsController {
   @Delete(&#x27;&#x27;)
   deletePost(@Query(&#x27;id&#x27;, ParseIntPipe) id: number) {
     if (!id) {
-      throw new HttpException(&#x27;No id provided&#x27;, HttpStatus.BAD_REQUEST);
+      throw new HttpException(&#x27;No ID Provided&#x27;, HttpStatus.BAD_REQUEST);
     }
 
     const deleteRequest &#x3D; this.postService.delete({ id });
