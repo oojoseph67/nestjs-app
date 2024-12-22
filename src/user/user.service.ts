@@ -74,14 +74,13 @@ export class UserService {
     ];
   }
 
-  public findOneById({ id }: { id: number }) {
-    console.log(`Find user with id: ${id}`);
+  public async findOneById({ id }: { id: number }) {
+    const user = await this.userRepository.findOneBy({ id });
 
-    const dummyUserData = [
-      { id: 1, firstName: 'John Doe', email: 'john@doe.com' },
-      { id: 2, firstName: 'Jane Doe', email: 'jane@doe.com' },
-    ];
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
 
-    return dummyUserData.find((user) => user.id === id);
+    return user;
   }
 }

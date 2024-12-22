@@ -3,6 +3,7 @@ POST http://localhost:7231/posts
 content-type: application/json
 
 {
+    "authorId": 1,
     "title": "Everything is good",
     "postType": "page",
     "slug": "everyday-2",

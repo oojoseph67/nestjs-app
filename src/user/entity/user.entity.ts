@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Post } from 'src/posts/entity/post.entity';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class User {
@@ -17,7 +18,7 @@ export class User {
     length: 96,
     nullable: true,
   })
-  lastName: string;
+  lastName?: string;
 
   @Column({
     type: 'varchar',
@@ -33,4 +34,7 @@ export class User {
     nullable: false,
   })
   password: string;
+
+  @OneToMany(() => Post, (posts) => posts.author) // first argument is the one we want to setup a relationship with, second argument is the what references the relationship
+  posts: Post[];
 }

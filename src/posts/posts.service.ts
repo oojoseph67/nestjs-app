@@ -20,19 +20,14 @@ export class PostsService {
   ) {}
 
   public async create({ createPost }: { createPost: CreatePostDto }) {
-    // let metaOptions = null;
-    // if (createPost.metaOptions) {
-    //   const metaValue = createPost.metaOptions;
-    //   metaOptions = this.metaOptionsRepository.create(metaValue);
+    const author = await this.userServices.findOneById({
+      id: createPost.authorId,
+    });
 
-    //   await this.metaOptionsRepository.save(metaOptions);
-    // }
-
-    const post = await this.postRepository.create(createPost);
-
-    // if (metaOptions) {
-    //   post.metaOptions = metaOptions;
-    // }
+    const post = await this.postRepository.create({
+      ...createPost,
+      author: author,
+    });
 
     await this.postRepository.save(post);
 
@@ -40,9 +35,7 @@ export class PostsService {
   }
 
   public async getAllPosts({ userId }: { userId: number }) {
-    const posts = await this.postRepository.find({
-      relations: { metaOptions: false },
-    });
+    const posts = await this.postRepository.find({});
 
     return posts;
   }

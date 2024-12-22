@@ -1,6 +1,7 @@
 import {
   IsArray,
   IsEnum,
+  IsInt,
   IsISO8601,
   IsJSON,
   IsNotEmpty,
@@ -142,4 +143,14 @@ export class CreatePostDto {
   @ValidateNested({ each: true })
   @Type(() => CreateMetaOptionsDto)
   metaOptions?: CreateMetaOptionsDto | null;
+
+  @ApiProperty({
+    description: 'This is the id of the author of the post',
+    example: 123,
+    type: 'integer',
+    required: true,
+  })
+  @IsInt()
+  @IsNotEmpty()
+  authorId: number;
 }

@@ -22,10 +22,12 @@ export class AuthService {
     // login
     // token
 
-    const user = this.userService.findOneById({ id });
-    console.log(`Logging in user ${user.firstName}`);
+    // const user = this.userService.findOneById({ id });
+    // console.log(`Logging in user ${user.firstName}`);
 
-    return user;
+    // return user;
+
+    return 'login';
   }
 
   public isAuthenticated() {

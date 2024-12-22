@@ -28,13 +28,13 @@
 <title>cluster_PostsModule_providers</title>
 <polygon fill="none" stroke="black" points="235,-78 235,-130 371,-130 371,-78 235,-78"/>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_PostsModule_exports</title>
-<polygon fill="none" stroke="black" points="187,-208 187,-260 295,-260 295,-208 187,-208"/>
-</g>
 <g id="clust3" class="cluster">
 <title>cluster_PostsModule_imports</title>
 <polygon fill="none" stroke="black" points="125,-78 125,-130 227,-130 227,-78 125,-78"/>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_PostsModule_exports</title>
+<polygon fill="none" stroke="black" points="187,-208 187,-260 295,-260 295,-208 187,-208"/>
 </g>
 <!-- UserModule -->
 <g id="node1" class="node">

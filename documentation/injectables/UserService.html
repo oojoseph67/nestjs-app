@@ -146,6 +146,7 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#findOneById" >findOneById</a>
                             </li>
                         </ul>
@@ -370,6 +371,7 @@
                     <a name="findOneById"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
                         <span ><b>findOneById</b></span>
                         <a href="#findOneById"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -421,7 +423,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>    <code>unknown</code>
 
                         </div>
                             <div class="io-description">
@@ -513,15 +515,14 @@ export class UserService {
     ];
   }
 
-  public findOneById({ id }: { id: number }) {
-    console.log(&#x60;Find user with id: ${id}&#x60;);
+  public async findOneById({ id }: { id: number }) {
+    const user &#x3D; await this.userRepository.findOneBy({ id });
 
-    const dummyUserData &#x3D; [
-      { id: 1, firstName: &#x27;John Doe&#x27;, email: &#x27;john@doe.com&#x27; },
-      { id: 2, firstName: &#x27;Jane Doe&#x27;, email: &#x27;jane@doe.com&#x27; },
-    ];
+    if (!user) {
+      throw new HttpException(&#x27;User not found&#x27;, HttpStatus.NOT_FOUND);
+    }
 
-    return dummyUserData.find((user) &#x3D;&gt; user.id &#x3D;&#x3D;&#x3D; id);
+    return user;
   }
 }
 </code></pre>

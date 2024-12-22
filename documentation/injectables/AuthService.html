@@ -231,8 +231,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/auth/auth.service.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/auth/auth.service.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -306,7 +306,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                         </div>
                             <div class="io-description">
@@ -346,10 +346,12 @@ export class AuthService {
     // login
     // token
 
-    const user &#x3D; this.userService.findOneById({ id });
-    console.log(&#x60;Logging in user ${user.firstName}&#x60;);
+    // const user &#x3D; this.userService.findOneById({ id });
+    // console.log(&#x60;Logging in user ${user.firstName}&#x60;);
 
-    return user;
+    // return user;
+
+    return &#x27;login&#x27;;
   }
 
   public isAuthenticated() {

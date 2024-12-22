@@ -332,8 +332,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="50"
-                                    class="link-to-prism">src/posts/posts.service.ts:50</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">src/posts/posts.service.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -401,8 +401,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="42"
-                                    class="link-to-prism">src/posts/posts.service.ts:42</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="37"
+                                    class="link-to-prism">src/posts/posts.service.ts:37</a></div>
                         </td>
                     </tr>
 
@@ -475,19 +475,14 @@ export class PostsService {
   ) {}
 
   public async create({ createPost }: { createPost: CreatePostDto }) {
-    // let metaOptions &#x3D; null;
-    // if (createPost.metaOptions) {
-    //   const metaValue &#x3D; createPost.metaOptions;
-    //   metaOptions &#x3D; this.metaOptionsRepository.create(metaValue);
+    const author &#x3D; await this.userServices.findOneById({
+      id: createPost.authorId,
+    });
 
-    //   await this.metaOptionsRepository.save(metaOptions);
-    // }
-
-    const post &#x3D; await this.postRepository.create(createPost);
-
-    // if (metaOptions) {
-    //   post.metaOptions &#x3D; metaOptions;
-    // }
+    const post &#x3D; await this.postRepository.create({
+      ...createPost,
+      author: author,
+    });
 
     await this.postRepository.save(post);
 
@@ -495,9 +490,7 @@ export class PostsService {
   }
 
   public async getAllPosts({ userId }: { userId: number }) {
-    const posts &#x3D; await this.postRepository.find({
-      relations: { metaOptions: false },
-    });
+    const posts &#x3D; await this.postRepository.find({});
 
     return posts;
   }
