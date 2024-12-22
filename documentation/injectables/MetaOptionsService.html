@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >PostsService</li>
+  <li class="breadcrumb-item" >MetaOptionsService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/posts/posts.service.ts</code>
+            <code>src/meta-options/meta-options.service.ts</code>
         </p>
 
 
@@ -140,16 +140,6 @@
                                     <span class="modifier">Async</span>
                                 <a href="#create" >create</a>
                             </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#delete" >delete</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#getAllPosts" >getAllPosts</a>
-                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -168,12 +158,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userServices: <a href="../injectables/UserService.html" target="_self">UserService</a>, tagsService: <a href="../injectables/TagsService.html" target="_self">TagsService</a>, postRepository: <a href="../entitys/Post.html" target="_self">Repository&lt;PostRepository&gt;</a>, metaOptionsRepository: <a href="../entitys/MetaOption.html" target="_self">Repository&lt;MetaOptionRepository&gt;</a>)</code>
+<code>constructor(metaOptionsRepository: <a href="../entitys/MetaOption.html" target="_self">Repository&lt;MetaOptionsRepository&gt;</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/posts/posts.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/meta-options/meta-options.service.ts:8</a></div>
                             </td>
                         </tr>
 
@@ -191,46 +181,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userServices</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>tagsService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/TagsService.html" target="_self" >TagsService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>postRepository</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../entitys/Post.html" target="_self" >Repository&lt;PostRepository&gt;</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
                                                         <td>metaOptionsRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../entitys/MetaOption.html" target="_self" >Repository&lt;MetaOptionRepository&gt;</a></code>
+                                                                        <code><a href="../entitys/MetaOption.html" target="_self" >Repository&lt;MetaOptionsRepository&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -275,146 +229,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/posts/posts.service.ts:32</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                        <code>literal type</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="delete"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>delete</b></span>
-                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>delete(undefined: literal type)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/posts/posts.service.ts:58</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                        <code>literal type</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="getAllPosts"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>getAllPosts</b></span>
-                        <a href="#getAllPosts"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getAllPosts(undefined: literal type)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/posts/posts.service.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="15"
+                                    class="link-to-prism">src/meta-options/meta-options.service.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -465,75 +281,26 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &#x27;@nestjs/common&#x27;;
-import { UserService } from &#x27;src/user/user.service&#x27;;
-import { CreatePostDto } from &#x27;./dtos/create-post.dto&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+import { CreateMetaOptionsDto } from &#x27;./dtos/create-meta-options.dto&#x27;;
+import { MetaOption as MetaOptionsRepository } from &#x27;./entity/meta-option.entity&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { MetaOption as MetaOptionRepository } from &#x27;src/meta-options/entity/meta-option.entity&#x27;;
-import { Post as PostRepository } from &#x27;./entity/post.entity&#x27;;
-import { TagsService } from &#x27;src/tags/tags.service&#x27;;
+import { Repository } from &#x27;typeorm&#x27;;
 
 @Injectable()
-export class PostsService {
+export class MetaOptionsService {
   constructor(
-    /**
-     * Repositories Injections
-     */
-
-    // injecting user service (making user of another service (a single dependency injection))
-    private userServices: UserService,
-
-    private tagsService: TagsService,
-
-    /**
-     * Repositories Injections
-     */
-    @InjectRepository(PostRepository)
-    private postRepository: Repository&lt;PostRepository&gt;,
-
-    @InjectRepository(MetaOptionRepository)
-    private metaOptionsRepository: Repository&lt;MetaOptionRepository&gt;,
+    // injecting meta options service repository dependency
+    @InjectRepository(MetaOptionsRepository)
+    private metaOptionsRepository: Repository&lt;MetaOptionsRepository&gt;,
   ) {}
 
-  public async create({ createPost }: { createPost: CreatePostDto }) {
-    const author &#x3D; await this.userServices.findOneById({
-      id: createPost.authorId,
-    });
+  public async create({ metaOptions }: { metaOptions: CreateMetaOptionsDto }) {
+    const createdMetaOption &#x3D;
+      await this.metaOptionsRepository.create(metaOptions);
+    await this.metaOptionsRepository.save(createdMetaOption);
 
-    const tags &#x3D; await this.tagsService.findMultipleTags({
-      tags: createPost.tags,
-    });
-
-    const post &#x3D; await this.postRepository.create({
-      ...createPost,
-      author: author,
-      tags: tags,
-    });
-
-    await this.postRepository.save(post);
-
-    return post;
-  }
-
-  public async getAllPosts({ userId }: { userId: number }) {
-    const posts &#x3D; await this.postRepository.find({});
-
-    return posts;
-  }
-
-  public async delete({ id }: { id: number }) {
-    // const post &#x3D; await this.postRepository.findOneBy({ id });
-
-    // if (!post) {
-    //   throw new HttpException(&#x27;Post not found&#x27;, HttpStatus.NOT_FOUND);
-    // }
-
-    await this.postRepository.delete({ id });
-
-    // await this.metaOptionsRepository.delete({ id: post.metaOptions.id });
-
-    return { message: &#x27;Post deleted successfully&#x27;, status: &#x27;success&#x27;, id };
+    return createdMetaOption;
   }
 }
 </code></pre>
@@ -579,7 +346,7 @@ export class PostsService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PostsService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'MetaOptionsService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

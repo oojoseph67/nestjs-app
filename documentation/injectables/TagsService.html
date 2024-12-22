@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >PostsService</li>
+  <li class="breadcrumb-item" >TagsService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/posts/posts.service.ts</code>
+            <code>src/tags/tags.service.ts</code>
         </p>
 
 
@@ -138,17 +138,22 @@
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#create" >create</a>
+                                <a href="#createTag" >createTag</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#delete" >delete</a>
+                                <a href="#findMultipleTags" >findMultipleTags</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#getAllPosts" >getAllPosts</a>
+                                <a href="#getAllTags" >getAllTags</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#getTagById" >getTagById</a>
                             </li>
                         </ul>
                     </td>
@@ -168,12 +173,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userServices: <a href="../injectables/UserService.html" target="_self">UserService</a>, tagsService: <a href="../injectables/TagsService.html" target="_self">TagsService</a>, postRepository: <a href="../entitys/Post.html" target="_self">Repository&lt;PostRepository&gt;</a>, metaOptionsRepository: <a href="../entitys/MetaOption.html" target="_self">Repository&lt;MetaOptionRepository&gt;</a>)</code>
+<code>constructor(tagsRepository: <a href="../entitys/Tag.html" target="_self">Repository&lt;TagRepository&gt;</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/posts/posts.service.ts:11</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/tags/tags.service.ts:8</a></div>
                             </td>
                         </tr>
 
@@ -191,46 +196,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userServices</td>
+                                                        <td>tagsRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>tagsService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/TagsService.html" target="_self" >TagsService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>postRepository</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../entitys/Post.html" target="_self" >Repository&lt;PostRepository&gt;</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>metaOptionsRepository</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../entitys/MetaOption.html" target="_self" >Repository&lt;MetaOptionRepository&gt;</a></code>
+                                                                        <code><a href="../entitys/Tag.html" target="_self" >Repository&lt;TagRepository&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -256,27 +225,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="create"></a>
+                    <a name="createTag"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>create</b></span>
-                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>createTag</b></span>
+                        <a href="#createTag"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>create(undefined: literal type)</code>
+                    <code>createTag(undefined: literal type)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/posts/posts.service.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="14"
+                                    class="link-to-prism">src/tags/tags.service.ts:14</a></div>
                         </td>
                     </tr>
 
@@ -325,27 +294,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="delete"></a>
+                    <a name="findMultipleTags"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>delete</b></span>
-                        <a href="#delete"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>findMultipleTags</b></span>
+                        <a href="#findMultipleTags"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>delete(undefined: literal type)</code>
+                    <code>findMultipleTags(undefined: literal type)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/posts/posts.service.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/tags/tags.service.ts:46</a></div>
                         </td>
                     </tr>
 
@@ -394,27 +363,67 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="getAllPosts"></a>
+                    <a name="getAllTags"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>getAllPosts</b></span>
-                        <a href="#getAllPosts"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>getAllTags</b></span>
+                        <a href="#getAllTags"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getAllPosts(undefined: literal type)</code>
+                    <code>getAllTags()</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/posts/posts.service.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="30"
+                                    class="link-to-prism">src/tags/tags.service.ts:30</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTagById"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>getTagById</b></span>
+                        <a href="#getTagById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTagById(undefined: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/tags/tags.service.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -466,74 +475,58 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpException, HttpStatus, Injectable } from &#x27;@nestjs/common&#x27;;
-import { UserService } from &#x27;src/user/user.service&#x27;;
-import { CreatePostDto } from &#x27;./dtos/create-post.dto&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
+import { In, Repository } from &#x27;typeorm&#x27;;
+import { Tag as TagRepository } from &#x27;./entity/tags.entity&#x27;;
+import { CreateTagDto } from &#x27;./dtos/create-tag.dto&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { MetaOption as MetaOptionRepository } from &#x27;src/meta-options/entity/meta-option.entity&#x27;;
-import { Post as PostRepository } from &#x27;./entity/post.entity&#x27;;
-import { TagsService } from &#x27;src/tags/tags.service&#x27;;
 
 @Injectable()
-export class PostsService {
+export class TagsService {
   constructor(
-    /**
-     * Repositories Injections
-     */
-
-    // injecting user service (making user of another service (a single dependency injection))
-    private userServices: UserService,
-
-    private tagsService: TagsService,
-
-    /**
-     * Repositories Injections
-     */
-    @InjectRepository(PostRepository)
-    private postRepository: Repository&lt;PostRepository&gt;,
-
-    @InjectRepository(MetaOptionRepository)
-    private metaOptionsRepository: Repository&lt;MetaOptionRepository&gt;,
+    @InjectRepository(TagRepository)
+    private tagsRepository: Repository&lt;TagRepository&gt;,
   ) {}
 
-  public async create({ createPost }: { createPost: CreatePostDto }) {
-    const author &#x3D; await this.userServices.findOneById({
-      id: createPost.authorId,
+  public async createTag({ tag }: { tag: CreateTagDto }) {
+    const existingTags &#x3D; await this.tagsRepository.findOne({
+      where: { name: tag.name },
     });
 
-    const tags &#x3D; await this.tagsService.findMultipleTags({
-      tags: createPost.tags,
-    });
+    if (existingTags) {
+      throw new HttpException(&#x27;Tag already exists&#x27;, HttpStatus.CONFLICT);
+    }
 
-    const post &#x3D; await this.postRepository.create({
-      ...createPost,
-      author: author,
-      tags: tags,
-    });
+    const createdTags &#x3D; await this.tagsRepository.create(tag);
 
-    await this.postRepository.save(post);
+    await this.tagsRepository.save(createdTags);
 
-    return post;
+    return createdTags;
   }
 
-  public async getAllPosts({ userId }: { userId: number }) {
-    const posts &#x3D; await this.postRepository.find({});
+  public async getAllTags() {
+    const tags &#x3D; await this.tagsRepository.find({});
 
-    return posts;
+    return tags;
   }
 
-  public async delete({ id }: { id: number }) {
-    // const post &#x3D; await this.postRepository.findOneBy({ id });
+  public async getTagById({ id }: { id: number }) {
+    const tag &#x3D; await this.tagsRepository.findOneBy({ id });
 
-    // if (!post) {
-    //   throw new HttpException(&#x27;Post not found&#x27;, HttpStatus.NOT_FOUND);
-    // }
+    if (!tag) {
+      throw new HttpException(&#x27;Tag not found&#x27;, HttpStatus.NOT_FOUND);
+    }
 
-    await this.postRepository.delete({ id });
+    return tag;
+  }
 
-    // await this.metaOptionsRepository.delete({ id: post.metaOptions.id });
+  public async findMultipleTags({ tags }: { tags: number[] }) {
+    const results &#x3D; await this.tagsRepository.find({
+      where: {
+        id: In(tags),
+      },
+    });
 
-    return { message: &#x27;Post deleted successfully&#x27;, status: &#x27;success&#x27;, id };
+    return results;
   }
 }
 </code></pre>
@@ -579,7 +572,7 @@ export class PostsService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'PostsService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'TagsService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
