@@ -319,8 +319,9 @@ import { MetaOptionsModule } from &#x27;./meta-options/meta-options.module&#x27;
 import { TagsController } from &#x27;./tags/tags.controller&#x27;;
 import { TagsModule } from &#x27;./tags/tags.module&#x27;;
 import { ConfigModule, ConfigService } from &#x27;@nestjs/config&#x27;;
-import appConfig  from &#x27;./config/index.config&#x27;;
-import databaseConfig  from &#x27;./config/database.config&#x27;;
+import appConfig from &#x27;./config/index.config&#x27;;
+import databaseConfig from &#x27;./config/database.config&#x27;;
+import environmentValidation from &#x27;./config/environment.validation&#x27;;
 
 const ENV &#x3D; process.env.NODE_ENV;
 
@@ -331,6 +332,7 @@ const ENV &#x3D; process.env.NODE_ENV;
       // envFilePath: [&#x27;.env.development.local&#x27;], // specify the path to your.env file
       envFilePath: !ENV ? &#x27;.env&#x27; : &#x60;.env.${ENV}.local&#x60;,
       load: [appConfig, databaseConfig],
+      validationSchema: environmentValidation,
     }), // to use environment variables
     UserModule,
     PostsModule,

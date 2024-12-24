@@ -11,8 +11,9 @@ import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { TagsController } from './tags/tags.controller';
 import { TagsModule } from './tags/tags.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import appConfig  from './config/index.config';
-import databaseConfig  from './config/database.config';
+import appConfig from './config/index.config';
+import databaseConfig from './config/database.config';
+import environmentValidation from './config/environment.validation';
 
 const ENV = process.env.NODE_ENV;
 
@@ -23,6 +24,7 @@ const ENV = process.env.NODE_ENV;
       // envFilePath: ['.env.development.local'], // specify the path to your.env file
       envFilePath: !ENV ? '.env' : `.env.${ENV}.local`,
       load: [appConfig, databaseConfig],
+      validationSchema: environmentValidation,
     }), // to use environment variables
     UserModule,
     PostsModule,
