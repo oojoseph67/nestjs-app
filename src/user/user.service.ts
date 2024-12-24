@@ -11,7 +11,8 @@ import { Repository } from 'typeorm';
 import { User } from './entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
-import { ConfigService } from '@nestjs/config';
+import { ConfigService, ConfigType } from '@nestjs/config';
+import profileConfig from './config/profile.config';
 
 @Injectable()
 export class UserService {
@@ -26,6 +27,10 @@ export class UserService {
 
     // injecting environment variables
     private configService: ConfigService,
+
+    // injecting module specific configuration dependencies (environment variables)
+    @Inject(profileConfig.KEY)
+    private profileConfiguration: ConfigType<typeof profileConfig>,
   ) {}
 
   public async createUser({
@@ -59,11 +64,12 @@ export class UserService {
     limit: number;
     page: number;
   }) {
-
-    const environment = this.configService.get<string>('S3_BUCKET')
+    const environment = this.configService.get<string>('S3_BUCKET');
     console.log(`Environment: ${environment}`);
 
-    console.log("NODE_ENV: ", process.env.NODE_ENV)
+    console.log('NODE_ENV: ', process.env.NODE_ENV);
+
+    console.log('Profile: ', this.profileConfiguration);
 
     const { id } = userParamsDTO;
 

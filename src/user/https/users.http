@@ -11,10 +11,6 @@ content-type: application/json
 GET http://localhost:7231/users/12345
 content-type: application/json
 
-# Get Posts
-GET http://localhost:7231/posts/1
-content-type: application/json
-
 #create user 
 POST http://localhost:7231/users/
 content-type: application/json

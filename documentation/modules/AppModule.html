@@ -319,15 +319,18 @@ import { MetaOptionsModule } from &#x27;./meta-options/meta-options.module&#x27;
 import { TagsController } from &#x27;./tags/tags.controller&#x27;;
 import { TagsModule } from &#x27;./tags/tags.module&#x27;;
 import { ConfigModule, ConfigService } from &#x27;@nestjs/config&#x27;;
+import appConfig  from &#x27;./config/index.config&#x27;;
+import databaseConfig  from &#x27;./config/database.config&#x27;;
 
-const ENV &#x3D; process.env.NODE_ENV
+const ENV &#x3D; process.env.NODE_ENV;
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true, // make sure this is set to true to load environment variables from.env file
       // envFilePath: [&#x27;.env.development.local&#x27;], // specify the path to your.env file
-      envFilePath: !ENV ? &#x27;.env&#x27; : &#x60;.env.${ENV}.local&#x60;
+      envFilePath: !ENV ? &#x27;.env&#x27; : &#x60;.env.${ENV}.local&#x60;,
+      load: [appConfig, databaseConfig],
     }), // to use environment variables
     UserModule,
     PostsModule,
@@ -339,18 +342,24 @@ const ENV &#x3D; process.env.NODE_ENV
       useFactory: (configService: ConfigService) &#x3D;&gt; ({
         type: &#x27;postgres&#x27;,
         host: configService.get(&#x27;DATABASE_HOST&#x27;),
-        port: +configService.get(&#x27;DATABASE_PORT&#x27;),
+        port: +configService.get(&#x27;database.port&#x27;),
+        // port: +configService.get(&#x27;DATABASE_PORT&#x27;),
         username: configService.get(&#x27;DATABASE_USERNAME&#x27;),
         password: configService.get(&#x27;DATABASE_PASSWORD&#x27;),
         database: configService.get(&#x27;DATABASE_NAME&#x27;),
         entities: [&#x27;dist/**/*.entity.js&#x27;],
-        synchronize: true, // set to false in production
+        synchronize: configService.get(&#x27;database.synchronize&#x27;), // set to false in production
         // autoLoadEntities: true, // using this would require us to create a module (controller and module file) for every entity we want to add, exporting it and using the TypeORM.forFeature([]) function
       }),
     }),
     TagsModule,
   ],
-  controllers: [AppController, PostsController, MetaOptionsController, TagsController],
+  controllers: [
+    AppController,
+    PostsController,
+    MetaOptionsController,
+    TagsController,
+  ],
   providers: [AppService],
 })
 export class AppModule {}
