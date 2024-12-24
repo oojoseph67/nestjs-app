@@ -11,6 +11,7 @@ import { Repository } from 'typeorm';
 import { User } from './entity/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
@@ -22,6 +23,9 @@ export class UserService {
     // injecting user service repository dependency
     @InjectRepository(User)
     private userRepository: Repository<User>,
+
+    // injecting environment variables
+    private configService: ConfigService,
   ) {}
 
   public async createUser({
@@ -55,18 +59,24 @@ export class UserService {
     limit: number;
     page: number;
   }) {
+
+    const environment = this.configService.get<string>('S3_BUCKET')
+    console.log(`Environment: ${environment}`);
+
+    console.log("NODE_ENV: ", process.env.NODE_ENV)
+
     const { id } = userParamsDTO;
 
     const isAuth = this.authService.isAuthenticated();
-    console.log(`User authenticated: ${isAuth}`);
+    // console.log(`User authenticated: ${isAuth}`);
 
     if (!isAuth) {
       throw new HttpException('User not found', HttpStatus.FORBIDDEN);
     }
 
-    console.log(
-      `Find all users with id: ${id}, limit: ${limit}, page: ${page}`,
-    );
+    // console.log(
+    //   `Find all users with id: ${id}, limit: ${limit}, page: ${page}`,
+    // );
 
     return [
       { id: 1, firstName: 'John Doe', email: 'john@doe.com' },

@@ -167,12 +167,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>)</code>
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, configService: ConfigService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/user/user.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/user/user.service.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -206,6 +206,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../entitys/User.html" target="_self" >Repository&lt;User&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>configService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfigService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -250,8 +262,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/user/user.service.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="31"
+                                    class="link-to-prism">src/user/user.service.ts:31</a></div>
                         </td>
                     </tr>
 
@@ -318,8 +330,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">src/user/user.service.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="53"
+                                    class="link-to-prism">src/user/user.service.ts:53</a></div>
                         </td>
                     </tr>
 
@@ -387,8 +399,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/user/user.service.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/user/user.service.ts:87</a></div>
                         </td>
                     </tr>
 
@@ -452,6 +464,7 @@ import { Repository } from &#x27;typeorm&#x27;;
 import { User } from &#x27;./entity/user.entity&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { CreateUserDto } from &#x27;./dtos/create-user.dto&#x27;;
+import { ConfigService } from &#x27;@nestjs/config&#x27;;
 
 @Injectable()
 export class UserService {
@@ -463,6 +476,9 @@ export class UserService {
     // injecting user service repository dependency
     @InjectRepository(User)
     private userRepository: Repository&lt;User&gt;,
+
+    // injecting environment variables
+    private configService: ConfigService,
   ) {}
 
   public async createUser({
@@ -496,18 +512,24 @@ export class UserService {
     limit: number;
     page: number;
   }) {
+
+    const environment &#x3D; this.configService.get&lt;string&gt;(&#x27;S3_BUCKET&#x27;)
+    console.log(&#x60;Environment: ${environment}&#x60;);
+
+    console.log(&quot;NODE_ENV: &quot;, process.env.NODE_ENV)
+
     const { id } &#x3D; userParamsDTO;
 
     const isAuth &#x3D; this.authService.isAuthenticated();
-    console.log(&#x60;User authenticated: ${isAuth}&#x60;);
+    // console.log(&#x60;User authenticated: ${isAuth}&#x60;);
 
     if (!isAuth) {
       throw new HttpException(&#x27;User not found&#x27;, HttpStatus.FORBIDDEN);
     }
 
-    console.log(
-      &#x60;Find all users with id: ${id}, limit: ${limit}, page: ${page}&#x60;,
-    );
+    // console.log(
+    //   &#x60;Find all users with id: ${id}, limit: ${limit}, page: ${page}&#x60;,
+    // );
 
     return [
       { id: 1, firstName: &#x27;John Doe&#x27;, email: &#x27;john@doe.com&#x27; },
