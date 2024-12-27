@@ -138,6 +138,11 @@
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
+                                <a href="#createMany" >createMany</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#createUser" >createUser</a>
                             </li>
                             <li>
@@ -167,12 +172,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, configService: ConfigService, profileConfiguration: ConfigType<>)</code>
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, configService: ConfigService, profileConfiguration: ConfigType<>, dataSource: DataSource)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/user/user.service.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/user/user.service.ts:19</a></div>
                             </td>
                         </tr>
 
@@ -237,6 +242,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>dataSource</td>
+                                                  
+                                                        <td>
+                                                                    <code>DataSource</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -251,6 +268,75 @@
     <h3 id="methods">
         Methods
     </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createMany"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>createMany</b></span>
+                        <a href="#createMany"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createMany(undefined: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/user/user.service.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
@@ -274,8 +360,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="36"
-                                    class="link-to-prism">src/user/user.service.ts:36</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="40"
+                                    class="link-to-prism">src/user/user.service.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -342,8 +428,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/user/user.service.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="71"
+                                    class="link-to-prism">src/user/user.service.ts:71</a></div>
                         </td>
                     </tr>
 
@@ -378,7 +464,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>{}</code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                             <div class="io-description">
@@ -411,8 +497,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="93"
-                                    class="link-to-prism">src/user/user.service.ts:93</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="97"
+                                    class="link-to-prism">src/user/user.service.ts:97</a></div>
                         </td>
                     </tr>
 
@@ -469,10 +555,11 @@
   HttpStatus,
   Inject,
   Injectable,
+  RequestTimeoutException,
 } from &#x27;@nestjs/common&#x27;;
 import { GetUsersParamDto } from &#x27;./dtos/get-users-param.dto&#x27;;
 import { AuthService } from &#x27;src/auth/auth.service&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
+import { DataSource, Repository } from &#x27;typeorm&#x27;;
 import { User } from &#x27;./entity/user.entity&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { CreateUserDto } from &#x27;./dtos/create-user.dto&#x27;;
@@ -496,6 +583,9 @@ export class UserService {
     // injecting module specific configuration dependencies (environment variables)
     @Inject(profileConfig.KEY)
     private profileConfiguration: ConfigType&lt;typeof profileConfig&gt;,
+
+    // injecting datasource for typeorm transactions
+    private dataSource: DataSource,
   ) {}
 
   public async createUser({
@@ -504,9 +594,18 @@ export class UserService {
     user: CreateUserDto;
   }): Promise&lt;CreateUserDto&gt; {
     // check user
-    const existingUser &#x3D; await this.userRepository.findOne({
-      where: { email: user.email },
-    });
+    let existingUser &#x3D; undefined;
+
+    try {
+      existingUser &#x3D; await this.userRepository.findOne({
+        where: { email: user.email },
+      });
+    } catch (error) {
+      throw new RequestTimeoutException(&#x27;Request timeout&#x27;, {
+        cause: error,
+        description: &#x27;Request timeout&#x27;,
+      });
+    }
 
     // handle exception
     if (existingUser) {
@@ -536,23 +635,14 @@ export class UserService {
 
     console.log(&#x27;Profile: &#x27;, this.profileConfiguration);
 
-    const { id } &#x3D; userParamsDTO;
-
-    const isAuth &#x3D; this.authService.isAuthenticated();
-    // console.log(&#x60;User authenticated: ${isAuth}&#x60;);
-
-    if (!isAuth) {
-      throw new HttpException(&#x27;User not found&#x27;, HttpStatus.FORBIDDEN);
-    }
-
-    // console.log(
-    //   &#x60;Find all users with id: ${id}, limit: ${limit}, page: ${page}&#x60;,
-    // );
-
-    return [
-      { id: 1, firstName: &#x27;John Doe&#x27;, email: &#x27;john@doe.com&#x27; },
-      { id: 2, firstName: &#x27;Jane Doe&#x27;, email: &#x27;jane@doe.com&#x27; },
-    ];
+    throw new HttpException(
+      &#x27;Api endpoint does not exist&#x27;,
+      HttpStatus.MOVED_PERMANENTLY,
+      {
+        description: &#x27;Occurred because the API endpoint was deprecated&#x27;,
+        cause: &#x27;Api endpoint does not exist&#x27;,
+      },
+    );
   }
 
   public async findOneById({ id }: { id: number }) {
@@ -563,6 +653,38 @@ export class UserService {
     }
 
     return user;
+  }
+
+  public async createMany({ users }: { users: CreateUserDto[] }) {
+    // create query runner instance
+    const queryRunner &#x3D; this.dataSource.createQueryRunner();
+
+    // connect query runner to datasource
+    await queryRunner.connect();
+
+    // start transaction
+    await queryRunner.startTransaction();
+
+    let newUser: User[] &#x3D; [];
+    try {
+      // if successful commit the transaction
+      for (let user of users) {
+        const newUserInstance &#x3D; queryRunner.manager.create(User, user); // entity and object
+        const savedNewUserInstance &#x3D;
+          await queryRunner.manager.save(newUserInstance); // save entity to the database
+
+        newUser.push(savedNewUserInstance); // keeping track of the users we have created
+      }
+
+      await queryRunner.commitTransaction();
+    } catch (error: any) {
+      // if failed rollback transaction
+      await queryRunner.rollbackTransaction();
+      throw error;
+    } finally {
+      // release connection
+      await queryRunner.release();
+    }
   }
 }
 </code></pre>

@@ -349,8 +349,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="92"
-                                    class="link-to-prism">src/posts/posts.service.ts:92</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/posts/posts.service.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -418,8 +418,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/posts/posts.service.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="89"
+                                    class="link-to-prism">src/posts/posts.service.ts:89</a></div>
                         </td>
                     </tr>
 
@@ -599,7 +599,10 @@ export class PostsService {
     });
 
     if (!(tags.length &gt; 0)) {
-      throw new HttpException(&#x27;Tags not found&#x27;, HttpStatus.NOT_FOUND);
+      throw new HttpException(&#x27;Tags not found&#x27;, HttpStatus.NOT_FOUND, {
+        cause: &#x27;Tags not found&#x27;,
+        description: &#x27;Provide a valid tags to update&#x27;,
+      });
     }
 
     const post &#x3D; await this.postRepository.findOneBy({ id: updatePost.id });

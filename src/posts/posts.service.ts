@@ -58,7 +58,10 @@ export class PostsService {
     });
 
     if (!(tags.length > 0)) {
-      throw new HttpException('Tags not found', HttpStatus.NOT_FOUND);
+      throw new HttpException('Tags not found', HttpStatus.NOT_FOUND, {
+        cause: 'Tags not found',
+        description: 'Provide a valid tags to update',
+      });
     }
 
     const post = await this.postRepository.findOneBy({ id: updatePost.id });
