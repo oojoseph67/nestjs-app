@@ -21,3 +21,23 @@ content-type: application/json
   "email": "john@doe.com",
   "password": "nestjsIS6@awesome"
 }
+
+POST http://localhost:7231/users/create-many
+content-type: application/json
+
+{
+  "users": [
+    {
+      "firstName": "Mark",
+      "lastName": "Doe",
+      "email": "mark@doe.com",
+      "password": "nestjsIS6@awesome"
+  },
+  {
+      "firstName": "Jane",
+      "lastName": "Doe",
+      "email": "jane@doe.com",
+      "password": "nestjsIS6@awesome"
+   }
+  ]
+}

@@ -172,12 +172,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, configService: ConfigService, profileConfiguration: ConfigType<>, dataSource: DataSource)</code>
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, configService: ConfigService, profileConfiguration: ConfigType<>, dataSource: DataSource, usersCreateMany: <a href="../entitys/User.html" target="_self">UserCreateMany</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/user/user.service.ts:19</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/user/user.service.ts:21</a></div>
                             </td>
                         </tr>
 
@@ -254,6 +254,18 @@
                                                     </td>
                                                     
                                                 </tr>
+                                                <tr>
+                                                        <td>usersCreateMany</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/User.html" target="_self" >UserCreateMany</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
                                         </tbody>
                                     </table>
                             </div>
@@ -291,8 +303,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="107"
-                                    class="link-to-prism">src/user/user.service.ts:107</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/user/user.service.ts:111</a></div>
                         </td>
                     </tr>
 
@@ -327,7 +339,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>    <code>unknown</code>
 
                         </div>
                             <div class="io-description">
@@ -360,8 +372,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/user/user.service.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="44"
+                                    class="link-to-prism">src/user/user.service.ts:44</a></div>
                         </td>
                     </tr>
 
@@ -428,8 +440,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="71"
-                                    class="link-to-prism">src/user/user.service.ts:71</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="75"
+                                    class="link-to-prism">src/user/user.service.ts:75</a></div>
                         </td>
                     </tr>
 
@@ -497,8 +509,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="97"
-                                    class="link-to-prism">src/user/user.service.ts:97</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="101"
+                                    class="link-to-prism">src/user/user.service.ts:101</a></div>
                         </td>
                     </tr>
 
@@ -565,6 +577,8 @@ import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { CreateUserDto } from &#x27;./dtos/create-user.dto&#x27;;
 import { ConfigService, ConfigType } from &#x27;@nestjs/config&#x27;;
 import profileConfig from &#x27;./config/profile.config&#x27;;
+import { UserCreateMany } from &#x27;./user-create-many&#x27;;
+import { CreateManyUsersDto } from &#x27;./dtos/create-many-user.dto&#x27;;
 
 @Injectable()
 export class UserService {
@@ -586,6 +600,8 @@ export class UserService {
 
     // injecting datasource for typeorm transactions
     private dataSource: DataSource,
+
+    private usersCreateMany: UserCreateMany,
   ) {}
 
   public async createUser({
@@ -655,36 +671,8 @@ export class UserService {
     return user;
   }
 
-  public async createMany({ users }: { users: CreateUserDto[] }) {
-    // create query runner instance
-    const queryRunner &#x3D; this.dataSource.createQueryRunner();
-
-    // connect query runner to datasource
-    await queryRunner.connect();
-
-    // start transaction
-    await queryRunner.startTransaction();
-
-    let newUser: User[] &#x3D; [];
-    try {
-      // if successful commit the transaction
-      for (let user of users) {
-        const newUserInstance &#x3D; queryRunner.manager.create(User, user); // entity and object
-        const savedNewUserInstance &#x3D;
-          await queryRunner.manager.save(newUserInstance); // save entity to the database
-
-        newUser.push(savedNewUserInstance); // keeping track of the users we have created
-      }
-
-      await queryRunner.commitTransaction();
-    } catch (error: any) {
-      // if failed rollback transaction
-      await queryRunner.rollbackTransaction();
-      throw error;
-    } finally {
-      // release connection
-      await queryRunner.release();
-    }
+  public async createMany({ users }: { users: CreateManyUsersDto }) {
+    return await this.usersCreateMany.createMany({ users });
   }
 }
 </code></pre>

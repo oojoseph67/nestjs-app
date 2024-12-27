@@ -19,6 +19,7 @@ import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
 import { UserService } from './user.service';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { CreateManyUsersDto } from './dtos/create-many-user.dto';
 
 @Controller('users')
 @ApiTags('Users') // with the updated version of @nestjs/swagger there is no need to use @ApiTags
@@ -36,7 +37,6 @@ export class UserController {
 
   constructor(private readonly userService: UserService) {}
 
-  @Get('/:id?')
   @ApiOperation({
     summary: 'Get all users',
     description: 'Get all users with optional pagination',
@@ -60,6 +60,7 @@ export class UserController {
     description: 'The position of the number that you want the api to return',
     example: 1,
   })
+  @Get('/:id?')
   public getUsers(
     @Param() getUserParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
@@ -78,9 +79,19 @@ export class UserController {
   }
 
   @Post()
-  public createUsers(@Body() createUserDto: CreateUserDto) {
+  public createUser(@Body() createUserDto: CreateUserDto) {
     const createUser = this.userService.createUser({ user: createUserDto });
     return createUser;
+  }
+
+  @ApiOperation({
+    summary: 'Create users',
+    description: 'Create multiple users',
+  })
+  @Post('/create-many')
+  public createManyUsers(@Body() createUsersDto: CreateManyUsersDto) {
+    const createUsers = this.userService.createMany({ users: createUsersDto });
+    return createUsers;
   }
 
   @Patch()
