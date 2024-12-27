@@ -319,6 +319,8 @@ import { MetaOptionsModule } from &#x27;./meta-options/meta-options.module&#x27;
 import { TagsController } from &#x27;./tags/tags.controller&#x27;;
 import { TagsModule } from &#x27;./tags/tags.module&#x27;;
 import { ConfigModule, ConfigService } from &#x27;@nestjs/config&#x27;;
+import { PaginationService } from &#x27;./global/pagination/pagination.service&#x27;;
+import { PaginationModule } from &#x27;./global/pagination/pagination.module&#x27;;
 import appConfig from &#x27;./config/index.config&#x27;;
 import databaseConfig from &#x27;./config/database.config&#x27;;
 import environmentValidation from &#x27;./config/environment.validation&#x27;;
@@ -355,6 +357,7 @@ const ENV &#x3D; process.env.NODE_ENV;
       }),
     }),
     TagsModule,
+    PaginationModule,
   ],
   controllers: [
     AppController,
@@ -362,7 +365,7 @@ const ENV &#x3D; process.env.NODE_ENV;
     MetaOptionsController,
     TagsController,
   ],
-  providers: [AppService],
+  providers: [AppService, PaginationService],
 })
 export class AppModule {}
 </code></pre>

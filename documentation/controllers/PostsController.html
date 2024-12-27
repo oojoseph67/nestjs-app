@@ -155,6 +155,7 @@
                             <li>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#getAllPosts" >getAllPosts</a>
                             </li>
                             <li>
@@ -211,8 +212,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="62"
-                                    class="link-to-prism">src/posts/posts.controller.ts:62</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="72"
+                                    class="link-to-prism">src/posts/posts.controller.ts:72</a></div>
                         </td>
                     </tr>
 
@@ -301,8 +302,8 @@ It logs the received data and returns a confirmation message.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="100"
-                                    class="link-to-prism">src/posts/posts.controller.ts:100</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/posts/posts.controller.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -356,6 +357,7 @@ It logs the received data and returns a confirmation message.</p>
                     <span class="name">
                             <span class="modifier"></span>
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>getAllPosts</b></span>
                         <a href="#getAllPosts"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -364,7 +366,7 @@ It logs the received data and returns a confirmation message.</p>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>getAllPosts(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    <code>getAllPosts(userId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, postQuery: <a href="../classes/GetPostsQueryDto.html" target="_self">GetPostsQueryDto</a>)</code>
                 </td>
             </tr>
 
@@ -372,14 +374,14 @@ It logs the received data and returns a confirmation message.</p>
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiResponse({status: undefined, description: &#x27;All posts&#x27;, type: undefined})<br />@Get(&#x27;:userId?&#x27;)<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Retrieves all posts for a specific user&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;All posts&#x27;, type: undefined})<br />@Get(&#x27;:userId?&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="40"
-                                    class="link-to-prism">src/posts/posts.controller.ts:40</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="45"
+                                    class="link-to-prism">src/posts/posts.controller.ts:45</a></div>
                         </td>
                     </tr>
 
@@ -421,6 +423,20 @@ to fetch the posts.</p>
 <li>The ID of the user whose posts are to be retrieved.</li>
 </ul>
 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>postQuery</td>
+                                            <td>
+                                                            <code><a href="../classes/GetPostsQueryDto.html" target="_self" >GetPostsQueryDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -470,8 +486,8 @@ representing all posts for the specified user.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="86"
-                                    class="link-to-prism">src/posts/posts.controller.ts:86</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/posts/posts.controller.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -551,6 +567,7 @@ import { PostsService } from &#x27;./posts.service&#x27;;
 import { CreatePostDto } from &#x27;./dtos/create-post.dto&#x27;;
 import { ApiOperation, ApiResponse } from &#x27;@nestjs/swagger&#x27;;
 import { PatchPostDto } from &#x27;./dtos/patch-post.dto&#x27;;
+import { GetPostsQueryDto } from &#x27;./dtos/get-posts.dto&#x27;;
 
 @Controller(&#x27;posts&#x27;)
 export class PostsController {
@@ -567,14 +584,23 @@ export class PostsController {
    * @returns {Promise&lt;CreatePostDto[]&gt;} A promise that resolves to an array of CreatePostDto objects,
    *                                     representing all posts for the specified user.
    */
+
+  @ApiOperation({
+    summary: &#x27;Retrieves all posts for a specific user&#x27;,
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: &#x27;All posts&#x27;,
     type: [CreatePostDto],
   })
   @Get(&#x27;:userId?&#x27;)
-  getAllPosts(@Param(&#x27;userId&#x27;) userId: number) {
-    return this.postService.getAllPosts({ userId });
+  getAllPosts(
+    @Param(&#x27;userId&#x27;) userId: number,
+    @Query() postQuery: GetPostsQueryDto,
+  ) {
+    console.log({ postQuery });
+
+    return this.postService.getAllPosts({ userId, queryParams: postQuery});
   }
 
   /**

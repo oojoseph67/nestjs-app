@@ -28,8 +28,15 @@ content-type: application/json
     "tags": [1,5]
 }
 
-# GET http://localhost:7231/posts
-# content-type: application/json
+
+GET http://localhost:7231/posts
+?startDate=2024-03-16T12:00:00
+&endDate=2024-03-16T12:00:00
+&limit=1
+&page=1
+
+
+content-type: application/json
 
 # DELETE http://localhost:7231/posts?id=4
 # content-type: application/json

@@ -15,6 +15,7 @@ import { PostsService } from './posts.service';
 import { CreatePostDto } from './dtos/create-post.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PatchPostDto } from './dtos/patch-post.dto';
+import { GetPostsQueryDto } from './dtos/get-posts.dto';
 
 @Controller('posts')
 export class PostsController {
@@ -31,14 +32,23 @@ export class PostsController {
    * @returns {Promise<CreatePostDto[]>} A promise that resolves to an array of CreatePostDto objects,
    *                                     representing all posts for the specified user.
    */
+
+  @ApiOperation({
+    summary: 'Retrieves all posts for a specific user',
+  })
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'All posts',
     type: [CreatePostDto],
   })
   @Get(':userId?')
-  getAllPosts(@Param('userId') userId: number) {
-    return this.postService.getAllPosts({ userId });
+  getAllPosts(
+    @Param('userId') userId: number,
+    @Query() postQuery: GetPostsQueryDto,
+  ) {
+    console.log({ postQuery });
+
+    return this.postService.getAllPosts({ userId, queryParams: postQuery});
   }
 
   /**

@@ -7,6 +7,8 @@ import { MetaOption as MetaOptionRepository } from 'src/meta-options/entity/meta
 import { Post as PostRepository } from './entity/post.entity';
 import { TagsService } from 'src/tags/tags.service';
 import { PatchPostDto } from './dtos/patch-post.dto';
+import { GetPostsQueryDto } from './dtos/get-posts.dto';
+import { PaginationService } from 'src/global/pagination/pagination.service';
 
 @Injectable()
 export class PostsService {
@@ -28,6 +30,9 @@ export class PostsService {
 
     @InjectRepository(MetaOptionRepository)
     private metaOptionsRepository: Repository<MetaOptionRepository>,
+
+    // injecting pagination service
+    private paginationService: PaginationService,
   ) {}
 
   public async create({ createPost }: { createPost: CreatePostDto }) {
@@ -86,8 +91,22 @@ export class PostsService {
     return updatedPost;
   }
 
-  public async getAllPosts({ userId }: { userId: number }) {
-    const posts = await this.postRepository.find({});
+  public async getAllPosts({
+    userId,
+    queryParams,
+  }: {
+    userId: number;
+    queryParams: GetPostsQueryDto;
+  }) {
+    const { endDate, limit, page, startDate } = queryParams;
+
+    const posts = await this.paginationService.paginateQuery({
+      paginationQuery: {
+        limit,
+        page,
+      },
+      repository: this.postRepository,
+    });
 
     return posts;
   }
