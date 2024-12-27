@@ -4,11 +4,12 @@ import { CreatePostDto } from './dtos/create-post.dto';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MetaOption as MetaOptionRepository } from 'src/meta-options/entity/meta-option.entity';
-import { Post as PostRepository } from './entity/post.entity';
+import { Post, Post as PostRepository } from './entity/post.entity';
 import { TagsService } from 'src/tags/tags.service';
 import { PatchPostDto } from './dtos/patch-post.dto';
 import { GetPostsQueryDto } from './dtos/get-posts.dto';
 import { PaginationService } from 'src/global/pagination/pagination.service';
+import { Paginated } from 'src/global/pagination/interface/paginated.interface';
 
 @Injectable()
 export class PostsService {
@@ -97,7 +98,7 @@ export class PostsService {
   }: {
     userId: number;
     queryParams: GetPostsQueryDto;
-  }) {
+  }): Promise<Paginated<Post>> {
     const { endDate, limit, page, startDate } = queryParams;
 
     const posts = await this.paginationService.paginateQuery({

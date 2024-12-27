@@ -178,7 +178,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/posts/posts.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/posts/posts.service.ts:15</a></div>
                             </td>
                         </tr>
 
@@ -292,8 +292,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="38"
-                                    class="link-to-prism">src/posts/posts.service.ts:38</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="39"
+                                    class="link-to-prism">src/posts/posts.service.ts:39</a></div>
                         </td>
                     </tr>
 
@@ -361,8 +361,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="114"
-                                    class="link-to-prism">src/posts/posts.service.ts:114</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="115"
+                                    class="link-to-prism">src/posts/posts.service.ts:115</a></div>
                         </td>
                     </tr>
 
@@ -430,8 +430,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="94"
-                                    class="link-to-prism">src/posts/posts.service.ts:94</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/posts/posts.service.ts:95</a></div>
                         </td>
                     </tr>
 
@@ -466,7 +466,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>        <code><a href="../entitys/Post.html" target="_self" >Promise&lt;Paginated&lt;Post&gt;&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -499,8 +499,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="58"
-                                    class="link-to-prism">src/posts/posts.service.ts:58</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="59"
+                                    class="link-to-prism">src/posts/posts.service.ts:59</a></div>
                         </td>
                     </tr>
 
@@ -557,11 +557,12 @@ import { CreatePostDto } from &#x27;./dtos/create-post.dto&#x27;;
 import { Repository } from &#x27;typeorm&#x27;;
 import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
 import { MetaOption as MetaOptionRepository } from &#x27;src/meta-options/entity/meta-option.entity&#x27;;
-import { Post as PostRepository } from &#x27;./entity/post.entity&#x27;;
+import { Post, Post as PostRepository } from &#x27;./entity/post.entity&#x27;;
 import { TagsService } from &#x27;src/tags/tags.service&#x27;;
 import { PatchPostDto } from &#x27;./dtos/patch-post.dto&#x27;;
 import { GetPostsQueryDto } from &#x27;./dtos/get-posts.dto&#x27;;
 import { PaginationService } from &#x27;src/global/pagination/pagination.service&#x27;;
+import { Paginated } from &#x27;src/global/pagination/interface/paginated.interface&#x27;;
 
 @Injectable()
 export class PostsService {
@@ -650,7 +651,7 @@ export class PostsService {
   }: {
     userId: number;
     queryParams: GetPostsQueryDto;
-  }) {
+  }): Promise&lt;Paginated&lt;Post&gt;&gt; {
     const { endDate, limit, page, startDate } &#x3D; queryParams;
 
     const posts &#x3D; await this.paginationService.paginateQuery({
