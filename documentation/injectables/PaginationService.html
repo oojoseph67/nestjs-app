@@ -79,16 +79,19 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content controller">
+               <div class="content injectable">
                    <div class="content-data">
 
 
 
 
 
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Controllers</li>
-  <li class="breadcrumb-item" >AuthController</li>
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >PaginationService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -112,16 +115,8 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/auth/auth.controller.ts</code>
+            <code>src/global/pagination/pagination.service.ts</code>
         </p>
-
-            <p class="comment">
-                <h3>Prefix</h3>
-            </p>
-            <p class="comment">
-                <code>auth</code>
-            </p>
-
 
 
 
@@ -141,9 +136,9 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier"></span>
-                                <a href="#login" >login</a>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#paginateQuery" >paginateQuery</a>
                             </li>
                         </ul>
                     </td>
@@ -157,6 +152,55 @@
     </table>
 </section>
 
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(request: Request)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/global/pagination/pagination.service.ts:9</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>request</td>
+                                                  
+                                                        <td>
+                                                                    <code>Request</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
             <section data-compodoc="block-methods">
     
     <h3 id="methods">
@@ -166,37 +210,38 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="login"></a>
+                    <a name="paginateQuery"></a>
                     <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>paginateQuery</b></span>
+                        <a href="#paginateQuery"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(loginBody: SignInDto)</code>
+                    <code>paginateQuery(undefined: literal type)</code>
                 </td>
             </tr>
 
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@Post(&#x27;login&#x27;)<br />@HttpCode(HttpStatus.OK)<br /></code>
-                </td>
-            </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="11"
-                                    class="link-to-prism">src/auth/auth.controller.ts:11</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="16"
+                                    class="link-to-prism">src/global/pagination/pagination.service.ts:16</a></div>
                         </td>
                     </tr>
 
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
 
             <tr>
                 <td class="col-md-4">
@@ -214,9 +259,8 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <td>loginBody</td>
                                             <td>
-                                                        <code>SignInDto</code>
+                                                        <code>literal type</code>
                                             </td>
 
                                             <td>
@@ -229,7 +273,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="../interfaces/Paginated.html" target="_self" >Promise&lt;Paginated&lt;T&gt;&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -239,30 +283,79 @@
             </tr>
         </tbody>
     </table>
-</section>    </div>
+</section>
+
+    </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Body, Controller, HttpCode, HttpStatus, Post } from &#x27;@nestjs/common&#x27;;
-import { AuthService } from &#x27;./auth.service&#x27;;
-import { SignInDto } from &#x27;./dtos/signin.dto&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject } from &#x27;@nestjs/common&#x27;;
+import { PaginationQueryDto } from &#x27;./dto/pagination-query.dto&#x27;;
+import { ObjectLiteral, Repository } from &#x27;typeorm&#x27;;
+import { REQUEST } from &#x27;@nestjs/core&#x27;;
+import { Request } from &#x27;express&#x27;;
+import { Paginated } from &#x27;./interface/paginated.interface&#x27;;
 
-@Controller(&#x27;auth&#x27;)
-export class AuthController {
-  constructor(private authService: AuthService) {}
+@Injectable()
+export class PaginationService {
+  constructor(
+    // injecting the request object
+    @Inject(REQUEST)
+    private readonly request: Request,
+  ) {}
 
-  @Post(&#x27;login&#x27;)
-  @HttpCode(HttpStatus.OK)
-  login(@Body() loginBody: SignInDto) {
-    return this.authService.login({ body: loginBody });
+  public async paginateQuery&lt;T extends ObjectLiteral&gt;({
+    paginationQuery,
+    repository,
+  }: {
+    paginationQuery: PaginationQueryDto;
+    repository: Repository&lt;T&gt;;
+  }): Promise&lt;Paginated&lt;T&gt;&gt; {
+    const { limit, page } &#x3D; paginationQuery;
+
+    const query &#x3D; await repository.find({
+      skip: (page - 1) * limit,
+      take: limit,
+    });
+
+    // creating url
+
+    const baseUrl &#x3D;
+      this.request.protocol + &#x27;://&#x27; + this.request.headers.host + &#x27;/&#x27;;
+
+    const newUrl &#x3D; new URL(this.request.url, baseUrl);
+
+    const totalItems &#x3D; await repository.count({});
+    const totalPages &#x3D; Math.ceil(totalItems / limit);
+    const nextPage &#x3D; totalPages &#x3D;&#x3D;&#x3D; page ? page : page + 1;
+    const prevPage &#x3D; page &#x3D;&#x3D;&#x3D; 1 ? page : page - 1;
+
+    const finalResponse: Paginated&lt;T&gt; &#x3D; {
+      data: query,
+      meta: {
+        itemsPerPage: limit,
+        totalItems,
+        currentPage: page,
+        totalPages,
+      },
+      links: {
+        first: &#x60;${newUrl.origin}${newUrl.pathname}?page&#x3D;1&amp;limit&#x3D;${limit}}&#x60;,
+        last: &#x60;${newUrl.pathname}?page&#x3D;${totalPages}&amp;limit&#x3D;${limit}&#x60;,
+        current: &#x60;${newUrl.pathname}?page&#x3D;${page}&amp;limit&#x3D;${limit}&#x60;,
+        next: &#x60;${newUrl.pathname}?page&#x3D;${nextPage}&amp;limit&#x3D;${limit}&#x60;,
+        prev: &#x60;${newUrl.pathname}?page&#x3D;${prevPage}&amp;limit&#x3D;${limit}&#x60;,
+      },
+    };
+
+    console.log({ baseUrl, requestUrl: this.request.url, newUrl });
+
+    return finalResponse;
   }
 }
 </code></pre>
     </div>
+
 </div>
-
-
-
 
 
 
@@ -301,8 +394,8 @@ export class AuthController {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'controller';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthController.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'PaginationService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

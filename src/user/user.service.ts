@@ -16,6 +16,7 @@ import { ConfigService, ConfigType } from '@nestjs/config';
 import profileConfig from './config/profile.config';
 import { UserCreateMany } from './user-create-many';
 import { CreateManyUsersDto } from './dtos/create-many-user.dto';
+import { CreateUserProvider } from './provider/create-user.provider';
 
 @Injectable()
 export class UserService {
@@ -35,10 +36,9 @@ export class UserService {
     @Inject(profileConfig.KEY)
     private profileConfiguration: ConfigType<typeof profileConfig>,
 
-    // injecting datasource for typeorm transactions
-    private dataSource: DataSource,
-
     private usersCreateMany: UserCreateMany,
+
+    private createUserProvider: CreateUserProvider,
   ) {}
 
   public async createUser({
@@ -46,30 +46,7 @@ export class UserService {
   }: {
     user: CreateUserDto;
   }): Promise<CreateUserDto> {
-    // check user
-    let existingUser = undefined;
-
-    try {
-      existingUser = await this.userRepository.findOne({
-        where: { email: user.email },
-      });
-    } catch (error) {
-      throw new RequestTimeoutException('Request timeout', {
-        cause: error,
-        description: 'Request timeout',
-      });
-    }
-
-    // handle exception
-    if (existingUser) {
-      throw new HttpException('Email already exists', HttpStatus.CONFLICT);
-    }
-
-    // create a new user
-    const newUser = await this.userRepository.create(user);
-    await this.userRepository.save(newUser);
-
-    return newUser;
+    return await this.createUserProvider.createUser({ user });
   }
 
   public findAll({
@@ -106,6 +83,20 @@ export class UserService {
     }
 
     return user;
+  }
+
+  public async findUserByEmail({ email }: { email: string }) {
+    try {
+      const user = await this.userRepository.findOneBy({ email });
+
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      }
+
+      return user;
+    } catch (error: any) {
+      throw new RequestTimeoutException('Timeout occurred');
+    }
   }
 
   public async createMany({ users }: { users: CreateManyUsersDto }) {

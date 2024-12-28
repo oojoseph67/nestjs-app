@@ -154,6 +154,11 @@
                                     <span class="modifier">Async</span>
                                 <a href="#findOneById" >findOneById</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#findUserByEmail" >findUserByEmail</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -172,12 +177,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, configService: ConfigService, profileConfiguration: ConfigType<>, dataSource: DataSource, usersCreateMany: <a href="../injectables/UserCreateMany.html" target="_self">UserCreateMany</a>)</code>
+<code>constructor(authService: <a href="../injectables/AuthService.html" target="_self">AuthService</a>, userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, configService: ConfigService, profileConfiguration: ConfigType<>, usersCreateMany: <a href="../injectables/UserCreateMany.html" target="_self">UserCreateMany</a>, createUserProvider: <a href="../entitys/User.html" target="_self">CreateUserProvider</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/user/user.service.ts:21</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/user/user.service.ts:22</a></div>
                             </td>
                         </tr>
 
@@ -243,10 +248,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>dataSource</td>
+                                                        <td>usersCreateMany</td>
                                                   
                                                         <td>
-                                                                    <code>DataSource</code>
+                                                                        <code><a href="../injectables/UserCreateMany.html" target="_self" >UserCreateMany</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -255,10 +260,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>usersCreateMany</td>
+                                                        <td>createUserProvider</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UserCreateMany.html" target="_self" >UserCreateMany</a></code>
+                                                                        <code><a href="../entitys/User.html" target="_self" >CreateUserProvider</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -303,8 +308,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/user/user.service.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/user/user.service.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -440,8 +445,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="75"
-                                    class="link-to-prism">src/user/user.service.ts:75</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="52"
+                                    class="link-to-prism">src/user/user.service.ts:52</a></div>
                         </td>
                     </tr>
 
@@ -509,8 +514,77 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="101"
-                                    class="link-to-prism">src/user/user.service.ts:101</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/user/user.service.ts:78</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="findUserByEmail"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>findUserByEmail</b></span>
+                        <a href="#findUserByEmail"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>findUserByEmail(undefined: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="88"
+                                    class="link-to-prism">src/user/user.service.ts:88</a></div>
                         </td>
                     </tr>
 
@@ -579,6 +653,7 @@ import { ConfigService, ConfigType } from &#x27;@nestjs/config&#x27;;
 import profileConfig from &#x27;./config/profile.config&#x27;;
 import { UserCreateMany } from &#x27;./user-create-many&#x27;;
 import { CreateManyUsersDto } from &#x27;./dtos/create-many-user.dto&#x27;;
+import { CreateUserProvider } from &#x27;./provider/create-user.provider&#x27;;
 
 @Injectable()
 export class UserService {
@@ -598,10 +673,9 @@ export class UserService {
     @Inject(profileConfig.KEY)
     private profileConfiguration: ConfigType&lt;typeof profileConfig&gt;,
 
-    // injecting datasource for typeorm transactions
-    private dataSource: DataSource,
-
     private usersCreateMany: UserCreateMany,
+
+    private createUserProvider: CreateUserProvider,
   ) {}
 
   public async createUser({
@@ -609,30 +683,7 @@ export class UserService {
   }: {
     user: CreateUserDto;
   }): Promise&lt;CreateUserDto&gt; {
-    // check user
-    let existingUser &#x3D; undefined;
-
-    try {
-      existingUser &#x3D; await this.userRepository.findOne({
-        where: { email: user.email },
-      });
-    } catch (error) {
-      throw new RequestTimeoutException(&#x27;Request timeout&#x27;, {
-        cause: error,
-        description: &#x27;Request timeout&#x27;,
-      });
-    }
-
-    // handle exception
-    if (existingUser) {
-      throw new HttpException(&#x27;Email already exists&#x27;, HttpStatus.CONFLICT);
-    }
-
-    // create a new user
-    const newUser &#x3D; await this.userRepository.create(user);
-    await this.userRepository.save(newUser);
-
-    return newUser;
+    return await this.createUserProvider.createUser({ user });
   }
 
   public findAll({
@@ -669,6 +720,20 @@ export class UserService {
     }
 
     return user;
+  }
+
+  public async findUserByEmail({ email }: { email: string }) {
+    try {
+      const user &#x3D; await this.userRepository.findOneBy({ email });
+
+      if (!user) {
+        throw new HttpException(&#x27;User not found&#x27;, HttpStatus.NOT_FOUND);
+      }
+
+      return user;
+    } catch (error: any) {
+      throw new RequestTimeoutException(&#x27;Timeout occurred&#x27;);
+    }
   }
 
   public async createMany({ users }: { users: CreateManyUsersDto }) {

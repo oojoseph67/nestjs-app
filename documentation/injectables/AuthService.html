@@ -141,6 +141,7 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
                                 <a href="#login" >login</a>
                             </li>
                         </ul>
@@ -161,12 +162,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, hashingProvider: HashingProvider)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="5" class="link-to-prism">src/auth/auth.service.ts:5</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/auth/auth.service.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -188,6 +189,18 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>hashingProvider</td>
+                                                  
+                                                        <td>
+                                                                    <code>HashingProvider</code>
                                                         </td>
                                                   
                                                     <td>
@@ -231,8 +244,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="33"
-                                    class="link-to-prism">src/auth/auth.service.ts:33</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="51"
+                                    class="link-to-prism">src/auth/auth.service.ts:51</a></div>
                         </td>
                     </tr>
 
@@ -255,6 +268,7 @@
                     <a name="login"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
                         <span ><b>login</b></span>
                         <a href="#login"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -270,8 +284,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="12"
-                                    class="link-to-prism">src/auth/auth.service.ts:12</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="25"
+                                    class="link-to-prism">src/auth/auth.service.ts:25</a></div>
                         </td>
                     </tr>
 
@@ -306,7 +320,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                            <b>Returns : </b>    <code>unknown</code>
 
                         </div>
                             <div class="io-description">
@@ -322,8 +336,17 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject, forwardRef } from &#x27;@nestjs/common&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  Injectable,
+  Inject,
+  forwardRef,
+  HttpException,
+  HttpStatus,
+  RequestTimeoutException,
+} from &#x27;@nestjs/common&#x27;;
 import { UserService } from &#x27;src/user/user.service&#x27;;
+import { SignInDto } from &#x27;./dtos/signin.dto&#x27;;
+import { HashingProvider } from &#x27;./providers/hashing.provider&#x27;;
 
 @Injectable()
 export class AuthService {
@@ -331,27 +354,36 @@ export class AuthService {
     // injecting a service dependency (circular dependency injection)
     @Inject(forwardRef(() &#x3D;&gt; UserService))
     private userService: UserService,
+
+    // injecting hashing provider
+    @Inject(forwardRef(() &#x3D;&gt; HashingProvider)) // doing this because this is a circular dependency
+    private hashingProvider: HashingProvider,
   ) {}
 
-  public login({
-    id,
-    username,
-    password,
-  }: {
-    id: number;
-    username: string;
-    password: string;
-  }) {
-    // check user exists in the database and if the password is correct
-    // login
-    // token
+  public async login({ body }: { body: SignInDto }) {
+    const { email, password } &#x3D; body;
 
-    // const user &#x3D; this.userService.findOneById({ id });
-    // console.log(&#x60;Logging in user ${user.firstName}&#x60;);
+    const existingUser &#x3D; await this.userService.findUserByEmail({ email });
 
-    // return user;
+    let isPasswordCorrect: boolean;
 
-    return &#x27;login&#x27;;
+    try {
+      isPasswordCorrect &#x3D; await this.hashingProvider.comparePasswords({
+        hashedPassword: existingUser.password,
+        password,
+      });
+    } catch (error: any) {
+      throw new RequestTimeoutException(error.message, {
+        cause: error,
+        description: &#x27;Request timeout. Could not compare passwords&#x27;,
+      });
+    }
+
+    if (!isPasswordCorrect) {
+      throw new HttpException(&#x27;Invalid credentials&#x27;, HttpStatus.UNAUTHORIZED);
+    }
+
+    return true;
   }
 
   public isAuthenticated() {
