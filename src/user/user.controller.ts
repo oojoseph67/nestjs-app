@@ -13,6 +13,7 @@ import {
   ParseIntPipe,
   DefaultValuePipe,
   ValidationPipe,
+  UseGuards,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
@@ -20,6 +21,7 @@ import { PatchUserDto } from './dtos/patch-user.dto';
 import { UserService } from './user.service';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateManyUsersDto } from './dtos/create-many-user.dto';
+import { AccessTokenGuard } from 'src/auth/guards/access-token/access-token.guard';
 
 @Controller('users')
 @ApiTags('Users') // with the updated version of @nestjs/swagger there is no need to use @ApiTags
@@ -88,6 +90,7 @@ export class UserController {
     summary: 'Create users',
     description: 'Create multiple users',
   })
+  @UseGuards(AccessTokenGuard)
   @Post('/create-many')
   public createManyUsers(@Body() createUsersDto: CreateManyUsersDto) {
     const createUsers = this.userService.createMany({ users: createUsersDto });

@@ -258,16 +258,31 @@ import { UserService } from &#x27;./user.service&#x27;;
 import { AuthModule } from &#x27;src/auth/auth.module&#x27;;
 import { TypeOrmModule } from &#x27;@nestjs/typeorm&#x27;;
 import { User } from &#x27;./entity/user.entity&#x27;;
-import { ConfigModule } from &#x27;@nestjs/config&#x27;;
+import { ConfigModule, ConfigType } from &#x27;@nestjs/config&#x27;;
 import { UserCreateMany } from &#x27;./user-create-many&#x27;;
 import { CreateUserProvider } from &#x27;./provider/create-user.provider&#x27;;
 import profileConfig from &#x27;./config/profile.config&#x27;;
+import jwtConfig from &#x27;src/config/jwt.config&#x27;;
+import { JwtModule } from &#x27;@nestjs/jwt&#x27;;
 
 @Module({
   imports: [
     forwardRef(() &#x3D;&gt; AuthModule), // for dependency injection (circular dependency injection)
     TypeOrmModule.forFeature([User]), // for repository (entity) injection
-    ConfigModule.forFeature(profileConfig)
+    ConfigModule.forFeature(profileConfig),
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync({
+      imports: [ConfigModule.forFeature(jwtConfig)],
+      useFactory: async (jwtConfiguration: ConfigType&lt;typeof jwtConfig&gt;) &#x3D;&gt; ({
+        secret: jwtConfiguration.jwtSecret,
+        signOptions: {
+          audience: jwtConfiguration.jwtTokenAudience,
+          issuer: jwtConfiguration.jwtTokenIssuer,
+          expiresIn: jwtConfiguration.jwtTokenExpiration,
+        },
+      }),
+      inject: [jwtConfig.KEY],
+    }),
   ],
   controllers: [UserController],
   providers: [UserService, UserCreateMany, CreateUserProvider],
