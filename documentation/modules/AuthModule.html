@@ -258,9 +258,27 @@ import { AuthService } from &#x27;./auth.service&#x27;;
 import { UserModule } from &#x27;src/user/user.module&#x27;;
 import { HashingProvider } from &#x27;./providers/hashing.provider&#x27;;
 import { BcryptProvider } from &#x27;./providers/bcrypt.provider&#x27;;
+import { ConfigModule, ConfigType } from &#x27;@nestjs/config&#x27;;
+import jwtConfig from &#x27;src/config/jwt.config&#x27;;
+import { JwtModule } from &#x27;@nestjs/jwt&#x27;;
 
 @Module({
-  imports: [forwardRef(() &#x3D;&gt; UserModule)], // for dependency injection (circular dependency injection)
+  imports: [
+    forwardRef(() &#x3D;&gt; UserModule), // for dependency injection (circular dependency injection)
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync({
+      imports: [ConfigModule.forFeature(jwtConfig)],
+      useFactory: async (jwtConfiguration: ConfigType&lt;typeof jwtConfig&gt;) &#x3D;&gt; ({
+        secret: jwtConfiguration.jwtSecret,
+        signOptions: {
+          audience: jwtConfiguration.jwtTokenAudience,
+          issuer: jwtConfiguration.jwtTokenIssuer,
+          expiresIn: jwtConfiguration.jwtTokenExpiration,
+        },
+      }),
+      inject: [jwtConfig.KEY],
+    }),
+  ],
   exports: [AuthService, HashingProvider],
   controllers: [AuthController],
   providers: [

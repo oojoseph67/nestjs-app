@@ -9,6 +9,9 @@ import {
 import { UserService } from 'src/user/user.service';
 import { SignInDto } from './dtos/signin.dto';
 import { HashingProvider } from './providers/hashing.provider';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigType } from '@nestjs/config';
+import jwtConfig from 'src/config/jwt.config';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +23,13 @@ export class AuthService {
     // injecting hashing provider
     @Inject(forwardRef(() => HashingProvider)) // doing this because this is a circular dependency
     private hashingProvider: HashingProvider,
+
+    // injecting jwt service dependency
+    private jwtService: JwtService,
+
+    // injecting jwtConfig (environment values)
+    @Inject(jwtConfig.KEY)
+    private jwtConfiguration: ConfigType<typeof jwtConfig>,
   ) {}
 
   public async login({ body }: { body: SignInDto }) {
@@ -45,7 +55,22 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
 
-    return true;
+    const accessToken = await this.jwtService.signAsync(
+      {
+        sub: existingUser.id,
+        email: existingUser.email,
+      },
+      {
+        expiresIn: this.jwtConfiguration.jwtTokenExpiration,
+        secret: this.jwtConfiguration.jwtSecret,
+        audience: this.jwtConfiguration.jwtTokenAudience,
+        issuer: this.jwtConfiguration.jwtTokenIssuer,
+      },
+    );
+
+    return {
+      accessToken,
+    };
   }
 
   public isAuthenticated() {

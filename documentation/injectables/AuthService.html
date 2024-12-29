@@ -162,12 +162,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, hashingProvider: HashingProvider)</code>
+<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, hashingProvider: HashingProvider, jwtService: JwtService, jwtConfiguration: ConfigType<>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/auth/auth.service.ts:14</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/auth/auth.service.ts:17</a></div>
                             </td>
                         </tr>
 
@@ -201,6 +201,30 @@
                                                   
                                                         <td>
                                                                     <code>HashingProvider</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>jwtService</td>
+                                                  
+                                                        <td>
+                                                                    <code>JwtService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>jwtConfiguration</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfigType&lt;&gt;</code>
                                                         </td>
                                                   
                                                     <td>
@@ -244,8 +268,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="51"
-                                    class="link-to-prism">src/auth/auth.service.ts:51</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/auth/auth.service.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -284,8 +308,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="25"
-                                    class="link-to-prism">src/auth/auth.service.ts:25</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/auth/auth.service.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -347,6 +371,9 @@
 import { UserService } from &#x27;src/user/user.service&#x27;;
 import { SignInDto } from &#x27;./dtos/signin.dto&#x27;;
 import { HashingProvider } from &#x27;./providers/hashing.provider&#x27;;
+import { JwtService } from &#x27;@nestjs/jwt&#x27;;
+import { ConfigType } from &#x27;@nestjs/config&#x27;;
+import jwtConfig from &#x27;src/config/jwt.config&#x27;;
 
 @Injectable()
 export class AuthService {
@@ -358,6 +385,13 @@ export class AuthService {
     // injecting hashing provider
     @Inject(forwardRef(() &#x3D;&gt; HashingProvider)) // doing this because this is a circular dependency
     private hashingProvider: HashingProvider,
+
+    // injecting jwt service dependency
+    private jwtService: JwtService,
+
+    // injecting jwtConfig (environment values)
+    @Inject(jwtConfig.KEY)
+    private jwtConfiguration: ConfigType&lt;typeof jwtConfig&gt;,
   ) {}
 
   public async login({ body }: { body: SignInDto }) {
@@ -383,7 +417,22 @@ export class AuthService {
       throw new HttpException(&#x27;Invalid credentials&#x27;, HttpStatus.UNAUTHORIZED);
     }
 
-    return true;
+    const accessToken &#x3D; await this.jwtService.signAsync(
+      {
+        sub: existingUser.id,
+        email: existingUser.email,
+      },
+      {
+        expiresIn: this.jwtConfiguration.jwtTokenExpiration,
+        secret: this.jwtConfiguration.jwtSecret,
+        audience: this.jwtConfiguration.jwtTokenAudience,
+        issuer: this.jwtConfiguration.jwtTokenIssuer,
+      },
+    );
+
+    return {
+      accessToken,
+    };
   }
 
   public isAuthenticated() {
