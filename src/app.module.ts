@@ -21,6 +21,7 @@ export const ENV = process.env.NODE_ENV;
 
 @Module({
   imports: [
+    // env configs
     ConfigModule.forRoot({
       isGlobal: true, // make sure this is set to true to load environment variables from.env file
       // envFilePath: ['.env.development.local'], // specify the path to your.env file
@@ -28,10 +29,12 @@ export const ENV = process.env.NODE_ENV;
       load: [appConfig, databaseConfig],
       validationSchema: environmentValidation,
     }), // to use environment variables
+    // env configs
     UserModule,
     PostsModule,
     AuthModule,
     MetaOptionsModule,
+    // database configs
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule], // specify any additional imports here, e.g., TypeORM migrations or custom repositories
       inject: [ConfigService], // inject
@@ -48,6 +51,7 @@ export const ENV = process.env.NODE_ENV;
         // autoLoadEntities: true, // using this would require us to create a module (controller and module file) for every entity we want to add, exporting it and using the TypeORM.forFeature([]) function
       }),
     }),
+    // database configs
     TagsModule,
     PaginationModule,
   ],

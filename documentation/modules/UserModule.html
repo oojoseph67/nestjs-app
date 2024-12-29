@@ -264,6 +264,8 @@ import { CreateUserProvider } from &#x27;./provider/create-user.provider&#x27;;
 import profileConfig from &#x27;./config/profile.config&#x27;;
 import jwtConfig from &#x27;src/config/jwt.config&#x27;;
 import { JwtModule } from &#x27;@nestjs/jwt&#x27;;
+import { AccessTokenGuard } from &#x27;src/auth/guards/access-token/access-token.guard&#x27;;
+import { APP_GUARD } from &#x27;@nestjs/core&#x27;;
 
 @Module({
   imports: [
@@ -285,7 +287,15 @@ import { JwtModule } from &#x27;@nestjs/jwt&#x27;;
     }),
   ],
   controllers: [UserController],
-  providers: [UserService, UserCreateMany, CreateUserProvider],
+  providers: [
+    UserService,
+    UserCreateMany,
+    CreateUserProvider,
+    {
+      provide: APP_GUARD,
+      useClass: AccessTokenGuard
+    }, // setting a guard globally (this protect the entire application, everywhere the userModule is been imported)
+  ],
   exports: [UserService],
 })
 export class UserModule {}
