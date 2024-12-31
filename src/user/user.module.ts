@@ -18,29 +18,29 @@ import { APP_GUARD } from '@nestjs/core';
     forwardRef(() => AuthModule), // for dependency injection (circular dependency injection)
     TypeOrmModule.forFeature([User]), // for repository (entity) injection
     ConfigModule.forFeature(profileConfig),
-    ConfigModule.forFeature(jwtConfig),
-    JwtModule.registerAsync({
-      imports: [ConfigModule.forFeature(jwtConfig)],
-      useFactory: async (jwtConfiguration: ConfigType<typeof jwtConfig>) => ({
-        secret: jwtConfiguration.jwtSecret,
-        signOptions: {
-          audience: jwtConfiguration.jwtTokenAudience,
-          issuer: jwtConfiguration.jwtTokenIssuer,
-          expiresIn: jwtConfiguration.jwtTokenExpiration,
-        },
-      }),
-      inject: [jwtConfig.KEY],
-    }),
+    // ConfigModule.forFeature(jwtConfig),
+    // JwtModule.registerAsync({
+    //   imports: [ConfigModule.forFeature(jwtConfig)],
+    //   useFactory: async (jwtConfiguration: ConfigType<typeof jwtConfig>) => ({
+    //     secret: jwtConfiguration.jwtSecret,
+    //     signOptions: {
+    //       audience: jwtConfiguration.jwtTokenAudience,
+    //       issuer: jwtConfiguration.jwtTokenIssuer,
+    //       expiresIn: jwtConfiguration.jwtTokenExpiration,
+    //     },
+    //   }),
+    //   inject: [jwtConfig.KEY],
+    // }),
   ],
   controllers: [UserController],
   providers: [
     UserService,
     UserCreateMany,
     CreateUserProvider,
-    {
-      provide: APP_GUARD,
-      useClass: AccessTokenGuard
-    }, // setting a guard globally (this protect the entire application, everywhere the userModule is been imported)
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: AccessTokenGuard
+    // }, // setting a guard globally (this protect the entire application, everywhere the userModule is been imported)
   ],
   exports: [UserService],
 })

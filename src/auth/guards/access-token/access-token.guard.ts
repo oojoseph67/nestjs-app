@@ -50,8 +50,6 @@ export class AccessTokenGuard implements CanActivate {
         // ignoreExpiration: true
       });
       request.user = payload;
-
-      console.log({request})
     } catch (error: any) {
       throw new HttpException(`${error.message}`, HttpStatus.UNAUTHORIZED, {
         cause: error.message,

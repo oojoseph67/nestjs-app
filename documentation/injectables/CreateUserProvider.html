@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >AuthService</li>
+  <li class="breadcrumb-item" >CreateUserProvider</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/auth/auth.service.ts</code>
+            <code>src/user/provider/create-user.provider.ts</code>
         </p>
 
 
@@ -137,12 +137,8 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#isAuthenticated" >isAuthenticated</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#login" >login</a>
+                                <a href="#createUser" >createUser</a>
                             </li>
                         </ul>
                     </td>
@@ -162,12 +158,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, hashingProvider: <a href="../injectables/HashingProvider.html" target="_self">HashingProvider</a>, jwtService: JwtService, jwtConfiguration: ConfigType<>)</code>
+<code>constructor(userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, hashingProvider: <a href="../injectables/HashingProvider.html" target="_self">HashingProvider</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/auth/auth.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/user/provider/create-user.provider.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -185,10 +181,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userService</td>
+                                                        <td>userRepository</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                                        <code><a href="../entitys/User.html" target="_self" >Repository&lt;User&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -201,30 +197,6 @@
                                                   
                                                         <td>
                                                                         <code><a href="../injectables/HashingProvider.html" target="_self" >HashingProvider</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>jwtService</td>
-                                                  
-                                                        <td>
-                                                                    <code>JwtService</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>jwtConfiguration</td>
-                                                  
-                                                        <td>
-                                                                    <code>ConfigType&lt;&gt;</code>
                                                         </td>
                                                   
                                                     <td>
@@ -250,66 +222,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isAuthenticated"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>isAuthenticated</b></span>
-                        <a href="#isAuthenticated"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>isAuthenticated()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/auth/auth.service.ts:76</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="login"></a>
+                    <a name="createUser"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>createUser</b></span>
+                        <a href="#createUser"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(undefined: literal type)</code>
+                    <code>createUser(undefined: literal type)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/auth/auth.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/user/provider/create-user.provider.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -344,7 +277,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>        <code><a href="../classes/CreateUserDto.html" target="_self" >Promise&lt;CreateUserDto&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -361,82 +294,66 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  Injectable,
-  Inject,
   forwardRef,
   HttpException,
   HttpStatus,
+  Inject,
+  Injectable,
   RequestTimeoutException,
 } from &#x27;@nestjs/common&#x27;;
-import { UserService } from &#x27;src/user/user.service&#x27;;
-import { SignInDto } from &#x27;./dtos/signin.dto&#x27;;
-import { HashingProvider } from &#x27;./providers/hashing.provider&#x27;;
-import { JwtService } from &#x27;@nestjs/jwt&#x27;;
-import { ConfigType } from &#x27;@nestjs/config&#x27;;
-import jwtConfig from &#x27;src/config/jwt.config&#x27;;
+import { CreateUserDto } from &#x27;../dtos/create-user.dto&#x27;;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
+import { User } from &#x27;../entity/user.entity&#x27;;
+import { Repository } from &#x27;typeorm&#x27;;
+import { HashingProvider } from &#x27;src/auth/providers/hashing.provider&#x27;;
 
 @Injectable()
-export class AuthService {
+export class CreateUserProvider {
   constructor(
-    // injecting a service dependency (circular dependency injection)
-    @Inject(forwardRef(() &#x3D;&gt; UserService))
-    private userService: UserService,
+    // injecting user service repository dependency
+    @InjectRepository(User)
+    private userRepository: Repository&lt;User&gt;,
 
     // injecting hashing provider
     @Inject(forwardRef(() &#x3D;&gt; HashingProvider)) // doing this because this is a circular dependency
     private hashingProvider: HashingProvider,
-
-    // injecting jwt service dependency
-    private jwtService: JwtService,
-
-    // injecting jwtConfig (environment values)
-    @Inject(jwtConfig.KEY)
-    private jwtConfiguration: ConfigType&lt;typeof jwtConfig&gt;,
   ) {}
 
-  public async login({ body }: { body: SignInDto }) {
-    const { email, password } &#x3D; body;
-
-    const existingUser &#x3D; await this.userService.findUserByEmail({ email });
-
-    let isPasswordCorrect: boolean;
+  public async createUser({
+    user,
+  }: {
+    user: CreateUserDto;
+  }): Promise&lt;CreateUserDto&gt; {
+    // check user
+    let existingUser &#x3D; undefined;
 
     try {
-      isPasswordCorrect &#x3D; await this.hashingProvider.comparePasswords({
-        hashedPassword: existingUser.password,
-        password,
+      existingUser &#x3D; await this.userRepository.findOne({
+        where: { email: user.email },
       });
-    } catch (error: any) {
-      throw new RequestTimeoutException(error.message, {
+    } catch (error) {
+      throw new RequestTimeoutException(&#x27;Request timeout&#x27;, {
         cause: error,
-        description: &#x27;Request timeout. Could not compare passwords&#x27;,
+        description: &#x27;Request timeout&#x27;,
       });
     }
 
-    if (!isPasswordCorrect) {
-      throw new HttpException(&#x27;Invalid credentials&#x27;, HttpStatus.UNAUTHORIZED);
+    // handle exception
+    if (existingUser) {
+      throw new HttpException(&#x27;Email already exists&#x27;, HttpStatus.CONFLICT);
     }
 
-    const accessToken &#x3D; await this.jwtService.signAsync(
-      {
-        sub: existingUser.id,
-        email: existingUser.email,
-      },
-      {
-        expiresIn: this.jwtConfiguration.jwtTokenExpiration,
-        secret: this.jwtConfiguration.jwtSecret,
-        audience: this.jwtConfiguration.jwtTokenAudience,
-        issuer: this.jwtConfiguration.jwtTokenIssuer,
-      },
-    );
+    const hashedPassword &#x3D; await this.hashingProvider.hashPassword({
+      password: user.password,
+    });
 
-    return {
-      accessToken,
-    };
-  }
+    user.password &#x3D; hashedPassword
 
-  public isAuthenticated() {
-    return true; // replace with actual authentication logic
+    // create a new user
+    const newUser &#x3D; await this.userRepository.create(user);
+    await this.userRepository.save(newUser);
+
+    return newUser;
   }
 }
 </code></pre>
@@ -482,7 +399,7 @@ export class AuthService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'CreateUserProvider.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

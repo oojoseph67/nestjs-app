@@ -10,12 +10,17 @@ import { MetaOptionsController } from './meta-options/meta-options.controller';
 import { MetaOptionsModule } from './meta-options/meta-options.module';
 import { TagsController } from './tags/tags.controller';
 import { TagsModule } from './tags/tags.module';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule, ConfigService, ConfigType } from '@nestjs/config';
 import { PaginationService } from './global/pagination/pagination.service';
 import { PaginationModule } from './global/pagination/pagination.module';
 import appConfig from './config/index.config';
 import databaseConfig from './config/database.config';
 import environmentValidation from './config/environment.validation';
+import { APP_GUARD } from '@nestjs/core';
+import { AccessTokenGuard } from './auth/guards/access-token/access-token.guard';
+import jwtConfig from './config/jwt.config';
+import { JwtModule } from '@nestjs/jwt';
+import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
 
 export const ENV = process.env.NODE_ENV;
 
@@ -30,10 +35,12 @@ export const ENV = process.env.NODE_ENV;
       validationSchema: environmentValidation,
     }), // to use environment variables
     // env configs
+
     UserModule,
     PostsModule,
     AuthModule,
     MetaOptionsModule,
+
     // database configs
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule], // specify any additional imports here, e.g., TypeORM migrations or custom repositories
@@ -52,6 +59,23 @@ export const ENV = process.env.NODE_ENV;
       }),
     }),
     // database configs
+
+    // jwt configuration
+    ConfigModule.forFeature(jwtConfig),
+    JwtModule.registerAsync({
+      imports: [ConfigModule.forFeature(jwtConfig)],
+      useFactory: async (jwtConfiguration: ConfigType<typeof jwtConfig>) => ({
+        secret: jwtConfiguration.jwtSecret,
+        signOptions: {
+          audience: jwtConfiguration.jwtTokenAudience,
+          issuer: jwtConfiguration.jwtTokenIssuer,
+          expiresIn: jwtConfiguration.jwtTokenExpiration,
+        },
+      }),
+      inject: [jwtConfig.KEY],
+    }),
+    // jwt configuration
+
     TagsModule,
     PaginationModule,
   ],
@@ -61,6 +85,15 @@ export const ENV = process.env.NODE_ENV;
     MetaOptionsController,
     TagsController,
   ],
-  providers: [AppService, PaginationService],
+  providers: [
+    AppService,
+    PaginationService,
+    AccessTokenGuard, // because authentication guard has a dependency injection of AccessTokenGuard
+    {
+      provide: APP_GUARD,
+      useClass: AuthenticationGuard,
+      // useClass: AccessTokenGuard,
+    },
+  ],
 })
 export class AppModule {}

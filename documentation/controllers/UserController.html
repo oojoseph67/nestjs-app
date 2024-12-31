@@ -149,6 +149,7 @@
                             </li>
                             <li>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                     <span class="modifier">Public</span>
                                 <a href="#createUser" >createUser</a>
                             </li>
@@ -209,14 +210,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiOperation({summary: &#x27;Create users&#x27;, description: &#x27;Create multiple users&#x27;})<br />@UseGuards(AccessTokenGuard)<br />@Post(&#x27;/create-many&#x27;)<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Create users&#x27;, description: &#x27;Create multiple users&#x27;})<br />@Auth(AuthType.BEARER)<br />@Post(&#x27;/create-many&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="95"
-                                    class="link-to-prism">src/user/user.controller.ts:95</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="102"
+                                    class="link-to-prism">src/user/user.controller.ts:102</a></div>
                         </td>
                     </tr>
 
@@ -252,7 +253,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
                         </div>
                             <div class="io-description">
@@ -268,6 +269,7 @@
                 <td class="col-md-4">
                     <a name="createUser"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier">Public</span>
                         <span ><b>createUser</b></span>
@@ -286,14 +288,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@Post()<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Create a new user&#x27;, description: &#x27;Create a new user for the application&#x27;})<br />@Post()<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="84"
-                                    class="link-to-prism">src/user/user.controller.ts:84</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="90"
+                                    class="link-to-prism">src/user/user.controller.ts:90</a></div>
                         </td>
                     </tr>
 
@@ -373,8 +375,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="66"
-                                    class="link-to-prism">src/user/user.controller.ts:66</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="68"
+                                    class="link-to-prism">src/user/user.controller.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -474,8 +476,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="101"
-                                    class="link-to-prism">src/user/user.controller.ts:101</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/user/user.controller.ts:109</a></div>
                         </td>
                     </tr>
 
@@ -541,6 +543,7 @@
   DefaultValuePipe,
   ValidationPipe,
   UseGuards,
+  SetMetadata,
 } from &#x27;@nestjs/common&#x27;;
 import { CreateUserDto } from &#x27;./dtos/create-user.dto&#x27;;
 import { GetUsersParamDto } from &#x27;./dtos/get-users-param.dto&#x27;;
@@ -549,6 +552,7 @@ import { UserService } from &#x27;./user.service&#x27;;
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from &#x27;@nestjs/swagger&#x27;;
 import { CreateManyUsersDto } from &#x27;./dtos/create-many-user.dto&#x27;;
 import { AccessTokenGuard } from &#x27;src/auth/guards/access-token/access-token.guard&#x27;;
+import { Auth, AuthType } from &#x27;src/auth/decorators/auth.decorator&#x27;;
 
 @Controller(&#x27;users&#x27;)
 @ApiTags(&#x27;Users&#x27;) // with the updated version of @nestjs/swagger there is no need to use @ApiTags
@@ -607,6 +611,10 @@ export class UserController {
     return findAll;
   }
 
+  @ApiOperation({
+    summary: &#x27;Create a new user&#x27;,
+    description: &#x27;Create a new user for the application&#x27;,
+  })
   @Post()
   public createUser(@Body() createUserDto: CreateUserDto) {
     const createUser &#x3D; this.userService.createUser({ user: createUserDto });
@@ -617,11 +625,13 @@ export class UserController {
     summary: &#x27;Create users&#x27;,
     description: &#x27;Create multiple users&#x27;,
   })
-  @UseGuards(AccessTokenGuard)
+  // @UseGuards(AccessTokenGuard)
+  @Auth(AuthType.BEARER)
   @Post(&#x27;/create-many&#x27;)
   public createManyUsers(@Body() createUsersDto: CreateManyUsersDto) {
-    const createUsers &#x3D; this.userService.createMany({ users: createUsersDto });
-    return createUsers;
+    console.log(&#x27;hitting it&#x27;)
+    // const createUsers &#x3D; this.userService.createMany({ users: createUsersDto });
+    // return createUsers;
   }
 
   @Patch()

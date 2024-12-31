@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content guard">
                    <div class="content-data">
 
 
@@ -89,9 +89,11 @@
 
 
 
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >AuthService</li>
+    <li class="breadcrumb-item">Guards</li>
+    <li class="breadcrumb-item" >AuthenticationGuard</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -110,22 +112,43 @@
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="info">
-        <p class="comment">
+        <div class="tab-pane fade active in" id="info">
+            <p class="comment">
             <h3>File</h3>
-        </p>
-        <p class="comment">
-            <code>src/auth/auth.service.ts</code>
-        </p>
+            </p>
+            <p class="comment">
+                <code>src/auth/guards/authentication/authentication.guard.ts</code>
+            </p>
 
 
 
 
 
-            <section data-compodoc="block-index">
+
+                <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#authTypeGuardMap" >authTypeGuardMap</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Static</span>
+                                <a href="#defaultAuthType" >defaultAuthType</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
 
                 <tr>
                     <td class="col-md-4">
@@ -136,13 +159,8 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#isAuthenticated" >isAuthenticated</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#login" >login</a>
+                                <a href="#canActivate" >canActivate</a>
                             </li>
                         </ul>
                     </td>
@@ -156,18 +174,18 @@
     </table>
 </section>
 
-            <section data-compodoc="block-constructor">
+                <section data-compodoc="block-constructor">
     <h3 id="constructor">Constructor</h3>
         <table class="table table-sm table-bordered">
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, hashingProvider: <a href="../injectables/HashingProvider.html" target="_self">HashingProvider</a>, jwtService: JwtService, jwtConfiguration: ConfigType<>)</code>
+<code>constructor(reflector: Reflector, accessTokenGuard: <a href="../guards/AccessTokenGuard.html" target="_self">AccessTokenGuard</a>)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/auth/auth.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/auth/guards/authentication/authentication.guard.ts:14</a></div>
                             </td>
                         </tr>
 
@@ -185,10 +203,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userService</td>
+                                                        <td>reflector</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
+                                                                    <code>Reflector</code>
                                                         </td>
                                                   
                                                     <td>
@@ -197,34 +215,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>hashingProvider</td>
+                                                        <td>accessTokenGuard</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../injectables/HashingProvider.html" target="_self" >HashingProvider</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>jwtService</td>
-                                                  
-                                                        <td>
-                                                                    <code>JwtService</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>jwtConfiguration</td>
-                                                  
-                                                        <td>
-                                                                    <code>ConfigType&lt;&gt;</code>
+                                                                        <code><a href="../guards/AccessTokenGuard.html" target="_self" >AccessTokenGuard</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -241,7 +235,7 @@
         </table>
 </section>
 
-            <section data-compodoc="block-methods">
+                <section data-compodoc="block-methods">
     
     <h3 id="methods">
         Methods
@@ -250,66 +244,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isAuthenticated"></a>
+                    <a name="canActivate"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>isAuthenticated</b></span>
-                        <a href="#isAuthenticated"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>isAuthenticated()</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/auth/auth.service.ts:76</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="login"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>canActivate</b></span>
+                        <a href="#canActivate"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(undefined: literal type)</code>
+                    <code>canActivate(context: ExecutionContext)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/auth/auth.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="33"
+                                    class="link-to-prism">src/auth/guards/authentication/authentication.guard.ts:33</a></div>
                         </td>
                     </tr>
 
@@ -330,8 +284,9 @@
                                     </thead>
                                     <tbody>
                                         <tr>
+                                                <td>context</td>
                                             <td>
-                                                        <code>literal type</code>
+                                                        <code>ExecutionContext</code>
                                             </td>
 
                                             <td>
@@ -344,7 +299,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -355,96 +310,87 @@
         </tbody>
     </table>
 </section>
+        </div>
 
-    </div>
 
-
-    <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  Injectable,
-  Inject,
-  forwardRef,
+        <div class="tab-pane fade  tab-source-code" id="source">
+            <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
+  CanActivate,
+  ExecutionContext,
   HttpException,
   HttpStatus,
-  RequestTimeoutException,
+  Injectable,
 } from &#x27;@nestjs/common&#x27;;
-import { UserService } from &#x27;src/user/user.service&#x27;;
-import { SignInDto } from &#x27;./dtos/signin.dto&#x27;;
-import { HashingProvider } from &#x27;./providers/hashing.provider&#x27;;
-import { JwtService } from &#x27;@nestjs/jwt&#x27;;
-import { ConfigType } from &#x27;@nestjs/config&#x27;;
-import jwtConfig from &#x27;src/config/jwt.config&#x27;;
+import { Reflector } from &#x27;@nestjs/core&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { AccessTokenGuard } from &#x27;../access-token/access-token.guard&#x27;;
+import { AUTH_TYPE_KEY, AuthType } from &#x27;src/auth/decorators/auth.decorator&#x27;;
 
 @Injectable()
-export class AuthService {
+export class AuthenticationGuard implements CanActivate {
   constructor(
-    // injecting a service dependency (circular dependency injection)
-    @Inject(forwardRef(() &#x3D;&gt; UserService))
-    private userService: UserService,
+    // injecting necessary services here
 
-    // injecting hashing provider
-    @Inject(forwardRef(() &#x3D;&gt; HashingProvider)) // doing this because this is a circular dependency
-    private hashingProvider: HashingProvider,
+    // injecting reflector
+    private reflector: Reflector,
 
-    // injecting jwt service dependency
-    private jwtService: JwtService,
-
-    // injecting jwtConfig (environment values)
-    @Inject(jwtConfig.KEY)
-    private jwtConfiguration: ConfigType&lt;typeof jwtConfig&gt;,
+    private accessTokenGuard: AccessTokenGuard,
   ) {}
 
-  public async login({ body }: { body: SignInDto }) {
-    const { email, password } &#x3D; body;
+  private static defaultAuthType: AuthType &#x3D; AuthType.BEARER;
 
-    const existingUser &#x3D; await this.userService.findUserByEmail({ email });
+  private authTypeGuardMap: Record&lt;AuthType, CanActivate | CanActivate[]&gt; &#x3D; {
+    [AuthType.BEARER]: this.accessTokenGuard,
+    [AuthType.NONE]: {
+      canActivate: () &#x3D;&gt; true,
+    },
+  };
 
-    let isPasswordCorrect: boolean;
+  async canActivate(context: ExecutionContext): Promise&lt;boolean&gt; {
+    // get all auth types from the reflector (metadata)
+    // getting the auth decorator passed
+    const authTypes &#x3D; this.reflector.getAllAndOverride(
+      AUTH_TYPE_KEY, // decorator that needs checking
+      [context.getHandler(), context.getClass()], // get keys for all type auth
+    ) ?? [AuthenticationGuard.defaultAuthType];
 
-    try {
-      isPasswordCorrect &#x3D; await this.hashingProvider.comparePasswords({
-        hashedPassword: existingUser.password,
-        password,
-      });
-    } catch (error: any) {
-      throw new RequestTimeoutException(error.message, {
-        cause: error,
-        description: &#x27;Request timeout. Could not compare passwords&#x27;,
-      });
+    console.log({ authTypes });
+
+    // getting the right guard for the right auth type decorator
+    const guards &#x3D; authTypes.map((type) &#x3D;&gt; this.authTypeGuardMap[type]).flat();
+
+    console.log(&#x27;Guards:&#x27;, JSON.stringify(guards, null, 2));
+
+    // array of guards
+    // loop guards canActivate
+    // loop through all the guards and fire the canActivate (returns a boolean)
+    for (const instance of guards) {
+      console.log({ instance });
+      const canActivate &#x3D; await Promise.resolve(instance.canActivate(context))
+        .then((canActivate) &#x3D;&gt; {
+          console.log(&#x27;canActivate&#x27;, canActivate);
+          return canActivate;
+        })
+        .catch((error: any) &#x3D;&gt; {
+          throw new HttpException(&#x60;${error.message}&#x60;, HttpStatus.UNAUTHORIZED, {
+            cause: error.message,
+            description: error,
+          });
+        });
+
+      if (!canActivate) {
+        throw new HttpException(&#x27;Unauthorized&#x27;, HttpStatus.UNAUTHORIZED);
+      }
+      return true;
     }
 
-    if (!isPasswordCorrect) {
-      throw new HttpException(&#x27;Invalid credentials&#x27;, HttpStatus.UNAUTHORIZED);
-    }
-
-    const accessToken &#x3D; await this.jwtService.signAsync(
-      {
-        sub: existingUser.id,
-        email: existingUser.email,
-      },
-      {
-        expiresIn: this.jwtConfiguration.jwtTokenExpiration,
-        secret: this.jwtConfiguration.jwtSecret,
-        audience: this.jwtConfiguration.jwtTokenAudience,
-        issuer: this.jwtConfiguration.jwtTokenIssuer,
-      },
-    );
-
-    return {
-      accessToken,
-    };
-  }
-
-  public isAuthenticated() {
-    return true; // replace with actual authentication logic
+    // throw exception if no canActivate
+    throw new HttpException(&#x27;Unauthorizedad&#x27;, HttpStatus.UNAUTHORIZED);
   }
 }
 </code></pre>
-    </div>
-
+        </div>
 </div>
-
-
 
 
 
@@ -481,8 +427,8 @@ export class AuthService {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'guard';
+            var COMPODOC_CURRENT_PAGE_URL = 'AuthenticationGuard.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

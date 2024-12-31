@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >AuthService</li>
+  <li class="breadcrumb-item" >HashingProvider</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/auth/auth.service.ts</code>
+            <code>src/auth/providers/hashing.provider.ts</code>
         </p>
 
 
@@ -136,13 +136,12 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#isAuthenticated" >isAuthenticated</a>
+                                    <span class="modifier">Abstract</span>
+                                <a href="#comparePasswords" >comparePasswords</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#login" >login</a>
+                                    <span class="modifier">Abstract</span>
+                                <a href="#hashPassword" >hashPassword</a>
                             </li>
                         </ul>
                     </td>
@@ -156,90 +155,6 @@
     </table>
 </section>
 
-            <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, hashingProvider: <a href="../injectables/HashingProvider.html" target="_self">HashingProvider</a>, jwtService: JwtService, jwtConfiguration: ConfigType<>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/auth/auth.service.ts:17</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>userService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>hashingProvider</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/HashingProvider.html" target="_self" >HashingProvider</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>jwtService</td>
-                                                  
-                                                        <td>
-                                                                    <code>JwtService</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>jwtConfiguration</td>
-                                                  
-                                                        <td>
-                                                                    <code>ConfigType&lt;&gt;</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
             <section data-compodoc="block-methods">
     
@@ -250,37 +165,77 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isAuthenticated"></a>
+                    <a name="comparePasswords"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>isAuthenticated</b></span>
-                        <a href="#isAuthenticated"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Abstract</span>
+                        <span ><b>comparePasswords</b></span>
+                        <a href="#comparePasswords"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>isAuthenticated()</code>
+                    <code>comparePasswords(undefined: literal type)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/auth/auth.service.ts:76</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="19"
+                                    class="link-to-prism">src/auth/providers/hashing.provider.ts:19</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
+                        <div class="io-description"><p>Compares a plain text password with a hashed password.</p>
+</div>
 
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>[object Object]</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The plain text password to compare. Can be a string or a Buffer.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
 
                         </div>
+                            <div class="io-description">
+                                <p>A promise that resolves to a boolean indicating whether the passwords match.</p>
+
+                            </div>
                 </td>
             </tr>
         </tbody>
@@ -289,27 +244,26 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="login"></a>
+                    <a name="hashPassword"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier">Abstract</span>
+                        <span ><b>hashPassword</b></span>
+                        <a href="#hashPassword"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(undefined: literal type)</code>
+                    <code>hashPassword(undefined: literal type)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/auth/auth.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="5"
+                                    class="link-to-prism">src/auth/providers/hashing.provider.ts:5</a></div>
                         </td>
                     </tr>
 
@@ -344,7 +298,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -360,84 +314,31 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  Injectable,
-  Inject,
-  forwardRef,
-  HttpException,
-  HttpStatus,
-  RequestTimeoutException,
-} from &#x27;@nestjs/common&#x27;;
-import { UserService } from &#x27;src/user/user.service&#x27;;
-import { SignInDto } from &#x27;./dtos/signin.dto&#x27;;
-import { HashingProvider } from &#x27;./providers/hashing.provider&#x27;;
-import { JwtService } from &#x27;@nestjs/jwt&#x27;;
-import { ConfigType } from &#x27;@nestjs/config&#x27;;
-import jwtConfig from &#x27;src/config/jwt.config&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
 
 @Injectable()
-export class AuthService {
-  constructor(
-    // injecting a service dependency (circular dependency injection)
-    @Inject(forwardRef(() &#x3D;&gt; UserService))
-    private userService: UserService,
+export abstract class HashingProvider {
+  abstract hashPassword({
+    password,
+  }: {
+    password: string | Buffer;
+  }): Promise&lt;string&gt;;
 
-    // injecting hashing provider
-    @Inject(forwardRef(() &#x3D;&gt; HashingProvider)) // doing this because this is a circular dependency
-    private hashingProvider: HashingProvider,
-
-    // injecting jwt service dependency
-    private jwtService: JwtService,
-
-    // injecting jwtConfig (environment values)
-    @Inject(jwtConfig.KEY)
-    private jwtConfiguration: ConfigType&lt;typeof jwtConfig&gt;,
-  ) {}
-
-  public async login({ body }: { body: SignInDto }) {
-    const { email, password } &#x3D; body;
-
-    const existingUser &#x3D; await this.userService.findUserByEmail({ email });
-
-    let isPasswordCorrect: boolean;
-
-    try {
-      isPasswordCorrect &#x3D; await this.hashingProvider.comparePasswords({
-        hashedPassword: existingUser.password,
-        password,
-      });
-    } catch (error: any) {
-      throw new RequestTimeoutException(error.message, {
-        cause: error,
-        description: &#x27;Request timeout. Could not compare passwords&#x27;,
-      });
-    }
-
-    if (!isPasswordCorrect) {
-      throw new HttpException(&#x27;Invalid credentials&#x27;, HttpStatus.UNAUTHORIZED);
-    }
-
-    const accessToken &#x3D; await this.jwtService.signAsync(
-      {
-        sub: existingUser.id,
-        email: existingUser.email,
-      },
-      {
-        expiresIn: this.jwtConfiguration.jwtTokenExpiration,
-        secret: this.jwtConfiguration.jwtSecret,
-        audience: this.jwtConfiguration.jwtTokenAudience,
-        issuer: this.jwtConfiguration.jwtTokenIssuer,
-      },
-    );
-
-    return {
-      accessToken,
-    };
-  }
-
-  public isAuthenticated() {
-    return true; // replace with actual authentication logic
-  }
+  /**
+   * Compares a plain text password with a hashed password.
+   * 
+   * @param options - The options for password comparison.
+   * @param options.password - The plain text password to compare. Can be a string or a Buffer.
+   * @param options.hashedPassword - The hashed password to compare against.
+   * @returns A promise that resolves to a boolean indicating whether the passwords match.
+   */
+  abstract comparePasswords({
+    password,
+    hashedPassword,
+  }: {
+    password: string | Buffer;
+    hashedPassword: string;
+  }): Promise&lt;boolean&gt;;
 }
 </code></pre>
     </div>
@@ -482,7 +383,7 @@ export class AuthService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'HashingProvider.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

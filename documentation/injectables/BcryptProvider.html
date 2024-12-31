@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >AuthService</li>
+  <li class="breadcrumb-item" >BcryptProvider</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/auth/auth.service.ts</code>
+            <code>src/auth/providers/bcrypt.provider.ts</code>
         </p>
 
 
@@ -136,13 +136,12 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#isAuthenticated" >isAuthenticated</a>
+                                <a href="#comparePasswords" >comparePasswords</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#login" >login</a>
+                                <a href="#hashPassword" >hashPassword</a>
                             </li>
                         </ul>
                     </td>
@@ -156,90 +155,6 @@
     </table>
 </section>
 
-            <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(userService: <a href="../injectables/UserService.html" target="_self">UserService</a>, hashingProvider: <a href="../injectables/HashingProvider.html" target="_self">HashingProvider</a>, jwtService: JwtService, jwtConfiguration: ConfigType<>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/auth/auth.service.ts:17</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>userService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>hashingProvider</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/HashingProvider.html" target="_self" >HashingProvider</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>jwtService</td>
-                                                  
-                                                        <td>
-                                                                    <code>JwtService</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>jwtConfiguration</td>
-                                                  
-                                                        <td>
-                                                                    <code>ConfigType&lt;&gt;</code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
 
             <section data-compodoc="block-methods">
     
@@ -250,72 +165,32 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="isAuthenticated"></a>
+                    <a name="comparePasswords"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                        <span ><b>isAuthenticated</b></span>
-                        <a href="#isAuthenticated"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>comparePasswords</b></span>
+                        <a href="#comparePasswords"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>isAuthenticated()</code>
+<code>comparePasswords(undefined: literal type)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/auth/auth.service.ts:76</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="34"
+                                    class="link-to-prism">src/auth/providers/bcrypt.provider.ts:34</a></div>
                         </td>
                     </tr>
 
 
             <tr>
                 <td class="col-md-4">
-
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-
-                        </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="login"></a>
-                    <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>login</b></span>
-                        <a href="#login"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>login(undefined: literal type)</code>
-                </td>
-            </tr>
-
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/auth/auth.service.ts:35</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
+                        <div class="io-description"><p>Compares a given password with its hashed version.</p>
+</div>
 
                             <div class="io-description">
                                 <b>Parameters :</b>
@@ -344,11 +219,92 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
+                            <b>Returns : </b>    <code>Promise&lt;boolean&gt;</code>
 
                         </div>
                             <div class="io-description">
+                                <p>A Promise that resolves to a boolean indicating whether the password matches the hashed password.</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hashPassword"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>hashPassword</b></span>
+                        <a href="#hashPassword"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>hashPassword(undefined: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="15"
+                                    class="link-to-prism">src/auth/providers/bcrypt.provider.ts:15</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Hashes a given password using bcrypt.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
                                 
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>[object Object]</td>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The password to be hashed. Can be a string or a Buffer.</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;string&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>A Promise that resolves to the hashed password as a string.</p>
+
                             </div>
                 </td>
             </tr>
@@ -360,83 +316,48 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  Injectable,
-  Inject,
-  forwardRef,
-  HttpException,
-  HttpStatus,
-  RequestTimeoutException,
-} from &#x27;@nestjs/common&#x27;;
-import { UserService } from &#x27;src/user/user.service&#x27;;
-import { SignInDto } from &#x27;./dtos/signin.dto&#x27;;
-import { HashingProvider } from &#x27;./providers/hashing.provider&#x27;;
-import { JwtService } from &#x27;@nestjs/jwt&#x27;;
-import { ConfigType } from &#x27;@nestjs/config&#x27;;
-import jwtConfig from &#x27;src/config/jwt.config&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
+import { HashingProvider } from &#x27;./hashing.provider&#x27;;
+import * as bcrypt from &#x27;bcrypt&#x27;;
 
 @Injectable()
-export class AuthService {
-  constructor(
-    // injecting a service dependency (circular dependency injection)
-    @Inject(forwardRef(() &#x3D;&gt; UserService))
-    private userService: UserService,
+export class BcryptProvider implements HashingProvider {
+  /**
+   * Hashes a given password using bcrypt.
+   *
+   * @param options - The options for hashing the password.
+   * @param options.password - The password to be hashed. Can be a string or a Buffer.
+   *
+   * @returns A Promise that resolves to the hashed password as a string.
+   */
+  public async hashPassword({
+    password,
+  }: {
+    password: string | Buffer;
+  }): Promise&lt;string&gt; {
+    const salt &#x3D; await bcrypt.genSalt();
+    const hashed &#x3D; bcrypt.hash(password, salt);
 
-    // injecting hashing provider
-    @Inject(forwardRef(() &#x3D;&gt; HashingProvider)) // doing this because this is a circular dependency
-    private hashingProvider: HashingProvider,
-
-    // injecting jwt service dependency
-    private jwtService: JwtService,
-
-    // injecting jwtConfig (environment values)
-    @Inject(jwtConfig.KEY)
-    private jwtConfiguration: ConfigType&lt;typeof jwtConfig&gt;,
-  ) {}
-
-  public async login({ body }: { body: SignInDto }) {
-    const { email, password } &#x3D; body;
-
-    const existingUser &#x3D; await this.userService.findUserByEmail({ email });
-
-    let isPasswordCorrect: boolean;
-
-    try {
-      isPasswordCorrect &#x3D; await this.hashingProvider.comparePasswords({
-        hashedPassword: existingUser.password,
-        password,
-      });
-    } catch (error: any) {
-      throw new RequestTimeoutException(error.message, {
-        cause: error,
-        description: &#x27;Request timeout. Could not compare passwords&#x27;,
-      });
-    }
-
-    if (!isPasswordCorrect) {
-      throw new HttpException(&#x27;Invalid credentials&#x27;, HttpStatus.UNAUTHORIZED);
-    }
-
-    const accessToken &#x3D; await this.jwtService.signAsync(
-      {
-        sub: existingUser.id,
-        email: existingUser.email,
-      },
-      {
-        expiresIn: this.jwtConfiguration.jwtTokenExpiration,
-        secret: this.jwtConfiguration.jwtSecret,
-        audience: this.jwtConfiguration.jwtTokenAudience,
-        issuer: this.jwtConfiguration.jwtTokenIssuer,
-      },
-    );
-
-    return {
-      accessToken,
-    };
+    return hashed;
   }
 
-  public isAuthenticated() {
-    return true; // replace with actual authentication logic
+  /**
+   * Compares a given password with its hashed version.
+   *
+   * @param password - The password to compare. It can be a string or a Buffer.
+   * @param hashedPassword - The hashed version of the password to compare against.
+   *
+   * @returns A Promise that resolves to a boolean indicating whether the password matches the hashed password.
+   */
+  comparePasswords({
+    password,
+    hashedPassword,
+  }: {
+    password: string | Buffer;
+    hashedPassword: string;
+  }): Promise&lt;boolean&gt; {
+    const compare &#x3D; bcrypt.compare(password, hashedPassword);
+    return compare;
   }
 }
 </code></pre>
@@ -482,7 +403,7 @@ export class AuthService {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'AuthService.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'BcryptProvider.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
