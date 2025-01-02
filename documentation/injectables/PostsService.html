@@ -361,8 +361,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="143"
-                                    class="link-to-prism">src/posts/posts.service.ts:143</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="155"
+                                    class="link-to-prism">src/posts/posts.service.ts:155</a></div>
                         </td>
                     </tr>
 
@@ -430,8 +430,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="123"
-                                    class="link-to-prism">src/posts/posts.service.ts:123</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="135"
+                                    class="link-to-prism">src/posts/posts.service.ts:135</a></div>
                         </td>
                     </tr>
 
@@ -499,8 +499,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/posts/posts.service.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/posts/posts.service.ts:99</a></div>
                         </td>
                     </tr>
 
@@ -608,11 +608,22 @@ export class PostsService {
       tags: createPost.tags,
     });
 
-    if (!tags) {
+    if (!tags.length || tags.length &#x3D;&#x3D;&#x3D; 0) {
       throw new HttpException(&#x27;Tags not found&#x27;, HttpStatus.NOT_FOUND, {
         cause: &#x27;Tags not found&#x27;,
         description: &#x27;Provide a valid tags to create&#x27;,
       });
+    }
+
+    const normalizedSlug &#x3D; createPost.slug.toLowerCase();
+    const existingSlug &#x3D; await this.postRepository.findOne({
+      where: {
+        slug: normalizedSlug,
+      },
+    });
+
+    if (existingSlug) {
+      throw new HttpException(&#x27;Slug already exists&#x27;, HttpStatus.CONFLICT);
     }
 
     try {
@@ -620,6 +631,7 @@ export class PostsService {
         ...createPost,
         author: author,
         tags: tags,
+        slug: normalizedSlug,
       });
 
       await this.postRepository.save(post);
@@ -627,7 +639,7 @@ export class PostsService {
       return post;
     } catch (error: any) {
       throw new HttpException(
-        &#x27;Error while creating post&#x27;,
+        &#x60;Error while creating post&#x60;,
         HttpStatus.BAD_REQUEST,
         {
           cause: error.message,

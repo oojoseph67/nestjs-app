@@ -55,11 +55,22 @@ export class PostsService {
       tags: createPost.tags,
     });
 
-    if (!tags) {
+    if (!tags.length || tags.length === 0) {
       throw new HttpException('Tags not found', HttpStatus.NOT_FOUND, {
         cause: 'Tags not found',
         description: 'Provide a valid tags to create',
       });
+    }
+
+    const normalizedSlug = createPost.slug.toLowerCase();
+    const existingSlug = await this.postRepository.findOne({
+      where: {
+        slug: normalizedSlug,
+      },
+    });
+
+    if (existingSlug) {
+      throw new HttpException('Slug already exists', HttpStatus.CONFLICT);
     }
 
     try {
@@ -67,6 +78,7 @@ export class PostsService {
         ...createPost,
         author: author,
         tags: tags,
+        slug: normalizedSlug,
       });
 
       await this.postRepository.save(post);
@@ -74,7 +86,7 @@ export class PostsService {
       return post;
     } catch (error: any) {
       throw new HttpException(
-        'Error while creating post',
+        `Error while creating post`,
         HttpStatus.BAD_REQUEST,
         {
           cause: error.message,
