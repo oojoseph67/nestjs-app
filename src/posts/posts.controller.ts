@@ -10,12 +10,16 @@ import {
   Patch,
   Post,
   Query,
+  Req,
 } from '@nestjs/common';
 import { PostsService } from './posts.service';
 import { CreatePostDto } from './dtos/create-post.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { PatchPostDto } from './dtos/patch-post.dto';
 import { GetPostsQueryDto } from './dtos/get-posts.dto';
+import { Auth, AuthType } from 'src/auth/decorators/auth.decorator';
+import { ActiveUser } from 'src/auth/decorators/active-user.decorator';
+import { UserPayload } from 'src/auth/guards/access-token/access-token.guard';
 
 @Controller('posts')
 export class PostsController {
@@ -48,7 +52,7 @@ export class PostsController {
   ) {
     console.log({ postQuery });
 
-    return this.postService.getAllPosts({ userId, queryParams: postQuery});
+    return this.postService.getAllPosts({ userId, queryParams: postQuery });
   }
 
   /**
@@ -62,6 +66,7 @@ export class PostsController {
    */
   @ApiOperation({
     summary: 'Creates a new post',
+    description: 'Creates a new post for a signed in user.',
   })
   @ApiResponse({
     status: HttpStatus.CREATED,
@@ -69,8 +74,18 @@ export class PostsController {
     type: CreatePostDto,
   })
   @Post('')
-  createPost(@Body() createPostDto: CreatePostDto) {
-    const createdPost = this.postService.create({ createPost: createPostDto });
+  createPost(
+    @Body() createPostDto: CreatePostDto,
+    @ActiveUser() user: UserPayload,
+  ) {
+    if (!user) {
+      throw new HttpException('User not found', HttpStatus.UNAUTHORIZED);
+    }
+
+    const createdPost = this.postService.create({
+      createPost: createPostDto,
+      authorId: user.sub as number,
+    });
     return createdPost;
   }
 

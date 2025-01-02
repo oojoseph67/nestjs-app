@@ -361,8 +361,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="115"
-                                    class="link-to-prism">src/posts/posts.service.ts:115</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="143"
+                                    class="link-to-prism">src/posts/posts.service.ts:143</a></div>
                         </td>
                     </tr>
 
@@ -430,8 +430,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="95"
-                                    class="link-to-prism">src/posts/posts.service.ts:95</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="123"
+                                    class="link-to-prism">src/posts/posts.service.ts:123</a></div>
                         </td>
                     </tr>
 
@@ -499,8 +499,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="59"
-                                    class="link-to-prism">src/posts/posts.service.ts:59</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/posts/posts.service.ts:87</a></div>
                         </td>
                     </tr>
 
@@ -589,24 +589,52 @@ export class PostsService {
     private paginationService: PaginationService,
   ) {}
 
-  public async create({ createPost }: { createPost: CreatePostDto }) {
+  public async create({
+    createPost,
+    authorId,
+  }: {
+    createPost: CreatePostDto;
+    authorId: number;
+  }) {
     const author &#x3D; await this.userServices.findOneById({
-      id: createPost.authorId,
+      id: authorId,
     });
+
+    if (!author) {
+      throw new HttpException(&#x27;Author not found&#x27;, HttpStatus.NOT_FOUND);
+    }
 
     const tags &#x3D; await this.tagsService.findMultipleTags({
       tags: createPost.tags,
     });
 
-    const post &#x3D; await this.postRepository.create({
-      ...createPost,
-      author: author,
-      tags: tags,
-    });
+    if (!tags) {
+      throw new HttpException(&#x27;Tags not found&#x27;, HttpStatus.NOT_FOUND, {
+        cause: &#x27;Tags not found&#x27;,
+        description: &#x27;Provide a valid tags to create&#x27;,
+      });
+    }
 
-    await this.postRepository.save(post);
+    try {
+      const post &#x3D; await this.postRepository.create({
+        ...createPost,
+        author: author,
+        tags: tags,
+      });
 
-    return post;
+      await this.postRepository.save(post);
+
+      return post;
+    } catch (error: any) {
+      throw new HttpException(
+        &#x27;Error while creating post&#x27;,
+        HttpStatus.BAD_REQUEST,
+        {
+          cause: error.message,
+          description: String(error),
+        },
+      );
+    }
   }
 
   public async update({ updatePost }: { updatePost: PatchPostDto }) {

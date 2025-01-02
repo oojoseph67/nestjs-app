@@ -12,6 +12,7 @@ import { HashingProvider } from './providers/hashing.provider';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigType } from '@nestjs/config';
 import jwtConfig from 'src/config/jwt.config';
+import { UserPayload } from './guards/access-token/access-token.guard';
 
 @Injectable()
 export class AuthService {
@@ -59,6 +60,9 @@ export class AuthService {
       {
         sub: existingUser.id,
         email: existingUser.email,
+      } as {
+        sub: number;
+        email: string;
       },
       {
         expiresIn: this.jwtConfiguration.jwtTokenExpiration,

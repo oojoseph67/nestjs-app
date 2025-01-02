@@ -38,21 +38,21 @@ export class AuthenticationGuard implements CanActivate {
       [context.getHandler(), context.getClass()], // get keys for all type auth
     ) ?? [AuthenticationGuard.defaultAuthType];
 
-    console.log({ authTypes });
+    // console.log({ authTypes });
 
     // getting the right guard for the right auth type decorator
     const guards = authTypes.map((type) => this.authTypeGuardMap[type]).flat();
 
-    console.log('Guards:', JSON.stringify(guards, null, 2));
+    // console.log('Guards:', JSON.stringify(guards, null, 2));
 
     // array of guards
     // loop guards canActivate
     // loop through all the guards and fire the canActivate (returns a boolean)
     for (const instance of guards) {
-      console.log({ instance });
+      // console.log({ instance });
       const canActivate = await Promise.resolve(instance.canActivate(context))
         .then((canActivate) => {
-          console.log('canActivate', canActivate);
+          // console.log('canActivate', canActivate);
           return canActivate;
         })
         .catch((error: any) => {
@@ -69,6 +69,6 @@ export class AuthenticationGuard implements CanActivate {
     }
 
     // throw exception if no canActivate
-    throw new HttpException('Unauthorizedad', HttpStatus.UNAUTHORIZED);
+    throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
   }
 }

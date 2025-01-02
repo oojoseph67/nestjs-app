@@ -167,7 +167,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/auth/auth.service.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/auth/auth.service.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -268,8 +268,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="76"
-                                    class="link-to-prism">src/auth/auth.service.ts:76</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/auth/auth.service.ts:80</a></div>
                         </td>
                     </tr>
 
@@ -308,8 +308,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="35"
-                                    class="link-to-prism">src/auth/auth.service.ts:35</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/auth/auth.service.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -374,6 +374,7 @@ import { HashingProvider } from &#x27;./providers/hashing.provider&#x27;;
 import { JwtService } from &#x27;@nestjs/jwt&#x27;;
 import { ConfigType } from &#x27;@nestjs/config&#x27;;
 import jwtConfig from &#x27;src/config/jwt.config&#x27;;
+import { UserPayload } from &#x27;./guards/access-token/access-token.guard&#x27;;
 
 @Injectable()
 export class AuthService {
@@ -421,6 +422,9 @@ export class AuthService {
       {
         sub: existingUser.id,
         email: existingUser.email,
+      } as {
+        sub: number;
+        email: string;
       },
       {
         expiresIn: this.jwtConfiguration.jwtTokenExpiration,

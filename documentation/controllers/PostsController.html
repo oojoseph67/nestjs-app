@@ -198,7 +198,7 @@
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createPost(createPostDto: <a href="../classes/CreatePostDto.html" target="_self">CreatePostDto</a>)</code>
+                    <code>createPost(createPostDto: <a href="../classes/CreatePostDto.html" target="_self">CreatePostDto</a>, user: <a href="../entitys/User.html" target="_self">UserPayload</a>)</code>
                 </td>
             </tr>
 
@@ -206,14 +206,14 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiOperation({summary: &#x27;Creates a new post&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Created post&#x27;, type: CreatePostDto})<br />@Post(&#x27;&#x27;)<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Creates a new post&#x27;, description: &#x27;Creates a new post for a signed in user.&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;Created post&#x27;, type: CreatePostDto})<br />@Post(&#x27;&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="72"
-                                    class="link-to-prism">src/posts/posts.controller.ts:72</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="77"
+                                    class="link-to-prism">src/posts/posts.controller.ts:77</a></div>
                         </td>
                     </tr>
 
@@ -254,6 +254,20 @@ It logs the received data and returns a confirmation message.</p>
 <li>The data transfer object containing the details of the post to be created.</li>
 </ul>
 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>user</td>
+                                            <td>
+                                                            <code><a href="../entitys/User.html" target="_self" >UserPayload</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -302,8 +316,8 @@ It logs the received data and returns a confirmation message.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="110"
-                                    class="link-to-prism">src/posts/posts.controller.ts:110</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="125"
+                                    class="link-to-prism">src/posts/posts.controller.ts:125</a></div>
                         </td>
                     </tr>
 
@@ -380,8 +394,8 @@ It logs the received data and returns a confirmation message.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="45"
-                                    class="link-to-prism">src/posts/posts.controller.ts:45</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="49"
+                                    class="link-to-prism">src/posts/posts.controller.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -486,8 +500,8 @@ representing all posts for the specified user.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="96"
-                                    class="link-to-prism">src/posts/posts.controller.ts:96</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="111"
+                                    class="link-to-prism">src/posts/posts.controller.ts:111</a></div>
                         </td>
                     </tr>
 
@@ -562,12 +576,16 @@ PatchPostDto data transfer object.</p>
   Patch,
   Post,
   Query,
+  Req,
 } from &#x27;@nestjs/common&#x27;;
 import { PostsService } from &#x27;./posts.service&#x27;;
 import { CreatePostDto } from &#x27;./dtos/create-post.dto&#x27;;
 import { ApiOperation, ApiResponse } from &#x27;@nestjs/swagger&#x27;;
 import { PatchPostDto } from &#x27;./dtos/patch-post.dto&#x27;;
 import { GetPostsQueryDto } from &#x27;./dtos/get-posts.dto&#x27;;
+import { Auth, AuthType } from &#x27;src/auth/decorators/auth.decorator&#x27;;
+import { ActiveUser } from &#x27;src/auth/decorators/active-user.decorator&#x27;;
+import { UserPayload } from &#x27;src/auth/guards/access-token/access-token.guard&#x27;;
 
 @Controller(&#x27;posts&#x27;)
 export class PostsController {
@@ -600,7 +618,7 @@ export class PostsController {
   ) {
     console.log({ postQuery });
 
-    return this.postService.getAllPosts({ userId, queryParams: postQuery});
+    return this.postService.getAllPosts({ userId, queryParams: postQuery });
   }
 
   /**
@@ -614,6 +632,7 @@ export class PostsController {
    */
   @ApiOperation({
     summary: &#x27;Creates a new post&#x27;,
+    description: &#x27;Creates a new post for a signed in user.&#x27;,
   })
   @ApiResponse({
     status: HttpStatus.CREATED,
@@ -621,8 +640,18 @@ export class PostsController {
     type: CreatePostDto,
   })
   @Post(&#x27;&#x27;)
-  createPost(@Body() createPostDto: CreatePostDto) {
-    const createdPost &#x3D; this.postService.create({ createPost: createPostDto });
+  createPost(
+    @Body() createPostDto: CreatePostDto,
+    @ActiveUser() user: UserPayload,
+  ) {
+    if (!user) {
+      throw new HttpException(&#x27;User not found&#x27;, HttpStatus.UNAUTHORIZED);
+    }
+
+    const createdPost &#x3D; this.postService.create({
+      createPost: createPostDto,
+      authorId: user.sub as number,
+    });
     return createdPost;
   }
 

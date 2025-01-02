@@ -36,24 +36,52 @@ export class PostsService {
     private paginationService: PaginationService,
   ) {}
 
-  public async create({ createPost }: { createPost: CreatePostDto }) {
+  public async create({
+    createPost,
+    authorId,
+  }: {
+    createPost: CreatePostDto;
+    authorId: number;
+  }) {
     const author = await this.userServices.findOneById({
-      id: createPost.authorId,
+      id: authorId,
     });
+
+    if (!author) {
+      throw new HttpException('Author not found', HttpStatus.NOT_FOUND);
+    }
 
     const tags = await this.tagsService.findMultipleTags({
       tags: createPost.tags,
     });
 
-    const post = await this.postRepository.create({
-      ...createPost,
-      author: author,
-      tags: tags,
-    });
+    if (!tags) {
+      throw new HttpException('Tags not found', HttpStatus.NOT_FOUND, {
+        cause: 'Tags not found',
+        description: 'Provide a valid tags to create',
+      });
+    }
 
-    await this.postRepository.save(post);
+    try {
+      const post = await this.postRepository.create({
+        ...createPost,
+        author: author,
+        tags: tags,
+      });
 
-    return post;
+      await this.postRepository.save(post);
+
+      return post;
+    } catch (error: any) {
+      throw new HttpException(
+        'Error while creating post',
+        HttpStatus.BAD_REQUEST,
+        {
+          cause: error.message,
+          description: String(error),
+        },
+      );
+    }
   }
 
   public async update({ updatePost }: { updatePost: PatchPostDto }) {

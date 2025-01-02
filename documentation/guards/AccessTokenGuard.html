@@ -169,7 +169,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/auth/guards/access-token/access-token.guard.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/auth/guards/access-token/access-token.guard.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -246,8 +246,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="32"
-                                    class="link-to-prism">src/auth/guards/access-token/access-token.guard.ts:32</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="43"
+                                    class="link-to-prism">src/auth/guards/access-token/access-token.guard.ts:43</a></div>
                         </td>
                     </tr>
 
@@ -315,8 +315,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="27"
-                                    class="link-to-prism">src/auth/guards/access-token/access-token.guard.ts:27</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="38"
+                                    class="link-to-prism">src/auth/guards/access-token/access-token.guard.ts:38</a></div>
                         </td>
                     </tr>
 
@@ -380,6 +380,17 @@ import { Request } from &#x27;express&#x27;;
 import { Observable } from &#x27;rxjs&#x27;;
 import jwtConfig from &#x27;src/config/jwt.config&#x27;;
 
+export const REQUEST_USER_KEY &#x3D; &#x27;user&#x27;;
+
+export type UserPayload &#x3D; {
+  sub: number;
+  email: string;
+  iat: number;
+  exp: number;
+  aud: string;
+  iss: string;
+};
+
 @Injectable()
 export class AccessTokenGuard implements CanActivate {
   constructor(
@@ -403,7 +414,7 @@ export class AccessTokenGuard implements CanActivate {
 
     // extract the token from the request (header)
     const token &#x3D; this.extractRequestFromHeader({ request });
-    console.log(&#x27;inside canActivate&#x27;, token);
+    // console.log(&#x27;inside canActivate&#x27;, token);
 
     // validate the token
     if (!token) {
@@ -417,7 +428,7 @@ export class AccessTokenGuard implements CanActivate {
         // issuer: this.jwtConfiguration.jwtTokenIssuer,
         // ignoreExpiration: true
       });
-      request.user &#x3D; payload;
+      request[REQUEST_USER_KEY] &#x3D; payload as UserPayload;
     } catch (error: any) {
       throw new HttpException(&#x60;${error.message}&#x60;, HttpStatus.UNAUTHORIZED, {
         cause: error.message,

@@ -12,6 +12,17 @@ import { Request } from 'express';
 import { Observable } from 'rxjs';
 import jwtConfig from 'src/config/jwt.config';
 
+export const REQUEST_USER_KEY = 'user';
+
+export type UserPayload = {
+  sub: number;
+  email: string;
+  iat: number;
+  exp: number;
+  aud: string;
+  iss: string;
+};
+
 @Injectable()
 export class AccessTokenGuard implements CanActivate {
   constructor(
@@ -35,7 +46,7 @@ export class AccessTokenGuard implements CanActivate {
 
     // extract the token from the request (header)
     const token = this.extractRequestFromHeader({ request });
-    console.log('inside canActivate', token);
+    // console.log('inside canActivate', token);
 
     // validate the token
     if (!token) {
@@ -49,7 +60,7 @@ export class AccessTokenGuard implements CanActivate {
         // issuer: this.jwtConfiguration.jwtTokenIssuer,
         // ignoreExpiration: true
       });
-      request.user = payload;
+      request[REQUEST_USER_KEY] = payload as UserPayload;
     } catch (error: any) {
       throw new HttpException(`${error.message}`, HttpStatus.UNAUTHORIZED, {
         cause: error.message,

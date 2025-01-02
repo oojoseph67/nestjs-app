@@ -108,7 +108,7 @@ export class CreatePostDto {
     format: 'date-time',
     type: 'string',
   })
-  @IsISO8601()
+  @IsDate()
   @IsNotEmpty()
   publishedOn: Date;
 
@@ -145,13 +145,13 @@ export class CreatePostDto {
   @Type(() => CreateMetaOptionsDto)
   metaOptions?: CreateMetaOptionsDto | null;
 
-  @ApiProperty({
-    description: 'This is the id of the author of the post',
-    example: 123,
-    type: 'integer',
-    required: true,
-  })
-  @IsInt()
-  @IsNotEmpty()
-  authorId: number;
+  // @ApiProperty({
+  //   description: 'This is the id of the author of the post',
+  //   example: 123,
+  //   type: 'integer',
+  //   required: true,
+  // })
+  // @IsInt()
+  // @IsNotEmpty()
+  // authorId: number;
 }
