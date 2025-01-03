@@ -13,6 +13,9 @@ import { JwtService } from '@nestjs/jwt';
 import { ConfigType } from '@nestjs/config';
 import jwtConfig from 'src/config/jwt.config';
 import { UserPayload } from './guards/access-token/access-token.guard';
+import { GenerateTokenProvider } from './providers/generate-token.provider';
+import { RefreshTokenProvider } from './providers/refresh-token.provider';
+import { RefreshTokenDto } from './dtos/refresh-token.dto';
 
 @Injectable()
 export class AuthService {
@@ -31,6 +34,10 @@ export class AuthService {
     // injecting jwtConfig (environment values)
     @Inject(jwtConfig.KEY)
     private jwtConfiguration: ConfigType<typeof jwtConfig>,
+
+    public accessTokenProvider: GenerateTokenProvider,
+
+    public refreshTokenProvider: RefreshTokenProvider,
   ) {}
 
   public async login({ body }: { body: SignInDto }) {
@@ -56,24 +63,24 @@ export class AuthService {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }
 
-    const accessToken = await this.jwtService.signAsync(
-      {
-        sub: existingUser.id,
-        email: existingUser.email,
-      } as {
-        sub: number;
-        email: string;
-      },
-      {
-        expiresIn: this.jwtConfiguration.jwtTokenExpiration,
-        secret: this.jwtConfiguration.jwtSecret,
-        audience: this.jwtConfiguration.jwtTokenAudience,
-        issuer: this.jwtConfiguration.jwtTokenIssuer,
-      },
-    );
+    const { accessToken, refreshToken } =
+      await this.accessTokenProvider.generateTokens({
+        user: existingUser,
+      });
 
     return {
       accessToken,
+      refreshToken,
+    };
+  }
+
+  public async refreshTokens({ token }: { token: RefreshTokenDto }) {
+    const { accessToken, refreshToken } =
+      await this.refreshTokenProvider.getRefreshToken({ token });
+
+    return {
+      accessToken,
+      refreshToken,
     };
   }
 

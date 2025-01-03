@@ -5,3 +5,11 @@ content-type: application/json
     "email": "james@doe.com",
     "password": "nestjsIS6@awesome"
 }
+
+POST http://localhost:7231/auth/refresh-token
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsIjoiamFtZXNAZG9lLmNvbSIsImlhdCI6MTczNTg4NzMwMSwiZXhwIjoxNzM1ODkwOTAxLCJhdWQiOiJsb2NhbGhvc3Q6NzIzMSIsImlzcyI6ImxvY2FsaG9zdDo3MjMxIn0.G8vmGprqiK4ckxapOC2bikb8KIPvRC4nv4_XYJUTHZQ
+
+{
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImlhdCI6MTczNTg4NzMwMSwiZXhwIjoxNzM2NDkyMTAxLCJhdWQiOiJsb2NhbGhvc3Q6NzIzMSIsImlzcyI6ImxvY2FsaG9zdDo3MjMxIn0.rAMTI_hL35dv_yXqYcylBAJhi1_WXd_F7V56GdsDy9Y"
+}

@@ -261,6 +261,8 @@ import { BcryptProvider } from &#x27;./providers/bcrypt.provider&#x27;;
 import { ConfigModule, ConfigType } from &#x27;@nestjs/config&#x27;;
 import jwtConfig from &#x27;src/config/jwt.config&#x27;;
 import { JwtModule } from &#x27;@nestjs/jwt&#x27;;
+import { GenerateTokenProvider } from &#x27;./providers/generate-token.provider&#x27;;
+import { RefreshTokenProvider } from &#x27;./providers/refresh-token.provider&#x27;;
 
 @Module({
   imports: [
@@ -287,6 +289,8 @@ import { JwtModule } from &#x27;@nestjs/jwt&#x27;;
       provide: HashingProvider,
       useClass: BcryptProvider,
     },
+    GenerateTokenProvider,
+    RefreshTokenProvider,
   ],
 })
 export class AuthModule {}
