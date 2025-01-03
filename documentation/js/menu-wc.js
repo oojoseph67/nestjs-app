@@ -126,6 +126,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                         <li class="link">
                                             <a href="injectables/AuthService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AuthService</a>
                                         </li>
+                                        <li class="link">
+                                            <a href="injectables/GenerateTokenProvider.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >GenerateTokenProvider</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/RefreshTokenProvider.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >RefreshTokenProvider</a>
+                                        </li>
                                     </ul>
                                 </li>
                             </li>
@@ -342,6 +348,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/PatchUserDto.html" data-type="entity-link" >PatchUserDto</a>
                             </li>
                             <li class="link">
+                                <a href="classes/RefreshTokenDto.html" data-type="entity-link" >RefreshTokenDto</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/SignInDto.html" data-type="entity-link" >SignInDto</a>
                             </li>
                         </ul>
@@ -413,9 +422,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                         </ul>
                     </li>
-                        <li class="chapter">
-                            <a data-type="chapter-link" href="routes.html"><span class="icon ion-ios-git-branch"></span>Routes</a>
-                        </li>
                     <li class="chapter">
                         <a data-type="chapter-link" href="coverage.html"><span class="icon ion-ios-stats"></span>Documentation coverage</a>
                     </li>
