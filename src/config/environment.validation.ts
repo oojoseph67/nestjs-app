@@ -18,6 +18,7 @@ export default Joi.object({
   GOOGLE_CLIENT_ID: Joi.string().required(),
   GOOGLE_CLIENT_SECRET_KEY: Joi.string().required(),
   GOOGLE_REDIRECT_URI: Joi.string().required(),
+  API_VERSION: Joi.string().required(),
   // S3_BUCKET: Joi.string().required(),
   // S3_REGION: Joi.string().required(),
   // S3_ACCESS_KEY_ID: Joi.string().required(),

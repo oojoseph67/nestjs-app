@@ -354,11 +354,12 @@ import { PaginationModule } from &#x27;./global/pagination/pagination.module&#x2
 import appConfig from &#x27;./config/index.config&#x27;;
 import databaseConfig from &#x27;./config/database.config&#x27;;
 import environmentValidation from &#x27;./config/environment.validation&#x27;;
-import { APP_GUARD } from &#x27;@nestjs/core&#x27;;
+import { APP_GUARD, APP_INTERCEPTOR } from &#x27;@nestjs/core&#x27;;
 import { AccessTokenGuard } from &#x27;./auth/guards/access-token/access-token.guard&#x27;;
 import jwtConfig from &#x27;./config/jwt.config&#x27;;
 import { JwtModule } from &#x27;@nestjs/jwt&#x27;;
 import { AuthenticationGuard } from &#x27;./auth/guards/authentication/authentication.guard&#x27;;
+import { DataResponseInterceptor } from &#x27;./global/interceptors/data-response/data-response.interceptor&#x27;;
 
 export const ENV &#x3D; process.env.NODE_ENV;
 
@@ -431,6 +432,10 @@ export const ENV &#x3D; process.env.NODE_ENV;
       provide: APP_GUARD,
       useClass: AuthenticationGuard,
       // useClass: AccessTokenGuard,
+    }, // applying global guard
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: DataResponseInterceptor,
     },
   ],
 })

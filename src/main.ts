@@ -2,6 +2,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
+import { DataResponseInterceptor } from './global/interceptors/data-response/data-response.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,7 +16,7 @@ async function bootstrap() {
       transform: true,
       transformOptions: {
         enableImplicitConversion: true,
-      }
+      },
     }),
   );
 
@@ -41,13 +42,15 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-
   // Configure CORS with specific options
   app.enableCors({
     origin: ['http://localhost:3500', 'http://localhost:5173'],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   });
+
+  // global interceptor
+  // app.useGlobalInterceptors(new DataResponseInterceptor());
 
   await app.listen(7231);
 }
