@@ -31,9 +31,15 @@ export class User {
   @Column({
     type: 'varchar',
     length: 60,
-    nullable: false,
+    nullable: true, // this is done because we are using google auth
   })
-  password: string;
+  password?: string;
+
+  @Column({
+    type: 'varchar',
+    nullable: true,
+  })
+  googleId?: string;
 
   @OneToMany(() => Post, (posts) => posts.author) // first argument is the one we want to setup a relationship with, second argument is the what references the relationship
   posts: Post[];

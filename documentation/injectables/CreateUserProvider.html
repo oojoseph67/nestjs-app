@@ -277,7 +277,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../classes/CreateUserDto.html" target="_self" >Promise&lt;CreateUserDto&gt;</a></code>
+                            <b>Returns : </b>        <code><a href="../entitys/User.html" target="_self" >Promise&lt;User&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -319,13 +319,21 @@ export class CreateUserProvider {
     private hashingProvider: HashingProvider,
   ) {}
 
-  public async createUser({
-    user,
-  }: {
-    user: CreateUserDto;
-  }): Promise&lt;CreateUserDto&gt; {
+  public async createUser({ user }: { user: CreateUserDto }): Promise&lt;User&gt; {
     // check user
     let existingUser &#x3D; undefined;
+
+    if (!user.googleId &amp;&amp; !user.password) {
+      throw new HttpException(
+        &#x27;Provide a googleId or a password&#x27;,
+        HttpStatus.UNAUTHORIZED,
+        {
+          cause: &#x27;either googleId or password was provided&#x27;,
+          description:
+            &#x27;in other to create a user either googleId or password is required and none was provided&#x27;,
+        },
+      );
+    }
 
     try {
       existingUser &#x3D; await this.userRepository.findOne({
@@ -343,11 +351,17 @@ export class CreateUserProvider {
       throw new HttpException(&#x27;Email already exists&#x27;, HttpStatus.CONFLICT);
     }
 
-    const hashedPassword &#x3D; await this.hashingProvider.hashPassword({
-      password: user.password,
-    });
+    if (user.password) {
+      const hashedPassword &#x3D; await this.hashingProvider.hashPassword({
+        password: user.password,
+      });
 
-    user.password &#x3D; hashedPassword
+      user.password &#x3D; hashedPassword;
+    }
+
+    if (user.googleId) {
+      user.googleId &#x3D; user.googleId;
+    }
 
     // create a new user
     const newUser &#x3D; await this.userRepository.create(user);

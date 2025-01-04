@@ -24,13 +24,21 @@ export class CreateUserProvider {
     private hashingProvider: HashingProvider,
   ) {}
 
-  public async createUser({
-    user,
-  }: {
-    user: CreateUserDto;
-  }): Promise<CreateUserDto> {
+  public async createUser({ user }: { user: CreateUserDto }): Promise<User> {
     // check user
     let existingUser = undefined;
+
+    if (!user.googleId && !user.password) {
+      throw new HttpException(
+        'Provide a googleId or a password',
+        HttpStatus.UNAUTHORIZED,
+        {
+          cause: 'either googleId or password was provided',
+          description:
+            'in other to create a user either googleId or password is required and none was provided',
+        },
+      );
+    }
 
     try {
       existingUser = await this.userRepository.findOne({
@@ -48,11 +56,17 @@ export class CreateUserProvider {
       throw new HttpException('Email already exists', HttpStatus.CONFLICT);
     }
 
-    const hashedPassword = await this.hashingProvider.hashPassword({
-      password: user.password,
-    });
+    if (user.password) {
+      const hashedPassword = await this.hashingProvider.hashPassword({
+        password: user.password,
+      });
 
-    user.password = hashedPassword
+      user.password = hashedPassword;
+    }
+
+    if (user.googleId) {
+      user.googleId = user.googleId;
+    }
 
     // create a new user
     const newUser = await this.userRepository.create(user);

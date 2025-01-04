@@ -41,11 +41,7 @@ export class UserService {
     private createUserProvider: CreateUserProvider,
   ) {}
 
-  public async createUser({
-    user,
-  }: {
-    user: CreateUserDto;
-  }): Promise<CreateUserDto> {
+  public async createUser({ user }: { user: CreateUserDto }): Promise<User> {
     return await this.createUserProvider.createUser({ user });
   }
 
@@ -95,7 +91,22 @@ export class UserService {
 
       return user;
     } catch (error: any) {
-      throw new RequestTimeoutException('Timeout occurred');
+      throw new RequestTimeoutException(`Timeout occurred: ${error.message}`);
+    }
+  }
+
+  public async findUserByGoogleId({ googleId }: { googleId: string }) {
+    try {
+      const user = await this.userRepository.findOneBy({ googleId });
+
+      if (!user) {
+        // throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+        return null; // return null if user not found, instead of throwing an exception
+      }
+
+      return user;
+    } catch (error: any) {
+      throw new RequestTimeoutException(`Timeout occurred: ${error.message}`);
     }
   }
 

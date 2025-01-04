@@ -159,6 +159,11 @@
                                     <span class="modifier">Async</span>
                                 <a href="#findUserByEmail" >findUserByEmail</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#findUserByGoogleId" >findUserByGoogleId</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -308,8 +313,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="102"
-                                    class="link-to-prism">src/user/user.service.ts:102</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/user/user.service.ts:113</a></div>
                         </td>
                     </tr>
 
@@ -413,7 +418,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../classes/CreateUserDto.html" target="_self" >Promise&lt;CreateUserDto&gt;</a></code>
+                            <b>Returns : </b>        <code><a href="../entitys/User.html" target="_self" >Promise&lt;User&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -445,8 +450,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="52"
-                                    class="link-to-prism">src/user/user.service.ts:52</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="48"
+                                    class="link-to-prism">src/user/user.service.ts:48</a></div>
                         </td>
                     </tr>
 
@@ -514,8 +519,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/user/user.service.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="74"
+                                    class="link-to-prism">src/user/user.service.ts:74</a></div>
                         </td>
                     </tr>
 
@@ -583,8 +588,77 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="88"
-                                    class="link-to-prism">src/user/user.service.ts:88</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="84"
+                                    class="link-to-prism">src/user/user.service.ts:84</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                        <code>literal type</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="findUserByGoogleId"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Async</span>
+                        <span ><b>findUserByGoogleId</b></span>
+                        <a href="#findUserByGoogleId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>findUserByGoogleId(undefined: literal type)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/user/user.service.ts:98</a></div>
                         </td>
                     </tr>
 
@@ -678,11 +752,7 @@ export class UserService {
     private createUserProvider: CreateUserProvider,
   ) {}
 
-  public async createUser({
-    user,
-  }: {
-    user: CreateUserDto;
-  }): Promise&lt;CreateUserDto&gt; {
+  public async createUser({ user }: { user: CreateUserDto }): Promise&lt;User&gt; {
     return await this.createUserProvider.createUser({ user });
   }
 
@@ -732,7 +802,22 @@ export class UserService {
 
       return user;
     } catch (error: any) {
-      throw new RequestTimeoutException(&#x27;Timeout occurred&#x27;);
+      throw new RequestTimeoutException(&#x60;Timeout occurred: ${error.message}&#x60;);
+    }
+  }
+
+  public async findUserByGoogleId({ googleId }: { googleId: string }) {
+    try {
+      const user &#x3D; await this.userRepository.findOneBy({ googleId });
+
+      if (!user) {
+        // throw new HttpException(&#x27;User not found&#x27;, HttpStatus.NOT_FOUND);
+        return null; // return null if user not found, instead of throwing an exception
+      }
+
+      return user;
+    } catch (error: any) {
+      throw new RequestTimeoutException(&#x60;Timeout occurred: ${error.message}&#x60;);
     }
   }
 

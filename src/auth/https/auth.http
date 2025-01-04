@@ -13,3 +13,10 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsI
 {
     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImlhdCI6MTczNTg4NzMwMSwiZXhwIjoxNzM2NDkyMTAxLCJhdWQiOiJsb2NhbGhvc3Q6NzIzMSIsImlzcyI6ImxvY2FsaG9zdDo3MjMxIn0.rAMTI_hL35dv_yXqYcylBAJhi1_WXd_F7V56GdsDy9Y"
 }
+
+POST http://localhost:7231/google-authentication/
+content-type: application/json
+
+{
+    "access_token": "token"
+}
