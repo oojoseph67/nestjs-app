@@ -15,6 +15,10 @@ import {
   ValidationPipe,
   UseGuards,
   SetMetadata,
+  HttpCode,
+  HttpStatus,
+  UseInterceptors,
+  ClassSerializerInterceptor,
 } from '@nestjs/common';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
@@ -86,6 +90,9 @@ export class UserController {
     summary: 'Create a new user',
     description: 'Create a new user for the application',
   })
+  @HttpCode(HttpStatus.CREATED)
+  @Auth(AuthType.NONE)
+  @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   public createUser(@Body() createUserDto: CreateUserDto) {
     const createUser = this.userService.createUser({ user: createUserDto });
@@ -100,7 +107,7 @@ export class UserController {
   @Auth(AuthType.BEARER)
   @Post('/create-many')
   public createManyUsers(@Body() createUsersDto: CreateManyUsersDto) {
-    console.log('hitting it')
+    console.log('hitting it');
     // const createUsers = this.userService.createMany({ users: createUsersDto });
     // return createUsers;
   }

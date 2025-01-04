@@ -16,9 +16,9 @@ POST http://localhost:7231/users/
 content-type: application/json
 
 {
-  "firstName": "James",
+  "firstName": "Jane",
   "lastName": "Doe",
-  "email": "james@doe.com",
+  "email": "jane@doe.com",
   "password": "nestjsIS6@awesome"
 }
 
