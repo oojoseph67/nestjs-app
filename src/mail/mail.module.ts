@@ -14,11 +14,11 @@ import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
       inject: [ConfigService],
       useFactory: async (configService: ConfigService) => {
         console.log({ configService });
-        console.log(configService.get('emailConfig.mailHost'))
-        console.log(configService.get('emailConfig.mailPort'))
-        console.log(configService.get('emailConfig.mailSecure'))
-        console.log(configService.get('emailConfig.smtpUsername'))
-        console.log(configService.get('emailConfig.smtpPassword'))
+        console.log(configService.get('emailConfig.mailHost'));
+        console.log(configService.get('emailConfig.mailPort'));
+        console.log(configService.get('emailConfig.mailSecure'));
+        console.log(configService.get('emailConfig.smtpUsername'));
+        console.log(configService.get('emailConfig.smtpPassword'));
         return {
           transport: {
             // host: configService.get('MAIL_HOST'),
@@ -36,7 +36,9 @@ import { EjsAdapter } from '@nestjs-modules/mailer/dist/adapters/ejs.adapter';
           template: {
             dir: join(__dirname, 'templates'),
             ext: '.ejs',
-            adapter: new EjsAdapter(),
+            adapter: new EjsAdapter({
+              inlineCssEnabled: true,
+            }),
             options: {
               strict: false,
             },
