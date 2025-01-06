@@ -91,7 +91,7 @@
 
 <ol class="breadcrumb">
   <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >CreateUserProvider</li>
+  <li class="breadcrumb-item" >MailService</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,7 +115,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/user/provider/create-user.provider.ts</code>
+            <code>src/mail/mail.service.ts</code>
         </p>
 
 
@@ -138,7 +138,7 @@
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#createUser" >createUser</a>
+                                <a href="#sendWelcomeMail" >sendWelcomeMail</a>
                             </li>
                         </ul>
                     </td>
@@ -158,12 +158,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, hashingProvider: <a href="../injectables/HashingProvider.html" target="_self">HashingProvider</a>, mailService: <a href="../injectables/MailService.html" target="_self">MailService</a>)</code>
+<code>constructor(mailerService: MailerService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/user/provider/create-user.provider.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">src/mail/mail.service.ts:6</a></div>
                             </td>
                         </tr>
 
@@ -181,34 +181,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userRepository</td>
+                                                        <td>mailerService</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../entitys/User.html" target="_self" >Repository&lt;User&gt;</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>hashingProvider</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/HashingProvider.html" target="_self" >HashingProvider</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>mailService</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../injectables/MailService.html" target="_self" >MailService</a></code>
+                                                                    <code>MailerService</code>
                                                         </td>
                                                   
                                                     <td>
@@ -234,27 +210,27 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createUser"></a>
+                    <a name="sendWelcomeMail"></a>
                     <span class="name">
                             <span class="modifier">Public</span>
                             <span class="modifier">Async</span>
-                        <span ><b>createUser</b></span>
-                        <a href="#createUser"><span class="icon ion-ios-link"></span></a>
+                        <span ><b>sendWelcomeMail</b></span>
+                        <a href="#sendWelcomeMail"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
                         <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createUser(undefined: literal type)</code>
+                    <code>sendWelcomeMail(undefined: literal type)</code>
                 </td>
             </tr>
 
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="30"
-                                    class="link-to-prism">src/user/provider/create-user.provider.ts:30</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="9"
+                                    class="link-to-prism">src/mail/mail.service.ts:9</a></div>
                         </td>
                     </tr>
 
@@ -289,7 +265,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../entitys/User.html" target="_self" >Promise&lt;User&gt;</a></code>
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                         </div>
                             <div class="io-description">
@@ -305,104 +281,29 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import {
-  forwardRef,
-  HttpException,
-  HttpStatus,
-  Inject,
-  Injectable,
-  RequestTimeoutException,
-} from &#x27;@nestjs/common&#x27;;
-import { CreateUserDto } from &#x27;../dtos/create-user.dto&#x27;;
-import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { User } from &#x27;../entity/user.entity&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
-import { HashingProvider } from &#x27;src/auth/providers/hashing.provider&#x27;;
-import { MailService } from &#x27;src/mail/mail.service&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { MailerService } from &#x27;@nestjs-modules/mailer&#x27;;
+import { Injectable } from &#x27;@nestjs/common&#x27;;
+import { User } from &#x27;src/user/entity/user.entity&#x27;;
 
 @Injectable()
-export class CreateUserProvider {
-  constructor(
-    // injecting user service repository dependency
-    @InjectRepository(User)
-    private userRepository: Repository&lt;User&gt;,
+export class MailService {
+  constructor(private mailerService: MailerService) {}
 
-    // injecting hashing provider
-    @Inject(forwardRef(() &#x3D;&gt; HashingProvider)) // doing this because this is a circular dependency
-    private hashingProvider: HashingProvider,
+  public async sendWelcomeMail({ user }: { user: User }): Promise&lt;void&gt; {
+    const { email, firstName, lastName } &#x3D; user;
 
-    private mailService: MailService, // injecting mail service repository dependency... doing this without importing via module because mail.module.ts is a global module
-  ) {}
-
-  public async createUser({ user }: { user: CreateUserDto }): Promise&lt;User&gt; {
-    // check user
-    let existingUser &#x3D; undefined;
-
-    if (!user.googleId &amp;&amp; !user.password) {
-      throw new HttpException(
-        &#x27;Provide a googleId or a password&#x27;,
-        HttpStatus.UNAUTHORIZED,
-        {
-          cause: &#x27;either googleId or password was provided&#x27;,
-          description:
-            &#x27;in other to create a user either googleId or password is required and none was provided&#x27;,
-        },
-      );
-    }
-
-    try {
-      existingUser &#x3D; await this.userRepository.findOne({
-        where: { email: user.email },
-      });
-    } catch (error) {
-      throw new RequestTimeoutException(&#x27;Request timeout&#x27;, {
-        cause: error,
-        description: &#x27;Request timeout&#x27;,
-      });
-    }
-
-    // handle exception
-    if (existingUser) {
-      throw new HttpException(&#x27;Email already exists&#x27;, HttpStatus.CONFLICT);
-    }
-
-    if (user.password) {
-      const hashedPassword &#x3D; await this.hashingProvider.hashPassword({
-        password: user.password,
-      });
-
-      user.password &#x3D; hashedPassword;
-    }
-
-    if (user.googleId) {
-      user.googleId &#x3D; user.googleId;
-    }
-
-    let newUser: User;
-
-    try {
-      // create a new user
-      newUser &#x3D; this.userRepository.create(user);
-      // Save and send welcome email should be in the same transaction
-      await this.userRepository.manager.transaction(
-        async (transactionalEntityManager) &#x3D;&gt; {
-          await transactionalEntityManager.save(User, newUser);
-          await this.mailService.sendWelcomeMail({ user: newUser });
-        },
-      );
-    } catch (error: any) {
-      console.log({ error });
-      throw new HttpException(
-        &#x60;User creation failed: ${error.message}&#x60;,
-        HttpStatus.BAD_REQUEST,
-        {
-          cause: error.message,
-          description: error.stack,
-        },
-      );
-    }
-
-    return newUser;
+    await this.mailerService.sendMail({
+      to: email,
+      from: &#x27;&quot;NoReply&quot; &lt;noreply@yourdomain.com&gt;&#x27;,
+      subject: &#x27;Welcome to our platform!&#x27;,
+      template: &#x27;welcome&#x27;,
+      context: {
+        firstName,
+        lastName,
+        email,
+        loginUrl: &#x27;http://localhost:7321/auth/login&#x27;,
+      },
+    });
   }
 }
 </code></pre>
@@ -448,7 +349,7 @@ export class CreateUserProvider {
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'CreateUserProvider.html';
+            var COMPODOC_CURRENT_PAGE_URL = 'MailService.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 
