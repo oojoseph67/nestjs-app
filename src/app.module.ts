@@ -23,6 +23,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
 import { DataResponseInterceptor } from './global/interceptors/data-response/data-response.interceptor';
 import { FileUploadModule } from './file-upload/file-upload.module';
+import { MailModule } from './mail/mail.module';
 import awsConfig from './config/aws.config';
 
 export const ENV = process.env.NODE_ENV;
@@ -50,7 +51,7 @@ export const ENV = process.env.NODE_ENV;
       inject: [ConfigService], // inject
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('DATABASE_HOST'),
+        host: configService.get('DATABASE_HOST'), // using this syntax means getting directly from the environment variable
         port: +configService.get('database.port'),
         // port: +configService.get('DATABASE_PORT'),
         username: configService.get('DATABASE_USERNAME'),
@@ -82,6 +83,7 @@ export const ENV = process.env.NODE_ENV;
     TagsModule,
     PaginationModule,
     FileUploadModule,
+    MailModule,
   ],
   controllers: [
     AppController,

@@ -24,4 +24,9 @@ export default Joi.object({
   AWS_CLOUDFRONT_URL: Joi.string().required(),
   AWS_IAM_ACCESS_KEY: Joi.string().required(),
   AWS_IAM_SECRET_ACCESS_KEY: Joi.string().required(),
+  MAIL_HOST: Joi.string().required(),
+  MAIL_PORT: Joi.number().port().default(465),
+  MAIL_SECURE: Joi.boolean().default(true),
+  SMTP_USERNAME: Joi.string().required(),
+  SMTP_PASSWORD: Joi.string().required(),
 });

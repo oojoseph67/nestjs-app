@@ -11,6 +11,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from '../entity/user.entity';
 import { Repository } from 'typeorm';
 import { HashingProvider } from 'src/auth/providers/hashing.provider';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class CreateUserProvider {
@@ -22,6 +23,8 @@ export class CreateUserProvider {
     // injecting hashing provider
     @Inject(forwardRef(() => HashingProvider)) // doing this because this is a circular dependency
     private hashingProvider: HashingProvider,
+
+    private mailService: MailService, // injecting mail service repository dependency... doing this without importing via module because mail.module.ts is a global module
   ) {}
 
   public async createUser({ user }: { user: CreateUserDto }): Promise<User> {
@@ -68,9 +71,29 @@ export class CreateUserProvider {
       user.googleId = user.googleId;
     }
 
-    // create a new user
-    const newUser = await this.userRepository.create(user);
-    await this.userRepository.save(newUser);
+    let newUser: User;
+
+    try {
+      // create a new user
+      newUser = this.userRepository.create(user);
+      // Save and send welcome email should be in the same transaction
+      await this.userRepository.manager.transaction(
+        async (transactionalEntityManager) => {
+          await transactionalEntityManager.save(User, newUser);
+          await this.mailService.sendWelcomeMail({ user: newUser });
+        },
+      );
+    } catch (error: any) {
+      console.log({ error });
+      throw new HttpException(
+        `User creation failed: ${error.message}`,
+        HttpStatus.BAD_REQUEST,
+        {
+          cause: error.message,
+          description: error.stack,
+        },
+      );
+    }
 
     return newUser;
   }
