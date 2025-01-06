@@ -22,6 +22,8 @@ import jwtConfig from './config/jwt.config';
 import { JwtModule } from '@nestjs/jwt';
 import { AuthenticationGuard } from './auth/guards/authentication/authentication.guard';
 import { DataResponseInterceptor } from './global/interceptors/data-response/data-response.interceptor';
+import { FileUploadModule } from './file-upload/file-upload.module';
+import awsConfig from './config/aws.config';
 
 export const ENV = process.env.NODE_ENV;
 
@@ -32,7 +34,7 @@ export const ENV = process.env.NODE_ENV;
       isGlobal: true, // make sure this is set to true to load environment variables from.env file
       // envFilePath: ['.env.development.local'], // specify the path to your.env file
       envFilePath: !ENV ? '.env' : `.env.${ENV}.local`,
-      load: [appConfig, databaseConfig],
+      load: [appConfig, databaseConfig, awsConfig],
       validationSchema: environmentValidation,
     }), // to use environment variables
     // env configs
@@ -79,6 +81,7 @@ export const ENV = process.env.NODE_ENV;
 
     TagsModule,
     PaginationModule,
+    FileUploadModule,
   ],
   controllers: [
     AppController,

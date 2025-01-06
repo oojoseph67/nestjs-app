@@ -3,6 +3,8 @@ import { AppModule } from './app.module';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
 import { DataResponseInterceptor } from './global/interceptors/data-response/data-response.interceptor';
+import { config as awsConfig } from 'aws-sdk';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,7 +27,7 @@ async function bootstrap() {
    * swagger configuration
    */
 
-  const config = new DocumentBuilder()
+  const swaggerConfig = new DocumentBuilder()
     .setVersion('1.0')
     .setTitle('User Management API')
     .setDescription(
@@ -37,10 +39,28 @@ async function bootstrap() {
       'https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt',
     )
     .addServer('http://localhost:7231', 'Development Server')
+    .addBearerAuth({
+      type: 'http',
+      name: 'Authorization',
+      scheme: '',
+      bearerFormat: 'JWT',
+    })
     .build();
 
-  const document = SwaggerModule.createDocument(app, config);
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
   SwaggerModule.setup('api', app, document);
+
+  // setting up aws sdk
+  const configService = app.get(ConfigService);
+
+  awsConfig.update({
+    credentials: {
+      accessKeyId: configService.get('awsConfig.AWS_IAM_ACCESS_KEY'),
+      secretAccessKey: configService.get('awsConfig.AWS_IAM_SECRET_ACCESS_KEY'),
+    },
+    region: configService.get('awsConfig.AWS_REGION'),
+  });
+  // setting up aws sdk
 
   // Configure CORS with specific options
   app.enableCors({

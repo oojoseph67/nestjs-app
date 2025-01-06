@@ -1,0 +1,8 @@
+POST http://localhost:7231/file-upload
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsIjoiamFtZXNAZG9lLmNvbSIsImlhdCI6MTczNjE0MDgxMSwiZXhwIjoxNzM2MTQ0NDExLCJhdWQiOiJsb2NhbGhvc3Q6NzIzMSIsImlzcyI6ImxvY2FsaG9zdDo3MjMxIn0.twhYZMdmFMH0v861Fr3K5HX0n9xfvTg3QWwlLr1h5Ko
+
+{
+    "email": "james@doe.com",
+    "password": "nestjsIS6@awesome"
+}

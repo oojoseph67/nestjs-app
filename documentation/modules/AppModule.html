@@ -360,6 +360,8 @@ import jwtConfig from &#x27;./config/jwt.config&#x27;;
 import { JwtModule } from &#x27;@nestjs/jwt&#x27;;
 import { AuthenticationGuard } from &#x27;./auth/guards/authentication/authentication.guard&#x27;;
 import { DataResponseInterceptor } from &#x27;./global/interceptors/data-response/data-response.interceptor&#x27;;
+import { FileUploadModule } from &#x27;./file-upload/file-upload.module&#x27;;
+import awsConfig from &#x27;./config/aws.config&#x27;;
 
 export const ENV &#x3D; process.env.NODE_ENV;
 
@@ -370,7 +372,7 @@ export const ENV &#x3D; process.env.NODE_ENV;
       isGlobal: true, // make sure this is set to true to load environment variables from.env file
       // envFilePath: [&#x27;.env.development.local&#x27;], // specify the path to your.env file
       envFilePath: !ENV ? &#x27;.env&#x27; : &#x60;.env.${ENV}.local&#x60;,
-      load: [appConfig, databaseConfig],
+      load: [appConfig, databaseConfig, awsConfig],
       validationSchema: environmentValidation,
     }), // to use environment variables
     // env configs
@@ -417,6 +419,7 @@ export const ENV &#x3D; process.env.NODE_ENV;
 
     TagsModule,
     PaginationModule,
+    FileUploadModule,
   ],
   controllers: [
     AppController,
