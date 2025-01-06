@@ -112,6 +112,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             <li class="link">
                                                 <a href="controllers/AuthController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >AuthController</a>
                                             </li>
+                                            <li class="link">
+                                                <a href="controllers/GoogleAuthenticationController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >GoogleAuthenticationController</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 <li class="chapter inner">
@@ -130,7 +133,44 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                             <a href="injectables/GenerateTokenProvider.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >GenerateTokenProvider</a>
                                         </li>
                                         <li class="link">
+                                            <a href="injectables/GoogleAuthenticationService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >GoogleAuthenticationService</a>
+                                        </li>
+                                        <li class="link">
                                             <a href="injectables/RefreshTokenProvider.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >RefreshTokenProvider</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </li>
+                            <li class="link">
+                                <a href="modules/FileUploadModule.html" data-type="entity-link" >FileUploadModule</a>
+                                    <li class="chapter inner">
+                                        <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                            'data-bs-target="#controllers-links-module-FileUploadModule-84c15f7ba23d48ae0992519c55757d32e6467006e2447ed1f0b14cdba262e69d4680ac7a7b6e69c385058d63e381cd38694d5da1cbd4c092ecb382f88137ad58"' : 'data-bs-target="#xs-controllers-links-module-FileUploadModule-84c15f7ba23d48ae0992519c55757d32e6467006e2447ed1f0b14cdba262e69d4680ac7a7b6e69c385058d63e381cd38694d5da1cbd4c092ecb382f88137ad58"' }>
+                                            <span class="icon ion-md-swap"></span>
+                                            <span>Controllers</span>
+                                            <span class="icon ion-ios-arrow-down"></span>
+                                        </div>
+                                        <ul class="links collapse" ${ isNormalMode ? 'id="controllers-links-module-FileUploadModule-84c15f7ba23d48ae0992519c55757d32e6467006e2447ed1f0b14cdba262e69d4680ac7a7b6e69c385058d63e381cd38694d5da1cbd4c092ecb382f88137ad58"' :
+                                            'id="xs-controllers-links-module-FileUploadModule-84c15f7ba23d48ae0992519c55757d32e6467006e2447ed1f0b14cdba262e69d4680ac7a7b6e69c385058d63e381cd38694d5da1cbd4c092ecb382f88137ad58"' }>
+                                            <li class="link">
+                                                <a href="controllers/FileUploadController.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FileUploadController</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <li class="chapter inner">
+                                    <div class="simple menu-toggler" data-bs-toggle="collapse" ${ isNormalMode ?
+                                        'data-bs-target="#injectables-links-module-FileUploadModule-84c15f7ba23d48ae0992519c55757d32e6467006e2447ed1f0b14cdba262e69d4680ac7a7b6e69c385058d63e381cd38694d5da1cbd4c092ecb382f88137ad58"' : 'data-bs-target="#xs-injectables-links-module-FileUploadModule-84c15f7ba23d48ae0992519c55757d32e6467006e2447ed1f0b14cdba262e69d4680ac7a7b6e69c385058d63e381cd38694d5da1cbd4c092ecb382f88137ad58"' }>
+                                        <span class="icon ion-md-arrow-round-down"></span>
+                                        <span>Injectables</span>
+                                        <span class="icon ion-ios-arrow-down"></span>
+                                    </div>
+                                    <ul class="links collapse" ${ isNormalMode ? 'id="injectables-links-module-FileUploadModule-84c15f7ba23d48ae0992519c55757d32e6467006e2447ed1f0b14cdba262e69d4680ac7a7b6e69c385058d63e381cd38694d5da1cbd4c092ecb382f88137ad58"' :
+                                        'id="xs-injectables-links-module-FileUploadModule-84c15f7ba23d48ae0992519c55757d32e6467006e2447ed1f0b14cdba262e69d4680ac7a7b6e69c385058d63e381cd38694d5da1cbd4c092ecb382f88137ad58"' }>
+                                        <li class="link">
+                                            <a href="injectables/FileUploadService.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >FileUploadService</a>
+                                        </li>
+                                        <li class="link">
+                                            <a href="injectables/UploadToAwsProvider.html" data-type="entity-link" data-context="sub-entity" data-context-id="modules" >UploadToAwsProvider</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -302,6 +342,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                     <a href="entities/Tag.html" data-type="entity-link" >Tag</a>
                                 </li>
                                 <li class="link">
+                                    <a href="entities/Upload.html" data-type="entity-link" >Upload</a>
+                                </li>
+                                <li class="link">
                                     <a href="entities/User.html" data-type="entity-link" >User</a>
                                 </li>
                             </ul>
@@ -339,6 +382,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/GetUsersParamDto.html" data-type="entity-link" >GetUsersParamDto</a>
                             </li>
                             <li class="link">
+                                <a href="classes/GoogleTokenDto.html" data-type="entity-link" >GoogleTokenDto</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/PaginationQueryDto.html" data-type="entity-link" >PaginationQueryDto</a>
                             </li>
                             <li class="link">
@@ -365,6 +411,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <ul class="links collapse " ${ isNormalMode ? 'id="injectables-links"' : 'id="xs-injectables-links"' }>
                                 <li class="link">
                                     <a href="injectables/BcryptProvider.html" data-type="entity-link" >BcryptProvider</a>
+                                </li>
+                                <li class="link">
+                                    <a href="injectables/DataResponseInterceptor.html" data-type="entity-link" >DataResponseInterceptor</a>
                                 </li>
                                 <li class="link">
                                     <a href="injectables/HashingProvider.html" data-type="entity-link" >HashingProvider</a>
@@ -422,9 +471,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                         </ul>
                     </li>
-                        <li class="chapter">
-                            <a data-type="chapter-link" href="routes.html"><span class="icon ion-ios-git-branch"></span>Routes</a>
-                        </li>
                     <li class="chapter">
                         <a data-type="chapter-link" href="coverage.html"><span class="icon ion-ios-stats"></span>Documentation coverage</a>
                     </li>
