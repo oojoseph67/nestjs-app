@@ -121,13 +121,13 @@
 <title>cluster_PostsModule_providers</title>
 <polygon fill="none" stroke="black" points="368,-78 368,-130 504,-130 504,-78 368,-78"/>
 </g>
-<g id="clust4" class="cluster">
-<title>cluster_PostsModule_exports</title>
-<polygon fill="none" stroke="black" points="177,-208 177,-260 285,-260 285,-208 177,-208"/>
-</g>
 <g id="clust3" class="cluster">
 <title>cluster_PostsModule_imports</title>
 <polygon fill="none" stroke="black" points="16,-78 16,-130 360,-130 360,-78 16,-78"/>
+</g>
+<g id="clust4" class="cluster">
+<title>cluster_PostsModule_exports</title>
+<polygon fill="none" stroke="black" points="177,-208 177,-260 285,-260 285,-208 177,-208"/>
 </g>
 <!-- PaginationModule -->
 <g id="node1" class="node">
@@ -297,18 +297,22 @@
 import { PostsService } from &#x27;./posts.service&#x27;;
 import { PostsController } from &#x27;./posts.controller&#x27;;
 import { UserModule } from &#x27;src/user/user.module&#x27;;
-import { TypeOrmModule } from &#x27;@nestjs/typeorm&#x27;;
-import { Post as PostEntity } from &#x27;./entity/post.entity&#x27;;
-import { MetaOption } from &#x27;src/meta-options/entity/meta-option.entity&#x27;;
 import { TagsModule } from &#x27;src/tags/tags.module&#x27;;
 import { PaginationModule } from &#x27;src/global/pagination/pagination.module&#x27;;
+import { MongooseModule } from &#x27;@nestjs/mongoose&#x27;;
+import { Post, PostSchema } from &#x27;./schema/post.schema&#x27;;
 
 @Module({
   imports: [
     UserModule,
     TagsModule,
     PaginationModule,
-    TypeOrmModule.forFeature([PostEntity, MetaOption]),
+    MongooseModule.forFeature([
+      {
+        name: Post.name,
+        schema: PostSchema,
+      },
+    ]),
   ],
   controllers: [PostsController],
   providers: [PostsService],

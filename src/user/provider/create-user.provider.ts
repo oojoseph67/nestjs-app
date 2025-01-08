@@ -7,18 +7,18 @@ import {
   RequestTimeoutException,
 } from '@nestjs/common';
 import { CreateUserDto } from '../dtos/create-user.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { User } from '../entity/user.entity';
-import { Repository } from 'typeorm';
 import { HashingProvider } from 'src/auth/providers/hashing.provider';
 import { MailService } from 'src/mail/mail.service';
+import { InjectModel } from '@nestjs/mongoose';
+import { User } from '../schema/user.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class CreateUserProvider {
   constructor(
     // injecting user service repository dependency
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
+    @InjectModel(User.name)
+    private userModel: Model<User>,
 
     // injecting hashing provider
     @Inject(forwardRef(() => HashingProvider)) // doing this because this is a circular dependency
@@ -30,6 +30,8 @@ export class CreateUserProvider {
   public async createUser({ user }: { user: CreateUserDto }): Promise<User> {
     // check user
     let existingUser = undefined;
+
+    console.log('user response',{user})
 
     if (!user.googleId && !user.password) {
       throw new HttpException(
@@ -44,9 +46,7 @@ export class CreateUserProvider {
     }
 
     try {
-      existingUser = await this.userRepository.findOne({
-        where: { email: user.email },
-      });
+      existingUser = await this.userModel.findOne({ email: user.email }).exec();
     } catch (error) {
       throw new RequestTimeoutException('Request timeout', {
         cause: error,
@@ -71,18 +71,12 @@ export class CreateUserProvider {
       user.googleId = user.googleId;
     }
 
-    let newUser: User;
-
     try {
       // create a new user
-      newUser = this.userRepository.create(user);
-      // Save and send welcome email should be in the same transaction
-      await this.userRepository.manager.transaction(
-        async (transactionalEntityManager) => {
-          await transactionalEntityManager.save(User, newUser);
-          await this.mailService.sendWelcomeMail({ user: newUser });
-        },
-      );
+      const newUser = await this.userModel.create(user);
+      // fetch the created user without the password field
+      // return await this.userModel.findById(newUser._id).select('-password');
+      return await this.userModel.findById(newUser._id);
     } catch (error: any) {
       console.log({ error });
       throw new HttpException(
@@ -94,7 +88,5 @@ export class CreateUserProvider {
         },
       );
     }
-
-    return newUser;
   }
 }

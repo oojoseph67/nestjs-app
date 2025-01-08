@@ -158,7 +158,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(uploadToAwsProvider: <a href="../injectables/UploadToAwsProvider.html" target="_self">UploadToAwsProvider</a>, uploadRepository: <a href="../entitys/Upload.html" target="_self">Repository&lt;Upload&gt;</a>, awsConfiguration: ConfigType<>)</code>
+<code>constructor(uploadToAwsProvider: <a href="../injectables/UploadToAwsProvider.html" target="_self">UploadToAwsProvider</a>, uploadModel: <a href="../classes/Upload.html" target="_self">Model&lt;Upload&gt;</a>, awsConfiguration: ConfigType<>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -193,10 +193,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>uploadRepository</td>
+                                                        <td>uploadModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../entitys/Upload.html" target="_self" >Repository&lt;Upload&gt;</a></code>
+                                                                        <code><a href="../classes/Upload.html" target="_self" >Model&lt;Upload&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -312,11 +312,11 @@
   Injectable,
 } from &#x27;@nestjs/common&#x27;;
 import { UploadToAwsProvider } from &#x27;./providers/upload-to-aws.provider&#x27;;
-import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { FileTypes, Upload } from &#x27;./entity/upload.entity&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
 import awsConfig from &#x27;src/config/aws.config&#x27;;
 import { ConfigType } from &#x27;@nestjs/config&#x27;;
+import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
+import { FileTypes, Upload } from &#x27;./schema/upload.schema&#x27;;
+import { Model } from &#x27;mongoose&#x27;;
 
 @Injectable()
 export class FileUploadService {
@@ -325,8 +325,8 @@ export class FileUploadService {
     private uploadToAwsProvider: UploadToAwsProvider,
 
     // upload repository injection
-    @InjectRepository(Upload)
-    private uploadRepository: Repository&lt;Upload&gt;,
+    @InjectModel(Upload.name)
+    private uploadModel: Model&lt;Upload&gt;,
 
     @Inject(awsConfig.KEY)
     private awsConfiguration: ConfigType&lt;typeof awsConfig&gt;,
@@ -351,7 +351,7 @@ export class FileUploadService {
       console.log(&#x27;File uploaded to AWS:&#x27;, awsKey);
 
       // save the file info to database
-      const upload &#x3D; this.uploadRepository.create({
+      const upload &#x3D; new this.uploadModel({
         filename: awsKey,
         path: &#x60;${this.awsConfiguration.awsCloudfrontUrl}/${awsKey}&#x60;,
         type: FileTypes.IMAGE,
@@ -360,7 +360,7 @@ export class FileUploadService {
       });
 
       // generate to a new entry in database
-      return await this.uploadRepository.save(upload);
+      return await upload.save();
     } catch (error: any) {
       throw new ConflictException(error.message);
     }

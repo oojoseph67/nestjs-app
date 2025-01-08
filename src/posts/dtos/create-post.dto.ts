@@ -89,7 +89,7 @@ export class CreatePostDto {
   })
   @IsOptional()
   @IsJSON()
-  schema?: string;
+  postSchema?: string;
 
   @ApiPropertyOptional({
     description: 'This is the featured image URL',
@@ -123,27 +123,27 @@ export class CreatePostDto {
   @IsInt({ each: true }) // validate each item in the array as a string
   tags?: number[];
 
-  @ApiPropertyOptional({
-    description: 'This is the additional options for the post',
-    example: '{"sidebarEnabled": true, "footerEnabled": true}',
-    type: 'string',
-    required: false,
-    items: {
-      type: 'object',
-      properties: {
-        metaValue: {
-          type: 'json',
-          description: 'The meta value is a json object',
-          example: '{"sidebarEnabled": true, "footerEnabled": true}',
-        },
-      },
-      required: ['key', 'value'],
-    },
-  })
-  @IsOptional()
-  @ValidateNested({ each: true })
-  @Type(() => CreateMetaOptionsDto)
-  metaOptions?: CreateMetaOptionsDto | null;
+  // @ApiPropertyOptional({
+  //   description: 'This is the additional options for the post',
+  //   example: '{"sidebarEnabled": true, "footerEnabled": true}',
+  //   type: 'string',
+  //   required: false,
+  //   items: {
+  //     type: 'object',
+  //     properties: {
+  //       metaValue: {
+  //         type: 'json',
+  //         description: 'The meta value is a json object',
+  //         example: '{"sidebarEnabled": true, "footerEnabled": true}',
+  //       },
+  //     },
+  //     required: ['key', 'value'],
+  //   },
+  // })
+  // @IsOptional()
+  // @ValidateNested({ each: true })
+  // @Type(() => CreateMetaOptionsDto)
+  // metaOptions?: CreateMetaOptionsDto | null;
 
   // @ApiProperty({
   //   description: 'This is the id of the author of the post',

@@ -232,13 +232,18 @@ import { FileUploadController } from &#x27;./file-upload.controller&#x27;;
 import { UploadToAwsProvider } from &#x27;./providers/upload-to-aws.provider&#x27;;
 import { ConfigModule } from &#x27;@nestjs/config&#x27;;
 import awsConfig from &#x27;src/config/aws.config&#x27;;
-import { TypeOrmModule } from &#x27;@nestjs/typeorm&#x27;;
-import { Upload } from &#x27;./entity/upload.entity&#x27;;
+import { MongooseModule } from &#x27;@nestjs/mongoose&#x27;;
+import { Upload, UploadSchema } from &#x27;./schema/upload.schema&#x27;;
 
 @Module({
   imports: [
     ConfigModule.forFeature(awsConfig),
-    TypeOrmModule.forFeature([Upload]),
+    MongooseModule.forFeature([
+      {
+        name: Upload.name,
+        schema: UploadSchema,
+      },
+    ]),
   ],
   providers: [FileUploadService, UploadToAwsProvider],
   controllers: [FileUploadController],

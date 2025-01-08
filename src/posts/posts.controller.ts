@@ -45,6 +45,7 @@ export class PostsController {
     description: 'All posts',
     type: [CreatePostDto],
   })
+  @Auth(AuthType.NONE)
   @Get(':userId?')
   getAllPosts(
     @Param('userId') userId: number,

@@ -156,6 +156,7 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#getAllPosts" >getAllPosts</a>
                             </li>
                             <li>
@@ -212,8 +213,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/posts/posts.controller.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="78"
+                                    class="link-to-prism">src/posts/posts.controller.ts:78</a></div>
                         </td>
                     </tr>
 
@@ -316,8 +317,8 @@ It logs the received data and returns a confirmation message.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="125"
-                                    class="link-to-prism">src/posts/posts.controller.ts:125</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="126"
+                                    class="link-to-prism">src/posts/posts.controller.ts:126</a></div>
                         </td>
                     </tr>
 
@@ -372,6 +373,7 @@ It logs the received data and returns a confirmation message.</p>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
+                            <span class="modifier"></span>
                         <span ><b>getAllPosts</b></span>
                         <a href="#getAllPosts"><span class="icon ion-ios-link"></span></a>
                     </span>
@@ -388,14 +390,14 @@ It logs the received data and returns a confirmation message.</p>
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiOperation({summary: &#x27;Retrieves all posts for a specific user&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;All posts&#x27;, type: undefined})<br />@Get(&#x27;:userId?&#x27;)<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Retrieves all posts for a specific user&#x27;})<br />@ApiResponse({status: undefined, description: &#x27;All posts&#x27;, type: undefined})<br />@Auth(AuthType.NONE)<br />@Get(&#x27;:userId?&#x27;)<br /></code>
                 </td>
             </tr>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="49"
-                                    class="link-to-prism">src/posts/posts.controller.ts:49</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="50"
+                                    class="link-to-prism">src/posts/posts.controller.ts:50</a></div>
                         </td>
                     </tr>
 
@@ -500,8 +502,8 @@ representing all posts for the specified user.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="111"
-                                    class="link-to-prism">src/posts/posts.controller.ts:111</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="112"
+                                    class="link-to-prism">src/posts/posts.controller.ts:112</a></div>
                         </td>
                     </tr>
 
@@ -611,6 +613,7 @@ export class PostsController {
     description: &#x27;All posts&#x27;,
     type: [CreatePostDto],
   })
+  @Auth(AuthType.NONE)
   @Get(&#x27;:userId?&#x27;)
   getAllPosts(
     @Param(&#x27;userId&#x27;) userId: number,

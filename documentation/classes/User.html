@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content miscellaneous-variables">
+               <div class="content class">
                    <div class="content-data">
 
 
@@ -93,113 +93,125 @@
 
 
 
-
-
-
-
-
-
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Miscellaneous</li>
-  <li class="breadcrumb-item">Variables</li>
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >User</li>
 </ol>
 
-<section data-compodoc="block-index">
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/user/schema/user.schema.ts</code>
+        </p>
+
+
+
+
+
+
+            <section data-compodoc="block-index">
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <ul class="index-list">
-                        <li>
-                            <a href="#ActiveUser" title="src/auth/decorators/active-user.decorator.ts" ><b>ActiveUser</b>&nbsp;&nbsp;&nbsp;(src/.../active-user.decorator.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#Auth" title="src/auth/decorators/auth.decorator.ts" ><b>Auth</b>&nbsp;&nbsp;&nbsp;(src/.../auth.decorator.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#AUTH_TYPE_KEY" title="src/auth/decorators/auth.decorator.ts" ><b>AUTH_TYPE_KEY</b>&nbsp;&nbsp;&nbsp;(src/.../auth.decorator.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#ENV" title="src/app.module.ts" ><b>ENV</b>&nbsp;&nbsp;&nbsp;(src/.../app.module.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#MetaOptionSchema" title="src/meta-options/schema/meta-option.schema.ts" ><b>MetaOptionSchema</b>&nbsp;&nbsp;&nbsp;(src/.../meta-option.schema.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#PostSchema" title="src/posts/schema/post.schema.ts" ><b>PostSchema</b>&nbsp;&nbsp;&nbsp;(src/.../post.schema.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#REQUEST_USER_KEY" title="src/auth/guards/access-token/access-token.guard.ts" ><b>REQUEST_USER_KEY</b>&nbsp;&nbsp;&nbsp;(src/.../access-token.guard.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#TagsSchema" title="src/tags/schema/tags.schema.ts" ><b>TagsSchema</b>&nbsp;&nbsp;&nbsp;(src/.../tags.schema.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#UploadSchema" title="src/file-upload/schema/upload.schema.ts" ><b>UploadSchema</b>&nbsp;&nbsp;&nbsp;(src/.../upload.schema.ts)</a>
-                        </li>
-                        <li>
-                            <a href="#UserSchema" title="src/user/schema/user.schema.ts" ><b>UserSchema</b>&nbsp;&nbsp;&nbsp;(src/.../user.schema.ts)</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</section>
-
-    <h3>src/auth/decorators/active-user.decorator.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="ActiveUser"></a>
-                    <span class="name">
-                        <span ><b>ActiveUser</b></span>
-                        <a href="#ActiveUser"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>createParamDecorator(
-  (field: keyof UserPayload | undefined, ctx: ExecutionContext) &#x3D;&gt; {
-    const request &#x3D; ctx.switchToHttp().getRequest();
-    const user: UserPayload &#x3D; request[REQUEST_USER_KEY];
-
-    if (field) {
-      return user[field];
-    } else {
-      return user;
-    }
-  },
-)</code>
+                        <h6><b>Properties</b></h6>
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#email" >email</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#firstName" >firstName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#googleId" >googleId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#lastName" >lastName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#password" >password</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
 
 
         </tbody>
     </table>
 </section>
-    <h3>src/auth/decorators/auth.decorator.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
+
+
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="Auth"></a>
+                    <a name="email"></a>
                     <span class="name">
-                        <span ><b>Auth</b></span>
-                        <a href="#Auth"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                        <span ><b>email</b></span>
+                        <a href="#email"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>(...authTypes: AuthType[]) &#x3D;&gt; SetMetadata(AUTH_TYPE_KEY, authTypes)</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, unique: true, required: true, lowercase: true, trim: true, validate: undefined})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/user/schema/user.schema.ts:30</a></div>
+                        </td>
+                    </tr>
 
 
         </tbody>
@@ -208,10 +220,11 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="AUTH_TYPE_KEY"></a>
+                    <a name="firstName"></a>
                     <span class="name">
-                        <span ><b>AUTH_TYPE_KEY</b></span>
-                        <a href="#AUTH_TYPE_KEY"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                        <span ><b>firstName</b></span>
+                        <a href="#firstName"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -223,93 +236,32 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;authType&#x27;</code>
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, required: true})<br />
+                        </code>
                     </td>
                 </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/user/schema/user.schema.ts:10</a></div>
+                        </td>
+                    </tr>
 
 
         </tbody>
     </table>
-</section>
-    <h3>src/app.module.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="ENV"></a>
+                    <a name="googleId"></a>
                     <span class="name">
-                        <span ><b>ENV</b></span>
-                        <a href="#ENV"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>process.env.NODE_ENV</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-</section>
-    <h3>src/meta-options/schema/meta-option.schema.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="MetaOptionSchema"></a>
-                    <span class="name">
-                        <span ><b>MetaOptionSchema</b></span>
-                        <a href="#MetaOptionSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>SchemaFactory.createForClass(MetaOption)</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-</section>
-    <h3>src/posts/schema/post.schema.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="PostSchema"></a>
-                    <span class="name">
-                        <span ><b>PostSchema</b></span>
-                        <a href="#PostSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Default value : </i><code>SchemaFactory.createForClass(Post)</code>
-                    </td>
-                </tr>
-
-
-        </tbody>
-    </table>
-</section>
-    <h3>src/auth/guards/access-token/access-token.guard.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="REQUEST_USER_KEY"></a>
-                    <span class="name">
-                        <span ><b>REQUEST_USER_KEY</b></span>
-                        <a href="#REQUEST_USER_KEY"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>googleId</b></span>
+                        <a href="#googleId"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
@@ -321,83 +273,163 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>&#x27;user&#x27;</code>
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, default: &#x27;&#x27;, required: false})<br />
+                        </code>
                     </td>
                 </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/user/schema/user.schema.ts:44</a></div>
+                        </td>
+                    </tr>
 
 
         </tbody>
     </table>
-</section>
-    <h3>src/tags/schema/tags.schema.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="TagsSchema"></a>
+                    <a name="lastName"></a>
                     <span class="name">
-                        <span ><b>TagsSchema</b></span>
-                        <a href="#TagsSchema"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>lastName</b></span>
+                        <a href="#lastName"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>SchemaFactory.createForClass(Tags)</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, default: &#x27;&#x27;, required: false})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/user/schema/user.schema.ts:17</a></div>
+                        </td>
+                    </tr>
 
 
         </tbody>
     </table>
-</section>
-    <h3>src/file-upload/schema/upload.schema.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
+    <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="UploadSchema"></a>
+                    <a name="password"></a>
                     <span class="name">
-                        <span ><b>UploadSchema</b></span>
-                        <a href="#UploadSchema"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                        <span ><b>password</b></span>
+                        <a href="#password"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>SchemaFactory.createForClass(Upload)</code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
                     </td>
                 </tr>
-
-
-        </tbody>
-    </table>
-</section>
-    <h3>src/user/schema/user.schema.ts</h3>
-    <section data-compodoc="block-properties">
-    <h3></h3>    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="UserSchema"></a>
-                    <span class="name">
-                        <span ><b>UserSchema</b></span>
-                        <a href="#UserSchema"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Default value : </i><code>SchemaFactory.createForClass(User)</code>
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, required: true, select: false})<br />
+                        </code>
                     </td>
                 </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/user/schema/user.schema.ts:37</a></div>
+                        </td>
+                    </tr>
 
 
         </tbody>
     </table>
 </section>
+
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
+import { Document } from &#x27;mongoose&#x27;;
+
+@Schema()
+export class User extends Document {
+  @Prop({
+    type: String,
+    required: true,
+  })
+  firstName: string;
+
+  @Prop({
+    type: String,
+    default: &#x27;&#x27;,
+    required: false,
+  })
+  lastName?: string;
+
+  @Prop({
+    type: String,
+    unique: true,
+    required: true,
+    lowercase: true,
+    trim: true,
+    validate: {
+      validator: (v: string) &#x3D;&gt; /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+      message: &#x27;Please enter a valid email address&#x27;,
+    },
+  })
+  email: string;
+
+  @Prop({
+    type: String,
+    required: true,
+    select: false, // this field will not be returned when fetching users
+  })
+  password: string;
+
+  @Prop({
+    type: String,
+    default: &#x27;&#x27;,
+    required: false,
+  })
+  googleId?: string;
+}
+
+export const UserSchema &#x3D; SchemaFactory.createForClass(User);
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
 
 
 
@@ -426,8 +458,8 @@
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
-            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'User.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

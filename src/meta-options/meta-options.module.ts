@@ -1,13 +1,20 @@
 import { Module } from '@nestjs/common';
 import { MetaOptionsService } from './meta-options.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { MetaOption } from './entity/meta-option.entity';
 import { MetaOptionsController } from './meta-options.controller';
+import { MongooseModule } from '@nestjs/mongoose';
+import { MetaOption, MetaOptionSchema } from './schema/meta-option.schema';
 
 @Module({
   providers: [MetaOptionsService],
   controllers: [MetaOptionsController],
   exports: [MetaOptionsService],
-  imports: [TypeOrmModule.forFeature([MetaOption])],
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: MetaOption.name,
+        schema: MetaOptionSchema,
+      },
+    ]),
+  ],
 })
 export class MetaOptionsModule {}

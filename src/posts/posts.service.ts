@@ -2,14 +2,14 @@ import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UserService } from 'src/user/user.service';
 import { CreatePostDto } from './dtos/create-post.dto';
 import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
-import { MetaOption as MetaOptionRepository } from 'src/meta-options/entity/meta-option.entity';
-import { Post, Post as PostRepository } from './entity/post.entity';
 import { TagsService } from 'src/tags/tags.service';
 import { PatchPostDto } from './dtos/patch-post.dto';
 import { GetPostsQueryDto } from './dtos/get-posts.dto';
 import { PaginationService } from 'src/global/pagination/pagination.service';
 import { Paginated } from 'src/global/pagination/interface/paginated.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Post } from './schema/post.schema';
+import { Model, Types } from 'mongoose';
 
 @Injectable()
 export class PostsService {
@@ -26,11 +26,8 @@ export class PostsService {
     /**
      * Repositories Injections
      */
-    @InjectRepository(PostRepository)
-    private postRepository: Repository<PostRepository>,
-
-    @InjectRepository(MetaOptionRepository)
-    private metaOptionsRepository: Repository<MetaOptionRepository>,
+    @InjectModel(Post.name)
+    private postModel: Model<Post>,
 
     // injecting pagination service
     private paginationService: PaginationService,
@@ -63,7 +60,7 @@ export class PostsService {
     }
 
     const normalizedSlug = createPost.slug.toLowerCase();
-    const existingSlug = await this.postRepository.findOne({
+    const existingSlug = await this.postModel.findOne({
       where: {
         slug: normalizedSlug,
       },
@@ -74,14 +71,14 @@ export class PostsService {
     }
 
     try {
-      const post = await this.postRepository.create({
+      const post = new this.postModel({
         ...createPost,
         author: author,
         tags: tags,
         slug: normalizedSlug,
       });
 
-      await this.postRepository.save(post);
+      await post.save();
 
       return post;
     } catch (error: any) {
@@ -110,7 +107,7 @@ export class PostsService {
       });
     }
 
-    const post = await this.postRepository.findOneBy({ id: updatePost.id });
+    const post = await this.postModel.findOne({ id: updatePost.id });
 
     if (!post) {
       throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
@@ -121,13 +118,13 @@ export class PostsService {
     post.slug = updatePost.slug ?? post.slug;
     post.status = updatePost.status ?? post.status;
     post.content = updatePost.content ?? post.content;
-    post.schema = updatePost.schema ?? post.schema;
+    post.postSchema = updatePost.postSchema ?? post.postSchema;
     post.featuredImageUrl =
       updatePost.featuredImageUrl ?? post.featuredImageUrl;
     post.publishedOn = updatePost.publishedOn ?? post.publishedOn;
-    post.tags = updatePost.tags ? tags : post.tags;
+    post.tags = updatePost.tags ? tags.map(tag => tag._id as Types.ObjectId) : post.tags;
 
-    const updatedPost = await this.postRepository.save(post);
+    const updatedPost = await post.save();
 
     return updatedPost;
   }
@@ -146,7 +143,7 @@ export class PostsService {
         limit,
         page,
       },
-      repository: this.postRepository,
+      model: this.postModel,
     });
 
     return posts;
@@ -159,7 +156,7 @@ export class PostsService {
     //   throw new HttpException('Post not found', HttpStatus.NOT_FOUND);
     // }
 
-    await this.postRepository.delete({ id });
+    await this.postModel.deleteOne({ id });
 
     // await this.metaOptionsRepository.delete({ id: post.metaOptions.id });
 

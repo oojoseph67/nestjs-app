@@ -5,11 +5,11 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { UploadToAwsProvider } from './providers/upload-to-aws.provider';
-import { InjectRepository } from '@nestjs/typeorm';
-import { FileTypes, Upload } from './entity/upload.entity';
-import { Repository } from 'typeorm';
 import awsConfig from 'src/config/aws.config';
 import { ConfigType } from '@nestjs/config';
+import { InjectModel } from '@nestjs/mongoose';
+import { FileTypes, Upload } from './schema/upload.schema';
+import { Model } from 'mongoose';
 
 @Injectable()
 export class FileUploadService {
@@ -18,8 +18,8 @@ export class FileUploadService {
     private uploadToAwsProvider: UploadToAwsProvider,
 
     // upload repository injection
-    @InjectRepository(Upload)
-    private uploadRepository: Repository<Upload>,
+    @InjectModel(Upload.name)
+    private uploadModel: Model<Upload>,
 
     @Inject(awsConfig.KEY)
     private awsConfiguration: ConfigType<typeof awsConfig>,
@@ -44,7 +44,7 @@ export class FileUploadService {
       console.log('File uploaded to AWS:', awsKey);
 
       // save the file info to database
-      const upload = this.uploadRepository.create({
+      const upload = new this.uploadModel({
         filename: awsKey,
         path: `${this.awsConfiguration.awsCloudfrontUrl}/${awsKey}`,
         type: FileTypes.IMAGE,
@@ -53,7 +53,7 @@ export class FileUploadService {
       });
 
       // generate to a new entry in database
-      return await this.uploadRepository.save(upload);
+      return await upload.save();
     } catch (error: any) {
       throw new ConflictException(error.message);
     }

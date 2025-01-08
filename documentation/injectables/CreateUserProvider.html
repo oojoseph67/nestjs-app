@@ -158,7 +158,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userRepository: <a href="../entitys/User.html" target="_self">Repository&lt;User&gt;</a>, hashingProvider: <a href="../injectables/HashingProvider.html" target="_self">HashingProvider</a>, mailService: <a href="../injectables/MailService.html" target="_self">MailService</a>)</code>
+<code>constructor(userModel: <a href="../classes/User.html" target="_self">Model&lt;User&gt;</a>, hashingProvider: <a href="../injectables/HashingProvider.html" target="_self">HashingProvider</a>, mailService: <a href="../injectables/MailService.html" target="_self">MailService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -181,10 +181,10 @@
                                         </thead>
                                         <tbody>
                                                 <tr>
-                                                        <td>userRepository</td>
+                                                        <td>userModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../entitys/User.html" target="_self" >Repository&lt;User&gt;</a></code>
+                                                                        <code><a href="../classes/User.html" target="_self" >Model&lt;User&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -289,7 +289,7 @@
                                 </table>
                             </div>
                         <div class="io-description">
-                            <b>Returns : </b>        <code><a href="../entitys/User.html" target="_self" >Promise&lt;User&gt;</a></code>
+                            <b>Returns : </b>        <code><a href="../classes/User.html" target="_self" >Promise&lt;User&gt;</a></code>
 
                         </div>
                             <div class="io-description">
@@ -314,18 +314,18 @@
   RequestTimeoutException,
 } from &#x27;@nestjs/common&#x27;;
 import { CreateUserDto } from &#x27;../dtos/create-user.dto&#x27;;
-import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { User } from &#x27;../entity/user.entity&#x27;;
-import { Repository } from &#x27;typeorm&#x27;;
 import { HashingProvider } from &#x27;src/auth/providers/hashing.provider&#x27;;
 import { MailService } from &#x27;src/mail/mail.service&#x27;;
+import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
+import { User } from &#x27;../schema/user.schema&#x27;;
+import { Model } from &#x27;mongoose&#x27;;
 
 @Injectable()
 export class CreateUserProvider {
   constructor(
     // injecting user service repository dependency
-    @InjectRepository(User)
-    private userRepository: Repository&lt;User&gt;,
+    @InjectModel(User.name)
+    private userModel: Model&lt;User&gt;,
 
     // injecting hashing provider
     @Inject(forwardRef(() &#x3D;&gt; HashingProvider)) // doing this because this is a circular dependency
@@ -337,6 +337,8 @@ export class CreateUserProvider {
   public async createUser({ user }: { user: CreateUserDto }): Promise&lt;User&gt; {
     // check user
     let existingUser &#x3D; undefined;
+
+    console.log(&#x27;user response&#x27;,{user})
 
     if (!user.googleId &amp;&amp; !user.password) {
       throw new HttpException(
@@ -351,9 +353,7 @@ export class CreateUserProvider {
     }
 
     try {
-      existingUser &#x3D; await this.userRepository.findOne({
-        where: { email: user.email },
-      });
+      existingUser &#x3D; await this.userModel.findOne({ email: user.email }).exec();
     } catch (error) {
       throw new RequestTimeoutException(&#x27;Request timeout&#x27;, {
         cause: error,
@@ -378,18 +378,12 @@ export class CreateUserProvider {
       user.googleId &#x3D; user.googleId;
     }
 
-    let newUser: User;
-
     try {
       // create a new user
-      newUser &#x3D; this.userRepository.create(user);
-      // Save and send welcome email should be in the same transaction
-      await this.userRepository.manager.transaction(
-        async (transactionalEntityManager) &#x3D;&gt; {
-          await transactionalEntityManager.save(User, newUser);
-          await this.mailService.sendWelcomeMail({ user: newUser });
-        },
-      );
+      const newUser &#x3D; await this.userModel.create(user);
+      // fetch the created user without the password field
+      // return await this.userModel.findById(newUser._id).select(&#x27;-password&#x27;);
+      return await this.userModel.findById(newUser._id);
     } catch (error: any) {
       console.log({ error });
       throw new HttpException(
@@ -401,8 +395,6 @@ export class CreateUserProvider {
         },
       );
     }
-
-    return newUser;
   }
 }
 </code></pre>

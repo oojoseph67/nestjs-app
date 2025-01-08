@@ -2,8 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import jwtConfig from 'src/config/jwt.config';
-import { UserPayload } from '../guards/access-token/access-token.guard';
-import { User } from 'src/user/entity/user.entity';
+import { User } from 'src/user/schema/user.schema';
 
 @Injectable()
 export class GenerateTokenProvider {
@@ -54,7 +53,7 @@ export class GenerateTokenProvider {
     const [accessToken, refreshToken] = await Promise.all([
       await this.createToken({
         expiresIn: this.jwtConfiguration.jwtTokenExpiration,
-        userId: user.id,
+        userId: user._id as number,
         payload: {
           email: user.email,
         },

@@ -291,10 +291,10 @@
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, Inject } from &#x27;@nestjs/common&#x27;;
 import { PaginationQueryDto } from &#x27;./dto/pagination-query.dto&#x27;;
-import { ObjectLiteral, Repository } from &#x27;typeorm&#x27;;
 import { REQUEST } from &#x27;@nestjs/core&#x27;;
 import { Request } from &#x27;express&#x27;;
 import { Paginated } from &#x27;./interface/paginated.interface&#x27;;
+import { Model, Document } from &#x27;mongoose&#x27;;
 
 @Injectable()
 export class PaginationService {
@@ -304,16 +304,16 @@ export class PaginationService {
     private readonly request: Request,
   ) {}
 
-  public async paginateQuery&lt;T extends ObjectLiteral&gt;({
+  public async paginateQuery&lt;T extends Document&gt;({
     paginationQuery,
-    repository,
+    model,
   }: {
     paginationQuery: PaginationQueryDto;
-    repository: Repository&lt;T&gt;;
+    model: Model&lt;T&gt;;
   }): Promise&lt;Paginated&lt;T&gt;&gt; {
     const { limit, page } &#x3D; paginationQuery;
 
-    const query &#x3D; await repository.find({
+    const query &#x3D; await model.find({
       skip: (page - 1) * limit,
       take: limit,
     });
@@ -325,7 +325,7 @@ export class PaginationService {
 
     const newUrl &#x3D; new URL(this.request.url, baseUrl);
 
-    const totalItems &#x3D; await repository.count({});
+    const totalItems &#x3D; await model.countDocuments({});
     const totalPages &#x3D; Math.ceil(totalItems / limit);
     const nextPage &#x3D; totalPages &#x3D;&#x3D;&#x3D; page ? page : page + 1;
     const prevPage &#x3D; page &#x3D;&#x3D;&#x3D; 1 ? page : page - 1;

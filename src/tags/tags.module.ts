@@ -1,11 +1,18 @@
 import { Module } from '@nestjs/common';
 import { TagsService } from './tags.service';
 import { TagsController } from './tags.controller';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { Tag } from './entity/tags.entity';
+import { MongooseModule } from '@nestjs/mongoose';
+import { Tags, TagsSchema } from './schema/tags.schema';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tag])],
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: Tags.name,
+        schema: TagsSchema,
+      },
+    ]),
+  ],
   controllers: [TagsController],
   providers: [TagsService],
   exports: [TagsService],

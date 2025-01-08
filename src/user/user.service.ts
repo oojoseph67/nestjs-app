@@ -8,15 +8,13 @@ import {
 } from '@nestjs/common';
 import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { AuthService } from 'src/auth/auth.service';
-import { DataSource, Repository } from 'typeorm';
-import { User } from './entity/user.entity';
-import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dtos/create-user.dto';
 import { ConfigService, ConfigType } from '@nestjs/config';
 import profileConfig from './config/profile.config';
-import { UserCreateMany } from './user-create-many';
-import { CreateManyUsersDto } from './dtos/create-many-user.dto';
 import { CreateUserProvider } from './provider/create-user.provider';
+import { Model } from 'mongoose';
+import { User } from './schema/user.schema';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class UserService {
@@ -25,9 +23,9 @@ export class UserService {
     @Inject(forwardRef(() => AuthService))
     private authService: AuthService,
 
-    // injecting user service repository dependency
-    @InjectRepository(User)
-    private userRepository: Repository<User>,
+    // injecting user database model
+    @InjectModel(User.name)
+    private userModel: Model<User>,
 
     // injecting environment variables
     private configService: ConfigService,
@@ -35,8 +33,6 @@ export class UserService {
     // injecting module specific configuration dependencies (environment variables)
     @Inject(profileConfig.KEY)
     private profileConfiguration: ConfigType<typeof profileConfig>,
-
-    private usersCreateMany: UserCreateMany,
 
     private createUserProvider: CreateUserProvider,
   ) {}
@@ -71,8 +67,12 @@ export class UserService {
     );
   }
 
+  public async getAllUsers(): Promise<User[]> {
+    return this.userModel.find().exec();
+  }
+
   public async findOneById({ id }: { id: number }) {
-    const user = await this.userRepository.findOneBy({ id });
+    const user = await this.userModel.findOne({ id })
 
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -83,7 +83,7 @@ export class UserService {
 
   public async findUserByEmail({ email }: { email: string }) {
     try {
-      const user = await this.userRepository.findOneBy({ email });
+      const user = await this.userModel.findOne({ email })
 
       if (!user) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -97,7 +97,7 @@ export class UserService {
 
   public async findUserByGoogleId({ googleId }: { googleId: string }) {
     try {
-      const user = await this.userRepository.findOneBy({ googleId });
+      const user = await this.userModel.findOne({ googleId }).select('-password');
 
       if (!user) {
         // throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -108,9 +108,5 @@ export class UserService {
     } catch (error: any) {
       throw new RequestTimeoutException(`Timeout occurred: ${error.message}`);
     }
-  }
-
-  public async createMany({ users }: { users: CreateManyUsersDto }) {
-    return await this.usersCreateMany.createMany({ users });
   }
 }

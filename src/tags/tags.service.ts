@@ -1,18 +1,19 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { In, Repository } from 'typeorm';
-import { Tag as TagRepository } from './entity/tags.entity';
 import { CreateTagDto } from './dtos/create-tag.dto';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
+import { Tags } from './schema/tags.schema';
 
 @Injectable()
 export class TagsService {
   constructor(
-    @InjectRepository(TagRepository)
-    private tagsRepository: Repository<TagRepository>,
+    @InjectModel(Tags.name)
+    private tagsModel: Model<Tags>,
   ) {}
 
   public async createTag({ tag }: { tag: CreateTagDto }) {
-    const existingTags = await this.tagsRepository.findOne({
+    const existingTags = await this.tagsModel.findOne({
       where: { name: tag.name },
     });
 
@@ -20,21 +21,21 @@ export class TagsService {
       throw new HttpException('Tag already exists', HttpStatus.CONFLICT);
     }
 
-    const createdTags = await this.tagsRepository.create(tag);
+    const createdTags = new this.tagsModel(tag);
 
-    await this.tagsRepository.save(createdTags);
+    await createdTags.save();
 
     return createdTags;
   }
 
   public async getAllTags() {
-    const tags = await this.tagsRepository.find({});
+    const tags = await this.tagsModel.find({});
 
     return tags;
   }
 
   public async getTagById({ id }: { id: number }) {
-    const tag = await this.tagsRepository.findOneBy({ id });
+    const tag = await this.tagsModel.findOne({ id });
 
     if (!tag) {
       throw new HttpException('Tag not found', HttpStatus.NOT_FOUND);
@@ -44,7 +45,7 @@ export class TagsService {
   }
 
   public async findMultipleTags({ tags }: { tags: number[] }) {
-    const results = await this.tagsRepository.find({
+    const results = await this.tagsModel.find({
       where: {
         id: In(tags),
       },
@@ -54,14 +55,8 @@ export class TagsService {
   }
 
   public async delete({ id }: { id: number }) {
-    await this.tagsRepository.delete({ id });
+    await this.tagsModel.deleteOne({ id });
 
     return { message: 'Tag deleted successfully', status: 'success', id };
-  }
-
-  public async softDelete({ id }: { id: number }) {
-    await this.tagsRepository.softDelete({ id });
-
-    return { message: 'Tag soft deleted successfully', status: 'success', id };
   }
 }

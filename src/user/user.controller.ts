@@ -25,7 +25,6 @@ import { GetUsersParamDto } from './dtos/get-users-param.dto';
 import { PatchUserDto } from './dtos/patch-user.dto';
 import { UserService } from './user.service';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateManyUsersDto } from './dtos/create-many-user.dto';
 import { AccessTokenGuard } from 'src/auth/guards/access-token/access-token.guard';
 import { Auth, AuthType } from 'src/auth/decorators/auth.decorator';
 
@@ -68,7 +67,8 @@ export class UserController {
     description: 'The position of the number that you want the api to return',
     example: 1,
   })
-  @Get('/:id?')
+  @Auth(AuthType.NONE)
+  @Get('user/:id?')
   public getUsers(
     @Param() getUserParamDto: GetUsersParamDto,
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
@@ -86,6 +86,12 @@ export class UserController {
     return findAll;
   }
 
+  @Auth(AuthType.NONE)
+  @Get('')
+  public getAll() {
+    return this.userService.getAllUsers();
+  }
+
   @ApiOperation({
     summary: 'Create a new user',
     description: 'Create a new user for the application',
@@ -99,22 +105,8 @@ export class UserController {
     return createUser;
   }
 
-  @ApiOperation({
-    summary: 'Create users',
-    description: 'Create multiple users',
-  })
-  // @UseGuards(AccessTokenGuard)
-  @Auth(AuthType.BEARER)
-  @Post('/create-many')
-  public createManyUsers(@Body() createUsersDto: CreateManyUsersDto) {
-    console.log('hitting it');
-    // const createUsers = this.userService.createMany({ users: createUsersDto });
-    // return createUsers;
-  }
-
   @Patch()
   public patchUser(@Body() patchUserDto: PatchUserDto) {
     return patchUserDto;
-    // return 'You sent a patch request to users endpoint';
   }
 }

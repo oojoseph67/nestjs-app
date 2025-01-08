@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { PaginationQueryDto } from './dto/pagination-query.dto';
-import { ObjectLiteral, Repository } from 'typeorm';
 import { REQUEST } from '@nestjs/core';
 import { Request } from 'express';
 import { Paginated } from './interface/paginated.interface';
+import { Model, Document } from 'mongoose';
 
 @Injectable()
 export class PaginationService {
@@ -13,16 +13,16 @@ export class PaginationService {
     private readonly request: Request,
   ) {}
 
-  public async paginateQuery<T extends ObjectLiteral>({
+  public async paginateQuery<T extends Document>({
     paginationQuery,
-    repository,
+    model,
   }: {
     paginationQuery: PaginationQueryDto;
-    repository: Repository<T>;
+    model: Model<T>;
   }): Promise<Paginated<T>> {
     const { limit, page } = paginationQuery;
 
-    const query = await repository.find({
+    const query = await model.find({
       skip: (page - 1) * limit,
       take: limit,
     });
@@ -34,7 +34,7 @@ export class PaginationService {
 
     const newUrl = new URL(this.request.url, baseUrl);
 
-    const totalItems = await repository.count({});
+    const totalItems = await model.countDocuments({});
     const totalPages = Math.ceil(totalItems / limit);
     const nextPage = totalPages === page ? page : page + 1;
     const prevPage = page === 1 ? page : page - 1;

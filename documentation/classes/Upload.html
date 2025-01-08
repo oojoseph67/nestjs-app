@@ -79,7 +79,7 @@
                    <compodoc-menu mode="normal"></compodoc-menu>
                </div>
                <!-- START CONTENT -->
-               <div class="content injectable">
+               <div class="content class">
                    <div class="content-data">
 
 
@@ -89,9 +89,13 @@
 
 
 
+
+
+
+
 <ol class="breadcrumb">
-  <li class="breadcrumb-item">Injectables</li>
-  <li class="breadcrumb-item" >MetaOptionsService</li>
+  <li class="breadcrumb-item">Classes</li>
+  <li class="breadcrumb-item" >Upload</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -115,8 +119,9 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/meta-options/meta-options.service.ts</code>
+            <code>src/file-upload/schema/upload.schema.ts</code>
         </p>
+
 
 
 
@@ -126,19 +131,33 @@
     <h3 id="index">Index</h3>
     <table class="table table-sm table-bordered index-table">
         <tbody>
-
                 <tr>
                     <td class="col-md-4">
-                        <h6><b>Methods</b></h6>
+                        <h6><b>Properties</b></h6>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#create" >create</a>
+                                    <span class="modifier"></span>
+                                <a href="#fileName" >fileName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#mime" >mime</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#path" >path</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#size" >size</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
+                                <a href="#type" >type</a>
                             </li>
                         </ul>
                     </td>
@@ -148,168 +167,259 @@
 
 
 
+
         </tbody>
     </table>
 </section>
 
-            <section data-compodoc="block-constructor">
-    <h3 id="constructor">Constructor</h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-<code>constructor(metaOptionModel: <a href="../classes/MetaOption.html" target="_self">Model&lt;MetaOption&gt;</a>)</code>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/meta-options/meta-options.service.ts:8</a></div>
-                            </td>
-                        </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                            <div>
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>metaOptionModel</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../classes/MetaOption.html" target="_self" >Model&lt;MetaOption&gt;</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-</section>
-
-            <section data-compodoc="block-methods">
+            <section data-compodoc="block-properties">
     
-    <h3 id="methods">
-        Methods
+    <h3 id="inputs">
+        Properties
     </h3>
     <table class="table table-sm table-bordered">
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="create"></a>
+                    <a name="fileName"></a>
                     <span class="name">
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                        <span ><b>create</b></span>
-                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                            <span class="modifier"></span>
+                        <span ><b>fileName</b></span>
+                        <a href="#fileName"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
             </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>create(undefined: literal type)</code>
-                </td>
-            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
-
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, required: true})<br />
+                        </code>
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="15"
-                                    class="link-to-prism">src/meta-options/meta-options.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/file-upload/schema/upload.schema.ts:18</a></div>
                         </td>
                     </tr>
 
 
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
             <tr>
                 <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                        <code>literal type</code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>    <code>unknown</code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
+                    <a name="mime"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>mime</b></span>
+                        <a href="#mime"><span class="icon ion-ios-link"></span></a>
+                    </span>
                 </td>
             </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, required: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/file-upload/schema/upload.schema.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="path"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>path</b></span>
+                        <a href="#path"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, required: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/file-upload/schema/upload.schema.ts:24</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="size"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>size</b></span>
+                        <a href="#size"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, required: true})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/file-upload/schema/upload.schema.ts:44</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="type"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                        <span ><b>type</b></span>
+                        <a href="#type"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#FileTypes" target="_self" >FileTypes</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <b>Decorators : </b>
+                        <br />
+                        <code>
+                            @Prop({type: String, required: true, enum: FileTypes, default: undefined})<br />
+                        </code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/file-upload/schema/upload.schema.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
         </tbody>
     </table>
 </section>
+
+
+
+
+
+
 
     </div>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;;
-import { CreateMetaOptionsDto } from &#x27;./dtos/create-meta-options.dto&#x27;;
-import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
-import { MetaOption } from &#x27;./schema/meta-option.schema&#x27;;
-import { Model } from &#x27;mongoose&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Document } from &#x27;mongoose&#x27;;
+import { Prop, Schema, SchemaFactory } from &#x27;@nestjs/mongoose&#x27;;
 
-@Injectable()
-export class MetaOptionsService {
-  constructor(
-    // injecting meta options service repository dependency
-    @InjectModel(MetaOption.name)
-    private metaOptionModel: Model&lt;MetaOption&gt;,
-  ) {}
-
-  public async create({ metaOptions }: { metaOptions: CreateMetaOptionsDto }) {
-    const createdMetaOption &#x3D; new this.metaOptionModel(metaOptions);
-    await createdMetaOption.save();
-
-    return createdMetaOption;
-  }
+export enum FileTypes {
+  IMAGE &#x3D; &#x27;image&#x27;,
+  VIDEO &#x3D; &#x27;video&#x27;,
+  AUDIO &#x3D; &#x27;audio&#x27;,
+  DOCUMENT &#x3D; &#x27;document&#x27;,
+  OTHER &#x3D; &#x27;other&#x27;,
 }
+
+@Schema()
+export class Upload extends Document {
+  @Prop({
+    type: String,
+    required: true,
+  })
+  fileName: string;
+
+  @Prop({
+    type: String,
+    required: true,
+  })
+  path: string;
+
+  @Prop({
+    type: String,
+    required: true,
+    enum: FileTypes,
+    default: FileTypes.IMAGE,
+  })
+  type: FileTypes;
+
+  @Prop({
+    type: String,
+    required: true,
+  })
+  mime: string; // media types that can be uploaded (.aac or .mp4)
+
+  @Prop({
+    type: String,
+    required: true,
+  })
+  size: number;
+}
+
+export const UploadSchema &#x3D; SchemaFactory.createForClass(Upload);
 </code></pre>
     </div>
-
 </div>
-
-
-
-
 
 
 
@@ -344,8 +454,8 @@ export class MetaOptionsService {
 
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
-            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
-            var COMPODOC_CURRENT_PAGE_URL = 'MetaOptionsService.html';
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'Upload.html';
             var MAX_SEARCH_RESULTS = 15;
        </script>
 

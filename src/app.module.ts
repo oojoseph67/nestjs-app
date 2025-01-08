@@ -25,6 +25,7 @@ import { DataResponseInterceptor } from './global/interceptors/data-response/dat
 import { FileUploadModule } from './file-upload/file-upload.module';
 import { MailModule } from './mail/mail.module';
 import awsConfig from './config/aws.config';
+import { MongooseModule } from '@nestjs/mongoose';
 
 export const ENV = process.env.NODE_ENV;
 
@@ -45,24 +46,20 @@ export const ENV = process.env.NODE_ENV;
     AuthModule,
     MetaOptionsModule,
 
-    // database configs
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule], // specify any additional imports here, e.g., TypeORM migrations or custom repositories
-      inject: [ConfigService], // inject
-      useFactory: (configService: ConfigService) => ({
-        type: 'postgres',
-        host: configService.get('DATABASE_HOST'), // using this syntax means getting directly from the environment variable
-        port: +configService.get('database.port'),
-        // port: +configService.get('DATABASE_PORT'),
-        username: configService.get('DATABASE_USERNAME'),
-        password: configService.get('DATABASE_PASSWORD'),
-        database: configService.get('DATABASE_NAME'),
-        entities: ['dist/**/*.entity.js'],
-        synchronize: configService.get('database.synchronize'), // set to false in production
-        // autoLoadEntities: true, // using this would require us to create a module (controller and module file) for every entity we want to add, exporting it and using the TypeORM.forFeature([]) function
+    // mongodb connection setup
+    MongooseModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => ({
+        uri: configService.get('MONGODB_URI'),
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
       }),
     }),
-    // database configs
+
+    // MongooseModule.forRoot('', {
+    //   dbName: ''
+    // }),
 
     // jwt configuration
     ConfigModule.forFeature(jwtConfig),

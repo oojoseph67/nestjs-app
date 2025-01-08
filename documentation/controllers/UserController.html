@@ -144,19 +144,19 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
-                                    <span class="modifier">Public</span>
-                                <a href="#createManyUsers" >createManyUsers</a>
-                            </li>
-                            <li>
-                                    <span class="modifier"></span>
-                                    <span class="modifier"></span>
-                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier">Public</span>
                                 <a href="#createUser" >createUser</a>
                             </li>
                             <li>
+                                    <span class="modifier"></span>
+                                    <span class="modifier"></span>
+                                    <span class="modifier">Public</span>
+                                <a href="#getAll" >getAll</a>
+                            </li>
+                            <li>
+                                    <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
@@ -191,85 +191,6 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="createManyUsers"></a>
-                    <span class="name">
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                            <span class="modifier"></span>
-                            <span class="modifier">Public</span>
-                        <span ><b>createManyUsers</b></span>
-                        <a href="#createManyUsers"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createManyUsers(createUsersDto: <a href="../classes/CreateManyUsersDto.html" target="_self">CreateManyUsersDto</a>)</code>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Decorators : </b>
-                    <br />
-                    <code>@ApiOperation({summary: &#x27;Create users&#x27;, description: &#x27;Create multiple users&#x27;})<br />@Auth(AuthType.BEARER)<br />@Post(&#x27;/create-many&#x27;)<br /></code>
-                </td>
-            </tr>
-
-                    <tr>
-                        <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="109"
-                                    class="link-to-prism">src/user/user.controller.ts:109</a></div>
-                        </td>
-                    </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                            <div class="io-description">
-                                <b>Parameters :</b>
-                                
-                                <table class="params">
-                                    <thead>
-                                        <tr>
-                                            <td>Name</td>
-                                                <td>Type</td>
-                                            <td>Optional</td>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                                <td>createUsersDto</td>
-                                            <td>
-                                                            <code><a href="../classes/CreateManyUsersDto.html" target="_self" >CreateManyUsersDto</a></code>
-                                            </td>
-
-                                            <td>
-                                                    No
-                                            </td>
-
-
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        <div class="io-description">
-                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                        </div>
-                            <div class="io-description">
-                                
-                            </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="createUser"></a>
                     <span class="name">
                             <span class="modifier"></span>
@@ -300,8 +221,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="97"
-                                    class="link-to-prism">src/user/user.controller.ts:97</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/user/user.controller.ts:103</a></div>
                         </td>
                     </tr>
 
@@ -351,8 +272,57 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getAll"></a>
+                    <span class="name">
+                            <span class="modifier"></span>
+                            <span class="modifier"></span>
+                            <span class="modifier">Public</span>
+                        <span ><b>getAll</b></span>
+                        <a href="#getAll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAll()</code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <b>Decorators : </b>
+                    <br />
+                    <code>@Auth(AuthType.NONE)<br />@Get(&#x27;&#x27;)<br /></code>
+                </td>
+            </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/user/user.controller.ts:91</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="getUsers"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
@@ -375,7 +345,7 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiOperation({summary: &#x27;Get all users&#x27;, description: &#x27;Get all users with optional pagination&#x27;})<br />@ApiResponse({status: 200, description: &#x27;All users&#x27;, type: CreateUserDto})<br />@ApiQuery({name: &#x27;limit&#x27;, type: Number, required: false, description: &#x27;Limit the number of returned results&#x27;, example: 10})<br />@ApiQuery({name: &#x27;page&#x27;, type: Number, required: false, description: &#x27;The position of the number that you want the api to return&#x27;, example: 1})<br />@Get(&#x27;/:id?&#x27;)<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Get all users&#x27;, description: &#x27;Get all users with optional pagination&#x27;})<br />@ApiResponse({status: 200, description: &#x27;All users&#x27;, type: CreateUserDto})<br />@ApiQuery({name: &#x27;limit&#x27;, type: Number, required: false, description: &#x27;Limit the number of returned results&#x27;, example: 10})<br />@ApiQuery({name: &#x27;page&#x27;, type: Number, required: false, description: &#x27;The position of the number that you want the api to return&#x27;, example: 1})<br />@Auth(AuthType.NONE)<br />@Get(&#x27;user/:id?&#x27;)<br /></code>
                 </td>
             </tr>
 
@@ -482,8 +452,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="116"
-                                    class="link-to-prism">src/user/user.controller.ts:116</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="109"
+                                    class="link-to-prism">src/user/user.controller.ts:109</a></div>
                         </td>
                     </tr>
 
@@ -560,7 +530,6 @@ import { GetUsersParamDto } from &#x27;./dtos/get-users-param.dto&#x27;;
 import { PatchUserDto } from &#x27;./dtos/patch-user.dto&#x27;;
 import { UserService } from &#x27;./user.service&#x27;;
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from &#x27;@nestjs/swagger&#x27;;
-import { CreateManyUsersDto } from &#x27;./dtos/create-many-user.dto&#x27;;
 import { AccessTokenGuard } from &#x27;src/auth/guards/access-token/access-token.guard&#x27;;
 import { Auth, AuthType } from &#x27;src/auth/decorators/auth.decorator&#x27;;
 
@@ -603,7 +572,8 @@ export class UserController {
     description: &#x27;The position of the number that you want the api to return&#x27;,
     example: 1,
   })
-  @Get(&#x27;/:id?&#x27;)
+  @Auth(AuthType.NONE)
+  @Get(&#x27;user/:id?&#x27;)
   public getUsers(
     @Param() getUserParamDto: GetUsersParamDto,
     @Query(&#x27;limit&#x27;, new DefaultValuePipe(10), ParseIntPipe) limit: number,
@@ -621,6 +591,12 @@ export class UserController {
     return findAll;
   }
 
+  @Auth(AuthType.NONE)
+  @Get(&#x27;&#x27;)
+  public getAll() {
+    return this.userService.getAllUsers();
+  }
+
   @ApiOperation({
     summary: &#x27;Create a new user&#x27;,
     description: &#x27;Create a new user for the application&#x27;,
@@ -634,23 +610,9 @@ export class UserController {
     return createUser;
   }
 
-  @ApiOperation({
-    summary: &#x27;Create users&#x27;,
-    description: &#x27;Create multiple users&#x27;,
-  })
-  // @UseGuards(AccessTokenGuard)
-  @Auth(AuthType.BEARER)
-  @Post(&#x27;/create-many&#x27;)
-  public createManyUsers(@Body() createUsersDto: CreateManyUsersDto) {
-    console.log(&#x27;hitting it&#x27;);
-    // const createUsers &#x3D; this.userService.createMany({ users: createUsersDto });
-    // return createUsers;
-  }
-
   @Patch()
   public patchUser(@Body() patchUserDto: PatchUserDto) {
     return patchUserDto;
-    // return &#x27;You sent a patch request to users endpoint&#x27;;
   }
 }
 </code></pre>

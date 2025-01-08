@@ -240,11 +240,18 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Module } from &#x27;@nestjs/common&#x27;;
 import { TagsService } from &#x27;./tags.service&#x27;;
 import { TagsController } from &#x27;./tags.controller&#x27;;
-import { TypeOrmModule } from &#x27;@nestjs/typeorm&#x27;;
-import { Tag } from &#x27;./entity/tags.entity&#x27;;
+import { MongooseModule } from &#x27;@nestjs/mongoose&#x27;;
+import { Tags, TagsSchema } from &#x27;./schema/tags.schema&#x27;;
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Tag])],
+  imports: [
+    MongooseModule.forFeature([
+      {
+        name: Tags.name,
+        schema: TagsSchema,
+      },
+    ]),
+  ],
   controllers: [TagsController],
   providers: [TagsService],
   exports: [TagsService],

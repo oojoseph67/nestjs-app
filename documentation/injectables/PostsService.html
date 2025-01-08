@@ -173,7 +173,7 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(userServices: <a href="../injectables/UserService.html" target="_self">UserService</a>, tagsService: <a href="../injectables/TagsService.html" target="_self">TagsService</a>, postRepository: <a href="../entitys/Post.html" target="_self">Repository&lt;PostRepository&gt;</a>, metaOptionsRepository: <a href="../entitys/MetaOption.html" target="_self">Repository&lt;MetaOptionRepository&gt;</a>, paginationService: <a href="../injectables/PaginationService.html" target="_self">PaginationService</a>)</code>
+<code>constructor(userServices: <a href="../injectables/UserService.html" target="_self">UserService</a>, tagsService: <a href="../injectables/TagsService.html" target="_self">TagsService</a>, postModel: <a href="../classes/Post.html" target="_self">Model&lt;Post&gt;</a>, paginationService: <a href="../injectables/PaginationService.html" target="_self">PaginationService</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -220,22 +220,10 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>postRepository</td>
+                                                        <td>postModel</td>
                                                   
                                                         <td>
-                                                                        <code><a href="../entitys/Post.html" target="_self" >Repository&lt;PostRepository&gt;</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>metaOptionsRepository</td>
-                                                  
-                                                        <td>
-                                                                        <code><a href="../entitys/MetaOption.html" target="_self" >Repository&lt;MetaOptionRepository&gt;</a></code>
+                                                                        <code><a href="../classes/Post.html" target="_self" >Model&lt;Post&gt;</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -292,8 +280,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="39"
-                                    class="link-to-prism">src/posts/posts.service.ts:39</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="36"
+                                    class="link-to-prism">src/posts/posts.service.ts:36</a></div>
                         </td>
                     </tr>
 
@@ -361,8 +349,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="155"
-                                    class="link-to-prism">src/posts/posts.service.ts:155</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="152"
+                                    class="link-to-prism">src/posts/posts.service.ts:152</a></div>
                         </td>
                     </tr>
 
@@ -430,8 +418,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="135"
-                                    class="link-to-prism">src/posts/posts.service.ts:135</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="132"
+                                    class="link-to-prism">src/posts/posts.service.ts:132</a></div>
                         </td>
                     </tr>
 
@@ -499,8 +487,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="99"
-                                    class="link-to-prism">src/posts/posts.service.ts:99</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="96"
+                                    class="link-to-prism">src/posts/posts.service.ts:96</a></div>
                         </td>
                     </tr>
 
@@ -555,14 +543,14 @@
 import { UserService } from &#x27;src/user/user.service&#x27;;
 import { CreatePostDto } from &#x27;./dtos/create-post.dto&#x27;;
 import { Repository } from &#x27;typeorm&#x27;;
-import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;;
-import { MetaOption as MetaOptionRepository } from &#x27;src/meta-options/entity/meta-option.entity&#x27;;
-import { Post, Post as PostRepository } from &#x27;./entity/post.entity&#x27;;
 import { TagsService } from &#x27;src/tags/tags.service&#x27;;
 import { PatchPostDto } from &#x27;./dtos/patch-post.dto&#x27;;
 import { GetPostsQueryDto } from &#x27;./dtos/get-posts.dto&#x27;;
 import { PaginationService } from &#x27;src/global/pagination/pagination.service&#x27;;
 import { Paginated } from &#x27;src/global/pagination/interface/paginated.interface&#x27;;
+import { InjectModel } from &#x27;@nestjs/mongoose&#x27;;
+import { Post } from &#x27;./schema/post.schema&#x27;;
+import { Model, Types } from &#x27;mongoose&#x27;;
 
 @Injectable()
 export class PostsService {
@@ -579,11 +567,8 @@ export class PostsService {
     /**
      * Repositories Injections
      */
-    @InjectRepository(PostRepository)
-    private postRepository: Repository&lt;PostRepository&gt;,
-
-    @InjectRepository(MetaOptionRepository)
-    private metaOptionsRepository: Repository&lt;MetaOptionRepository&gt;,
+    @InjectModel(Post.name)
+    private postModel: Model&lt;Post&gt;,
 
     // injecting pagination service
     private paginationService: PaginationService,
@@ -616,7 +601,7 @@ export class PostsService {
     }
 
     const normalizedSlug &#x3D; createPost.slug.toLowerCase();
-    const existingSlug &#x3D; await this.postRepository.findOne({
+    const existingSlug &#x3D; await this.postModel.findOne({
       where: {
         slug: normalizedSlug,
       },
@@ -627,14 +612,14 @@ export class PostsService {
     }
 
     try {
-      const post &#x3D; await this.postRepository.create({
+      const post &#x3D; new this.postModel({
         ...createPost,
         author: author,
         tags: tags,
         slug: normalizedSlug,
       });
 
-      await this.postRepository.save(post);
+      await post.save();
 
       return post;
     } catch (error: any) {
@@ -663,7 +648,7 @@ export class PostsService {
       });
     }
 
-    const post &#x3D; await this.postRepository.findOneBy({ id: updatePost.id });
+    const post &#x3D; await this.postModel.findOne({ id: updatePost.id });
 
     if (!post) {
       throw new HttpException(&#x27;Post not found&#x27;, HttpStatus.NOT_FOUND);
@@ -674,13 +659,13 @@ export class PostsService {
     post.slug &#x3D; updatePost.slug ?? post.slug;
     post.status &#x3D; updatePost.status ?? post.status;
     post.content &#x3D; updatePost.content ?? post.content;
-    post.schema &#x3D; updatePost.schema ?? post.schema;
+    post.postSchema &#x3D; updatePost.postSchema ?? post.postSchema;
     post.featuredImageUrl &#x3D;
       updatePost.featuredImageUrl ?? post.featuredImageUrl;
     post.publishedOn &#x3D; updatePost.publishedOn ?? post.publishedOn;
-    post.tags &#x3D; updatePost.tags ? tags : post.tags;
+    post.tags &#x3D; updatePost.tags ? tags.map(tag &#x3D;&gt; tag._id as Types.ObjectId) : post.tags;
 
-    const updatedPost &#x3D; await this.postRepository.save(post);
+    const updatedPost &#x3D; await post.save();
 
     return updatedPost;
   }
@@ -699,7 +684,7 @@ export class PostsService {
         limit,
         page,
       },
-      repository: this.postRepository,
+      model: this.postModel,
     });
 
     return posts;
@@ -712,7 +697,7 @@ export class PostsService {
     //   throw new HttpException(&#x27;Post not found&#x27;, HttpStatus.NOT_FOUND);
     // }
 
-    await this.postRepository.delete({ id });
+    await this.postModel.deleteOne({ id });
 
     // await this.metaOptionsRepository.delete({ id: post.metaOptions.id });
 
