@@ -22,13 +22,14 @@ export class PaginationService {
   }): Promise<Paginated<T>> {
     const { limit, page } = paginationQuery;
 
-    const query = await model.find({
-      skip: (page - 1) * limit,
-      take: limit,
-    });
+    const query = await model
+      .find()
+      .populate(['tags', 'author'])
+      .skip((page - 1) * limit)
+      .limit(limit)
+      .exec();
 
     // creating url
-
     const baseUrl =
       this.request.protocol + '://' + this.request.headers.host + '/';
 

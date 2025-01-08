@@ -349,8 +349,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="152"
-                                    class="link-to-prism">src/posts/posts.service.ts:152</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="154"
+                                    class="link-to-prism">src/posts/posts.service.ts:154</a></div>
                         </td>
                     </tr>
 
@@ -418,8 +418,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="132"
-                                    class="link-to-prism">src/posts/posts.service.ts:132</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="134"
+                                    class="link-to-prism">src/posts/posts.service.ts:134</a></div>
                         </td>
                     </tr>
 
@@ -663,7 +663,9 @@ export class PostsService {
     post.featuredImageUrl &#x3D;
       updatePost.featuredImageUrl ?? post.featuredImageUrl;
     post.publishedOn &#x3D; updatePost.publishedOn ?? post.publishedOn;
-    post.tags &#x3D; updatePost.tags ? tags.map(tag &#x3D;&gt; tag._id as Types.ObjectId) : post.tags;
+    post.tags &#x3D; updatePost.tags
+      ? tags.map((tag) &#x3D;&gt; tag._id as Types.ObjectId)
+      : post.tags;
 
     const updatedPost &#x3D; await post.save();
 

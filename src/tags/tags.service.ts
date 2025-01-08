@@ -45,11 +45,21 @@ export class TagsService {
   }
 
   public async findMultipleTags({ tags }: { tags: number[] }) {
-    const results = await this.tagsModel.find({
-      where: {
-        id: In(tags),
-      },
-    });
+    const allTags = await this.getAllTags();
+
+    const results = tags
+      .map((index) => {
+        const adjustedIndex = index - 1;
+        return allTags[adjustedIndex];
+      })
+      .filter((tag) => tag !== undefined);
+
+    if (results.length !== tags.length) {
+      throw new HttpException(
+        'Some tag indices were out of bounds',
+        HttpStatus.NOT_FOUND,
+      );
+    }
 
     return results;
   }

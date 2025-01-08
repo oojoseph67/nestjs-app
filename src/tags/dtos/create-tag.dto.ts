@@ -1,6 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsJSON,
+  IsLowercase,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -9,6 +10,7 @@ import {
   MaxLength,
   MinLength,
 } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class CreateTagDto {
   @ApiProperty({
@@ -20,6 +22,7 @@ export class CreateTagDto {
   @IsString()
   @MinLength(3)
   @MaxLength(255)
+  @Transform(({ value }: { value: string }) => value.toLowerCase())
   name: string;
 
   @ApiProperty({

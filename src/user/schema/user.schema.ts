@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Document, HydratedDocument } from 'mongoose';
 
 @Schema()
 export class User extends Document {
@@ -32,7 +32,7 @@ export class User extends Document {
   @Prop({
     type: String,
     required: true,
-    select: false, // this field will not be returned when fetching users
+    // select: false, // this field will not be returned when fetching users
   })
   password: string;
 
@@ -43,5 +43,7 @@ export class User extends Document {
   })
   googleId?: string;
 }
+
+export type UserDocument = HydratedDocument<User>;
 
 export const UserSchema = SchemaFactory.createForClass(User);

@@ -72,7 +72,7 @@ export class UserService {
   }
 
   public async findOneById({ id }: { id: number }) {
-    const user = await this.userModel.findOne({ id })
+    const user = await this.userModel.findOne({ _id: id });
 
     if (!user) {
       throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -83,7 +83,8 @@ export class UserService {
 
   public async findUserByEmail({ email }: { email: string }) {
     try {
-      const user = await this.userModel.findOne({ email })
+      const user = await this.userModel.findOne({ email: email });
+      console.log('user in email', {user})
 
       if (!user) {
         throw new HttpException('User not found', HttpStatus.NOT_FOUND);
@@ -97,7 +98,9 @@ export class UserService {
 
   public async findUserByGoogleId({ googleId }: { googleId: string }) {
     try {
-      const user = await this.userModel.findOne({ googleId }).select('-password');
+      const user = await this.userModel
+        .findOne({ googleId })
+        .select('-password');
 
       if (!user) {
         // throw new HttpException('User not found', HttpStatus.NOT_FOUND);

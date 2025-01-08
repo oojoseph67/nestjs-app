@@ -18,7 +18,7 @@ content-type: application/json
 {
   "firstName": "Joe",
   "lastName": "Doe",
-  "email": "ha@doe.com",
+  "email": "joe@doe.com",
   "password": "nestjsIS6@awesome"
 }
 

@@ -51,8 +51,6 @@ export class PostsController {
     @Param('userId') userId: number,
     @Query() postQuery: GetPostsQueryDto,
   ) {
-    console.log({ postQuery });
-
     return this.postService.getAllPosts({ userId, queryParams: postQuery });
   }
 

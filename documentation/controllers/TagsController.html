@@ -276,8 +276,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="26"
-                                    class="link-to-prism">src/tags/tags.controller.ts:26</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="27"
+                                    class="link-to-prism">src/tags/tags.controller.ts:27</a></div>
                         </td>
                     </tr>
 
@@ -346,6 +346,7 @@ export class TagsController {
   @ApiOperation({ summary: &#x27;Create a tag&#x27; })
   @Post(&#x27;&#x27;)
   createPost(@Body() createTag: CreateTagDto) {
+    console.log({ createTag });
     const createdTags &#x3D; this.tagsService.createTag({ tag: createTag });
     return createdTags;
   }

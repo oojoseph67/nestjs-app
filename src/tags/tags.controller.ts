@@ -17,6 +17,7 @@ export class TagsController {
   @ApiOperation({ summary: 'Create a tag' })
   @Post('')
   createPost(@Body() createTag: CreateTagDto) {
+    console.log({ createTag });
     const createdTags = this.tagsService.createTag({ tag: createTag });
     return createdTags;
   }

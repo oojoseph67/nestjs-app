@@ -98,11 +98,11 @@ export class UserController {
   })
   @HttpCode(HttpStatus.CREATED)
   @Auth(AuthType.NONE)
-  @UseInterceptors(ClassSerializerInterceptor)
+  // @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   public createUser(@Body() createUserDto: CreateUserDto) {
-    const createUser = this.userService.createUser({ user: createUserDto });
-    return createUser;
+    const user = this.userService.createUser({ user: createUserDto });
+    return user;
   }
 
   @Patch()

@@ -24,19 +24,19 @@ export class Tags extends Document {
 
   @Prop({
     type: String,
-    required: true,
+    required: false,
   })
-  description: string;
+  description?: string;
 
   @Prop({
     type: String,
-    required: true,
+    required: false,
   })
   tagSchema?: string;
 
   @Prop({
     type: String,
-    required: true,
+    required: false,
   })
   featuredImageUrl?: string;
 }

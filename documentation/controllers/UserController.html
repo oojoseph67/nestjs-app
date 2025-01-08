@@ -145,7 +145,6 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
-                                    <span class="modifier"></span>
                                     <span class="modifier">Public</span>
                                 <a href="#createUser" >createUser</a>
                             </li>
@@ -197,7 +196,6 @@
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
-                            <span class="modifier"></span>
                             <span class="modifier">Public</span>
                         <span ><b>createUser</b></span>
                         <a href="#createUser"><span class="icon ion-ios-link"></span></a>
@@ -215,7 +213,7 @@
                 <td class="col-md-4">
                     <b>Decorators : </b>
                     <br />
-                    <code>@ApiOperation({summary: &#x27;Create a new user&#x27;, description: &#x27;Create a new user for the application&#x27;})<br />@HttpCode(HttpStatus.CREATED)<br />@Auth(AuthType.NONE)<br />@UseInterceptors(ClassSerializerInterceptor)<br />@Post()<br /></code>
+                    <code>@ApiOperation({summary: &#x27;Create a new user&#x27;, description: &#x27;Create a new user for the application&#x27;})<br />@HttpCode(HttpStatus.CREATED)<br />@Auth(AuthType.NONE)<br />@Post()<br /></code>
                 </td>
             </tr>
 
@@ -603,11 +601,11 @@ export class UserController {
   })
   @HttpCode(HttpStatus.CREATED)
   @Auth(AuthType.NONE)
-  @UseInterceptors(ClassSerializerInterceptor)
+  // @UseInterceptors(ClassSerializerInterceptor)
   @Post()
   public createUser(@Body() createUserDto: CreateUserDto) {
-    const createUser &#x3D; this.userService.createUser({ user: createUserDto });
-    return createUser;
+    const user &#x3D; this.userService.createUser({ user: createUserDto });
+    return user;
   }
 
   @Patch()

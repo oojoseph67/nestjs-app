@@ -213,8 +213,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="78"
-                                    class="link-to-prism">src/posts/posts.controller.ts:78</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/posts/posts.controller.ts:76</a></div>
                         </td>
                     </tr>
 
@@ -317,8 +317,8 @@ It logs the received data and returns a confirmation message.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="126"
-                                    class="link-to-prism">src/posts/posts.controller.ts:126</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="124"
+                                    class="link-to-prism">src/posts/posts.controller.ts:124</a></div>
                         </td>
                     </tr>
 
@@ -502,8 +502,8 @@ representing all posts for the specified user.</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="112"
-                                    class="link-to-prism">src/posts/posts.controller.ts:112</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="110"
+                                    class="link-to-prism">src/posts/posts.controller.ts:110</a></div>
                         </td>
                     </tr>
 
@@ -619,8 +619,6 @@ export class PostsController {
     @Param(&#x27;userId&#x27;) userId: number,
     @Query() postQuery: GetPostsQueryDto,
   ) {
-    console.log({ postQuery });
-
     return this.postService.getAllPosts({ userId, queryParams: postQuery });
   }
 

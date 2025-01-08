@@ -2,6 +2,8 @@ import { Document } from 'mongoose';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { PostStatus, PostTypes } from '../enums/posts.enums';
 import mongoose from 'mongoose';
+import { User } from 'src/user/schema/user.schema';
+import { Tags } from 'src/tags/schema/tags.schema';
 
 @Schema()
 export class Post extends Document {
@@ -24,12 +26,6 @@ export class Post extends Document {
     required: true,
   })
   slug: string;
-
-  @Prop({
-    type: String,
-    required: true,
-  })
-  type: string;
 
   @Prop({
     type: String,
@@ -58,7 +54,12 @@ export class Post extends Document {
   featuredImageUrl?: string;
 
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag' }],
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: Tags.name,
+      },
+    ],
     required: false,
     default: [],
   })
@@ -69,6 +70,13 @@ export class Post extends Document {
     required: true,
   })
   publishedOn: Date;
+
+  @Prop({
+    type: mongoose.Schema.Types.ObjectId,
+    ref: User.name,
+    required: true,
+  })
+  author: User;
 }
 
 export const PostSchema = SchemaFactory.createForClass(Post);

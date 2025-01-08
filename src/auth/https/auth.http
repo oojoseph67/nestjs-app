@@ -2,7 +2,7 @@ POST http://localhost:7231/auth/login
 content-type: application/json
 
 {
-    "email": "james@doe.com",
+    "email": "joe@doe.com",
     "password": "nestjsIS6@awesome"
 }
 

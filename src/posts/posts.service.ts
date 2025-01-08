@@ -122,7 +122,9 @@ export class PostsService {
     post.featuredImageUrl =
       updatePost.featuredImageUrl ?? post.featuredImageUrl;
     post.publishedOn = updatePost.publishedOn ?? post.publishedOn;
-    post.tags = updatePost.tags ? tags.map(tag => tag._id as Types.ObjectId) : post.tags;
+    post.tags = updatePost.tags
+      ? tags.map((tag) => tag._id as Types.ObjectId)
+      : post.tags;
 
     const updatedPost = await post.save();
 

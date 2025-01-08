@@ -47,6 +47,10 @@ export class AuthService {
 
     let isPasswordCorrect: boolean;
 
+    if (!existingUser.password) {
+      throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+    }
+
     try {
       isPasswordCorrect = await this.hashingProvider.comparePasswords({
         hashedPassword: existingUser.password,

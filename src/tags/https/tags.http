@@ -2,9 +2,9 @@ POST http://localhost:7231/tags
 content-type: application/json
 
 {
-    "name": "Pussy",
-    "description": "A post about pussy",
-    "slug": "psy",
+    "name": "JAVASCRIPT",
+    "description": "A post about javascript",
+    "slug": "js",
     "featuredImageUrl": "https://example.com/image.jpg"
 }
 

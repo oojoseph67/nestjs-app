@@ -15,9 +15,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { PostStatus, PostTypes } from '../enums/posts.enums';
-import { Type } from 'class-transformer';
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { CreateMetaOptionsDto } from 'src/meta-options/dtos/create-meta-options.dto';
 
 export class CreatePostDto {
   @ApiProperty({
@@ -121,7 +119,7 @@ export class CreatePostDto {
   @IsOptional()
   @IsArray()
   @IsInt({ each: true }) // validate each item in the array as a string
-  tags?: number[];
+  tags: number[];
 
   // @ApiPropertyOptional({
   //   description: 'This is the additional options for the post',
@@ -145,13 +143,13 @@ export class CreatePostDto {
   // @Type(() => CreateMetaOptionsDto)
   // metaOptions?: CreateMetaOptionsDto | null;
 
-  // @ApiProperty({
-  //   description: 'This is the id of the author of the post',
-  //   example: 123,
-  //   type: 'integer',
-  //   required: true,
-  // })
-  // @IsInt()
-  // @IsNotEmpty()
-  // authorId: number;
+  @ApiProperty({
+    description: 'This is the id of the author of the post',
+    example: 123,
+    type: 'integer',
+    required: true,
+  })
+  @IsString()
+  @IsNotEmpty()
+  author: string;
 }

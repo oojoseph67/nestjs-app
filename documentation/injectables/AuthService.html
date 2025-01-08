@@ -316,8 +316,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="87"
-                                    class="link-to-prism">src/auth/auth.service.ts:87</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="91"
+                                    class="link-to-prism">src/auth/auth.service.ts:91</a></div>
                         </td>
                     </tr>
 
@@ -425,8 +425,8 @@
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="77"
-                                    class="link-to-prism">src/auth/auth.service.ts:77</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="81"
+                                    class="link-to-prism">src/auth/auth.service.ts:81</a></div>
                         </td>
                     </tr>
 
@@ -585,6 +585,10 @@ export class AuthService {
     const existingUser &#x3D; await this.userService.findUserByEmail({ email });
 
     let isPasswordCorrect: boolean;
+
+    if (!existingUser.password) {
+      throw new HttpException(&#x27;User not found&#x27;, HttpStatus.NOT_FOUND);
+    }
 
     try {
       isPasswordCorrect &#x3D; await this.hashingProvider.comparePasswords({

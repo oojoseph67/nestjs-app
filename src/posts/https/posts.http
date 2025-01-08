@@ -1,7 +1,7 @@
 # create post endpoint
 POST http://localhost:7231/posts
 content-type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsIjoiamFtZXNAZG9lLmNvbSIsImlhdCI6MTczNTgwNTA1NiwiZXhwIjoxNzM1ODA4NjU2LCJhdWQiOiJsb2NhbGhvc3Q6NzIzMSIsImlzcyI6ImxvY2FsaG9zdDo3MjMxIn0.mgf7D_osnFKfOO2l11nEb5o5HCmd-9ogNARnGa8M9Us
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzdlMjJkYTRjNWI3YjYwMjAxNmNhMjIiLCJlbWFpbCI6ImpvZUBkb2UuY29tIiwiaWF0IjoxNzM2MzIwNTY1LCJleHAiOjE3MzYzMjQxNjUsImF1ZCI6ImxvY2FsaG9zdDo3MjMxIiwiaXNzIjoibG9jYWxob3N0OjcyMzEifQ.mC_B6vNQgweEOiPZ6P7qzLaYEekP8QoRYmKTTHTIE0c
 
 {
     "title": "Typescript to the world",
@@ -9,13 +9,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjQsImVtYWlsI
     "slug": "amen",
     "status": "published",
     "content": "Javascript is going to take over the world!",
-    "schema": "{\r\n \"@context\": \"https:\/\/schema.org\", \r\n \"@type\": \"Person\"\r\n}",
+    "postSchema": "{\r\n \"@context\": \"https:\/\/schema.org\", \r\n \"@type\": \"Person\"\r\n}",
     "featuredImageUrl": "https://images.app.goo.gl/2twFaFy51iKBmi519",
     "publishedOn": "2024-03-16T12:00:00+0000",
-    "tags": [5],
-    "metaOptions" : {
-        "metaValue": "{\"sidebarEnabled\": false, \"footerEnabled\": false}"
-    }
+    "tags": [1],
+    "author": "677e22da4c5b7b602016ca22"
 }
 
 ###

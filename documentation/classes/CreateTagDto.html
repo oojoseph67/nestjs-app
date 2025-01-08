@@ -161,6 +161,7 @@
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
                                     <span class="modifier"></span>
+                                    <span class="modifier"></span>
                                 <a href="#name" >name</a>
                             </li>
                             <li>
@@ -229,7 +230,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:49</a></div>
                         </td>
                     </tr>
 
@@ -270,7 +271,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:65</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:68</a></div>
                         </td>
                     </tr>
 
@@ -283,6 +284,7 @@
                 <td class="col-md-4">
                     <a name="name"></a>
                     <span class="name">
+                            <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
                             <span class="modifier"></span>
@@ -304,13 +306,13 @@
                         <b>Decorators : </b>
                         <br />
                         <code>
-                            @ApiProperty({description: &#x27;Name of the tag&#x27;, example: &#x27;TypeScript&#x27;, type: &#x27;string&#x27;})<br />@IsNotEmpty()<br />@IsString()<br />@MinLength(3)<br />@MaxLength(255)<br />
+                            @ApiProperty({description: &#x27;Name of the tag&#x27;, example: &#x27;TypeScript&#x27;, type: &#x27;string&#x27;})<br />@IsNotEmpty()<br />@IsString()<br />@MinLength(3)<br />@MaxLength(255)<br />@Transform( &#x3D;&gt; )<br />
                         </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:23</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -349,7 +351,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:51</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:54</a></div>
                         </td>
                     </tr>
 
@@ -389,7 +391,7 @@
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:37</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/tags/dtos/create-tag.dto.ts:40</a></div>
                         </td>
                     </tr>
 
@@ -411,6 +413,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ApiProperty, ApiPropertyOptional } from &#x27;@nestjs/swagger&#x27;;
 import {
   IsJSON,
+  IsLowercase,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -419,6 +422,7 @@ import {
   MaxLength,
   MinLength,
 } from &#x27;class-validator&#x27;;
+import { Transform } from &#x27;class-transformer&#x27;;
 
 export class CreateTagDto {
   @ApiProperty({
@@ -430,6 +434,7 @@ export class CreateTagDto {
   @IsString()
   @MinLength(3)
   @MaxLength(255)
+  @Transform(({ value }: { value: string }) &#x3D;&gt; value.toLowerCase())
   name: string;
 
   @ApiProperty({
